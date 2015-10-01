@@ -3,6 +3,7 @@
   <head>
     <title>Admin Login</title>
     <!-- Bootstrap -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="assets/styles.css" rel="stylesheet" media="screen">
@@ -18,15 +19,15 @@
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <div id="userNameDiv">
-        <input type="text" class="input-block-level" id="userName" placeholder="ÓÃ»§Ãû">
+        <input type="text" class="input-block-level" id="userName" placeholder="ç”¨æˆ·å">
         </div>
         <div id="passwordDiv">
-        <input type="password" class="input-block-level" id="password" placeholder="ÃÜÂë">
+        <input type="password" class="input-block-level" id="password" placeholder="å¯†ç ">
         </div>
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <button id="loginForm" class="btn btn-large btn-primary" type="button">µÇÂ½</button>
+        <button id="loginForm" class="btn btn-large btn-primary" type="button">ç™»å½•</button>
       </form>
 
     </div> <!-- /container -->
@@ -51,9 +52,9 @@
     			    type:"post",     
     			    data:{userName:userName,password:password},     
     			    dataType:"json",    
-    			    async : false, //Ä¬ÈÏÎªtrue Òì²½     
+    			    async : false,     
     			    error:function(data){     
-    			       alert(data);     
+    			       alert(data.responseText);     
     			    },     
     			    success:function(data){
     			    	var code = data.code;
