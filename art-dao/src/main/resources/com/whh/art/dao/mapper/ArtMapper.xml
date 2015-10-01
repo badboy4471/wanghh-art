@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.whh.art.dao.mapper.ArtMapper">
+
+	<select id="getArt" resultType="ArtModel" parameterType="int">
+		select
+			id,artName,artNumber,artImage,artYear,artAuthor,artSize,artCert,artDesc
+		from 
+			art 
+		where
+			id = #{id}
+	</select>
+
+
+	<select id="searchArts" resultType="ArtModel" parameterType="SearchModel">
+		select
+			id,artName,artNumber,artImage,artYear,artAuthor,artSize,artCert,artDesc
+		from 
+			art 
+		<where>
+			<if test="name != null and name != ''">
+				and artName like #{name}
+			</if>
+			<if test="number != null and number != ''">
+				and artNumber like #{number}
+			</if>
+			<if test="id > 0">
+				and id = #{id}
+			</if>
+			<if test="status != null">
+				and status = #{status}
+			</if>
+			<if test="beginDate != null">
+				and createTime > #{beginDate}
+			</if>
+			<if test="endDate != null">
+				and #{endDate} > createTime
+			</if>
+		</where>
+			limit #{start}, #{limit}
+	</select>
+	
+	<select id="countArts" resultType="int" parameterType="SearchModel">
+		select
+			count(id)
+		from 
+			art 
+		<where>
+			<if test="name != null and name != ''">
+				and artName like #{name}
+			</if>
+			<if test="number != null and number != ''">
+				and artNumber like #{number}
+			</if>
+			<if test="id > 0">
+				and id = #{id}
+			</if>
+			<if test="status != null">
+				and status = #{status}
+			</if>
+			<if test="beginDate != null">
+				and createTime > #{beginDate}
+			</if>
+			<if test="endDate != null">
+				and #{endDate} > createTime
+			</if>
+		</where>
+	</select>
+
+	<insert id="insertArt" parameterType="ArtModel" useGeneratedKeys="true" keyProperty="id">
+		insert into 
+			art
+			(artName,artNumber,artYear,artAuthor,artMaterial,artSize,artCert,artDesc,createTime,artImage,artAudio)
+		values
+			(#{artName},#{artNumber},#{artYear},#{artAuthor},#{artSize},#{artMaterial},#{artCert},#{artDesc},now(),#{imageUrl},#{audioUrl})
+	</insert>
+
+	<update id="updateArtImage" parameterType="map">
+		update 
+			art
+		set 
+			artImage = #{artImageUrl}
+		where 
+			id = #{id}
+	</update>
+	
+	<update id="updateArtAudio" parameterType="map">
+		update 
+			art
+		set 
+			artAudio = #{artAudioUrl}
+		where 
+			id = #{id}
+	</update>
+	<delete id="deletArt" parameterType="int">
+		delete from 
+			art
+		where id = #{id}
+	</delete>
+</mapper>
