@@ -132,6 +132,7 @@
 		            }  
 			    });
 			}
+			oTable.fnClearTable(false);
 			oTable.fnDraw(); 
 		}
 		
