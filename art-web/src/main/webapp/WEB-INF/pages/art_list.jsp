@@ -32,13 +32,14 @@
                          <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Bootstrap dataTables with Toolbar</div>
+                                <div class="muted pull-left">作品列表</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
+                                <!-- 
                                    <div class="table-toolbar">
                                       <div class="btn-group">
-                                         <a href="#"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
+                                         <a href="${ctx }/admin/art/add.form"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
                                       </div>
                                       <div class="btn-group pull-right">
                                          <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
@@ -49,7 +50,7 @@
                                          </ul>
                                       </div>
                                    </div>
-                                    
+                                 -->
                                     <table cellspacing="0" class="table table-striped table-bordered" id="artList">
                                         <thead>
                                             <tr>
@@ -77,13 +78,15 @@
         </div>
         <!--/.fluid-container-->
         <link href="${ctx }/vendors/uniform.default.css" rel="stylesheet" media="screen">
+        <link href="${ctx }/vendors/artdialog/ui-dialog.css" rel="stylesheet" media="screen">
         <script src="${ctx }/vendors/jquery-1.9.1.js"></script>
         <script src="${ctx }/bootstrap/js/bootstrap.min.js"></script>
         <script src="${ctx }/vendors/jquery.uniform.min.js"></script>
         <script src="${ctx }/vendors/chosen.jquery.min.js"></script>
         <script src="${ctx }/vendors/datatables/js/jquery.dataTables.min.js"></script>
 		<script src="${ctx }/assets/scripts.js"></script>
-		
+		<script src="${ctx }/assets/DT_bootstrap.js"></script>
+		<script src="${ctx }/vendors/artdialog/dialog-min.js"></script>
 		<script>
 		var oTable = null; 
 		function retrieveData( sSource, aoData, fnCallback ) {  
@@ -111,12 +114,17 @@
 						{ "mData": 'artName' },
 						{ "mData": 'artDesc' },
 						{ "mData": 'artSize' },
-						{ "mData": 'id' }
+						{ "mData": 'id' ,
+						  "mRender": function ( data, type, row ) {
+							  return "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
+							}
+						}
 					],
 					"fnServerData": retrieveData,           //获取数据的处理函数  
 		            //"bFilter": false,                       //不使用过滤功能  
 		            "bLengthChange": false,                 //用户不可改变每页显示数量  
 		            "iDisplayLength": 10,                    //每页显示10条数据  
+		            "sPaginationType": "bootstrap",
 		            "oLanguage": {                          //汉化  
 		                "sLengthMenu": "每页显示 _MENU_ 条记录",  
 		                "sZeroRecords": "没有检索到数据",  
@@ -129,13 +137,30 @@
 		                    "sNext": "后页",  
 		                    "sLast": "尾页"  
 		                }  
-		            }  
+		            },
+		            
 			    });
 			}
 			oTable.fnDraw(); 
 		}
 		
 		search();
+		
+		detail=function(title,id){
+			var d = dialog({
+			    title:title,
+			    width:400,
+			    height:500
+			});
+			$.ajax({
+			    url: "${ctx}/admin/art/detail.form?id="+id,
+			    success: function (data) {
+			        d.content(data);
+			    },
+			    cache: false
+			});
+			d.show();
+		}
 		</script>
     </body>
 </html>

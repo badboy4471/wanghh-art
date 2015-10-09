@@ -156,7 +156,8 @@
 					'uploader' : '${ctx}/admin/art/file/upload.form',
 					'onUploadSuccess' : function(file, data, response) {
 						var json = $.parseJSON(data);
-						$("#showImage").html("<img src='"+json.data.fullUrl+"' width='50' height='50'/>");
+						var imageSrc = "${ctx}/"+json.data.fullUrl;
+						$("#showImage").html("<img src='"+imageSrc+"' width='50' height='50'/>");
 						$("#imageUrl").val(json.data.url);
 				    }
 				});

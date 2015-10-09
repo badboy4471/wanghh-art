@@ -39,6 +39,11 @@ public class ArtController {
 		return "art_list";
 	}
 	
+	@RequestMapping(value = "admin/art/detail", method = { RequestMethod.GET })
+	public String viewArtDetail(@RequestParam("id")int id) {
+		return "dialog/art_detail";
+	}
+	
 	@RequestMapping(value = "admin/art/search", method = { RequestMethod.POST ,RequestMethod.GET},produces = "application/json")
 	public @ResponseBody
 	Result loadArts(

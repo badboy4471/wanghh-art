@@ -7,6 +7,7 @@
 				作品列表</a></li>
 		<li><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
 				添加作品</a></li>
+		<!-- 
 		<li><a href="form.html"><i class="icon-chevron-right"></i>
 				Forms</a></li>
 		<li><a href="tables.html"><i class="icon-chevron-right"></i>
@@ -33,5 +34,6 @@
 				class="badge badge-important pull-right">83</span> Errors</a></li>
 		<li><a href="#"><span class="badge badge-warning pull-right">4,231</span>
 				Logs</a></li>
+		 -->
 	</ul>
 </div>
