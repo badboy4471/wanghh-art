@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,6 +79,13 @@ public class ArtController {
 		SearchModel search = new SearchModel();
 		search.setName((String)paramMap.get("name"));
 		search.setNumber((String)paramMap.get("number"));
+		String museumStr = (String)paramMap.get("museumId");
+		try{
+			search.setBatchId(Integer.parseInt(museumStr));
+		}catch(Exception e){
+			search.setBatchId(0);
+		}
+		
 		int start = 0;
 		try{
 			start = Integer.parseInt((String)paramMap.get("iDisplayStart"));

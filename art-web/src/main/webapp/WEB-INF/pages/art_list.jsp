@@ -16,6 +16,7 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="${ctx }/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <c:set var="local" value="art.list"></c:set>
     </head>
     
     <body>
@@ -26,7 +27,6 @@
                 <!--/span-->
                 <div class="span9" id="content">
                       <!-- morris stacked chart -->
-	<p id="test111">test</p>
                      <!-- validation -->
                     <div class="row-fluid">
                          <!-- block -->
@@ -43,7 +43,12 @@
                                          <a href="${ctx }/admin/art/add.form"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
                                       </div>
                                       <div class="btn-group pull-right">
-										<p><input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="编号" id="artNumber" type="text" ><input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="名称" id="artName" type="text" > <button class="btn" id="searchBtn"><i class="icon-search"></i>搜索</button>
+										<p>
+										<select style="width: 150px;margin-bottom:0px;margin-right: 5px;" id="museumId" name="museumId">
+                                              <option value="0">请选择艺术馆</option>
+                                        </select>
+										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="编号" id="artNumber" type="text" >
+										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="名称" id="artName" type="text" > <button class="btn" id="searchBtn"><i class="icon-search"></i>搜索</button>
 										</p>
                                       </div>
                                    </div>
@@ -91,6 +96,7 @@
 			var number = $("#artNumber").val();
 			aoData.push({ "name": "name", "value": name});
 			aoData.push({ "name": "number", "value": number});
+			aoData.push({"name":"museumId","value":$("#museumId").val()});
 		    $.ajax( {  
 		        "type": "POST",   
 		        "contentType": "application/json",  
@@ -122,7 +128,8 @@
 						  "mRender": function ( data, type, row ) {
 							  var detail = "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
 							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">删除</a>";
-							  return detail + " " + del;
+							  var archive = "<a href='###' data=\""+data+"\" class='archive'>归档</a>";
+							  return detail + " " + del + " " + archive;
 							}
 						}
 					],
@@ -180,6 +187,24 @@
 			    },
 			    cache: false
 			});
+		};
+		
+		initSelect = function(){
+			var optionSize = $("#museumId option").size();
+			if (optionSize == 1){
+				$.ajax({
+					url:"${ctx}/admin/museum/all.form",
+					dataType:"json",
+					method:"POST",
+					success:function(data){
+						$.each(data.data, function(i, item) {
+				            $("#museumId").append(
+				                    "<option value="+item.id+">" + item.name + "</option>");
+				                   
+				        });
+					}
+				})
+			}
 		}
 		$(document).ready(function(){
 			search();
@@ -187,6 +212,29 @@
 			$("body").on("click", '#searchBtn', function(){
 				search();
 			});
+			
+			$("body").on("click",'.archive',function(){
+				var artId = $(this).attr("data");
+				var d = dialog({
+				    title:"归档",
+					width:500,
+					height:240
+				});
+				$.ajax({
+					url: "${ctx}/admin/museum/list.form?artId="+artId,
+					success: function (data) {
+						d.content(data);
+					},
+					cache: false
+				});
+				d.show();
+			});
+			
+			
+			initSelect();
+			$("body").on("click","#museumId",function(){
+				initSelect();
+			})
 		}) 
 		</script>
     </body>

@@ -67,6 +67,10 @@ public class LoginController {
 			form.setMuseum(museum);
 			museumList.add(form);
 		}
+		//添加按钮
+		MuseumForm form = new MuseumForm();
+		museumList.add(form);
+		
 		model.addAttribute("museums", museumList);
 		
 		

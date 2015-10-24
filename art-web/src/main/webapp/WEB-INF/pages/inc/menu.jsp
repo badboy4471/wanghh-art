@@ -1,11 +1,11 @@
 <%@ page language="java" isELIgnored="false" pageEncoding="UTF-8"%>
 <div class="span3" id="sidebar">
 	<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-		<li class="active"><a href="${ctx }/admin/index.form"><i
+		<li <c:if test="${local == 'home' }">class="active"</c:if>><a href="${ctx }/admin/index.form"><i
 				class="icon-chevron-right"></i> 首页</a></li>
-		<li><a href="${ctx }/admin/art/list.form"><i class="icon-chevron-right"></i>
+		<li <c:if test="${local == 'art.list' }">class="active"</c:if>><a href="${ctx }/admin/art/list.form"><i class="icon-chevron-right"></i>
 				作品列表</a></li>
-		<li><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
+		<li <c:if test="${local == 'art.add' }">class="active"</c:if>><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
 				添加作品</a></li>
 		<!-- 
 		<li><a href="form.html"><i class="icon-chevron-right"></i>

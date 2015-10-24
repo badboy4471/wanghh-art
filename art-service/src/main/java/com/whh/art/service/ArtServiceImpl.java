@@ -129,7 +129,9 @@ public class ArtServiceImpl implements IArtService {
 
 	@Override
 	public void deleteMuseumArt(int museumId, int artId) {
-		artMapper.deleteMuseumArt(museumId, artId);
+		if (museumId > 0 || artId > 0){
+			artMapper.deleteMuseumArt(museumId, artId);
+		}
 	}
 
 

@@ -15,6 +15,7 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="${ctx }/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+         <c:set var="local" value="home"></c:set>
     </head>
     
     <body>
@@ -54,11 +55,12 @@
                     </div>
                     <div class="row-fluid">
                     	<c:forEach var="museum" items="${museums }" varStatus="midx">
+                    	<c:if test="${ not empty museum.museum }">
                         <div class="span6">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">${museum.museum.name }</div>
+                                    <div class="muted pull-left"><a href="###" class="museumRemove" data="${museum.museum.id }"><i class="icon-remove"></i></a> ${museum.museum.name }</div>
                                     <div class="pull-right"><span class="badge badge-info">${museum.artCount }</span>
 
                                     </div>
@@ -88,16 +90,9 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        <c:if test="${midx.count%2 == 0 }">
-                        	</div>
-                        	<div class="row-fluid">
                         </c:if>
-                        </c:forEach>
-                    </div>
-                    
-                    <div class="row-fluid">
-                        <!-- block -->
-                        <div class="span6">
+                        <c:if test="${empty museum.museum}">
+                        	<div class="span6">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
@@ -113,7 +108,7 @@
                                         <tbody>
                                             <tr>
                                                 <td style="border-top: none;text-align: center;">
-                                                	<a href=""><img alt="add" src="${ctx }/images/big-add.png"></a>
+                                                	<a href="###" id="addMuseum"><img alt="add" src="${ctx }/images/big-add.png"></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -122,22 +117,70 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        <!-- /block -->
+                        </c:if>
+                        <c:if test="${midx.count%2 == 0 }">
+                        	</div>
+                        	<div class="row-fluid">
+                        </c:if>
+                        
+                        
+                        </c:forEach>
                     </div>
+                    
+                    
                 </div>
             </div>
             <hr>
             <%@ include file="inc/footer.jsp" %>
         </div>
         <!--/.fluid-container-->
+        <link href="${ctx }/vendors/artdialog/ui-dialog.css" rel="stylesheet" media="screen">
         <script src="${ctx }/vendors/jquery-1.9.1.min.js"></script>
         <script src="${ctx }/bootstrap/js/bootstrap.min.js"></script>
         <script src="${ctx }/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="${ctx }/assets/scripts.js"></script>
+        <script src="${ctx }/vendors/artdialog/dialog-min.js"></script>
         <script>
         $(function() {
             // Easy pie charts
             $('.chart').easyPieChart({animate: 1000});
+        });
+        
+        $(document).ready(function(){
+        	$("#addMuseum").click(function(){
+        		var d = dialog({
+        		    title:'添加艺术馆',
+        		    width:550,
+        			height:260
+        		});
+        		$.ajax({
+        		    url: "${ctx}/admin/museum/add.form",
+        		    success: function (data) {
+        		        d.content(data);
+        		    },
+        		    cache: false
+        		});
+        		d.show();
+        	});
+        	
+        	$(".museumRemove").click(function(){
+        		if(confirm("删除艺术馆吗？")){
+        			var museumId = $(this).attr("data");
+        			$.ajax({
+        				url:"${ctx}/admin/museum/delete.form",
+        				dataType:"json",
+        				data:{museumId:museumId},
+        				method:"POST",
+        				success:function(data){
+        					alert(data.message);
+        					if (data.code == 200){
+        						window.location.reload();
+        					}
+        				}
+        				
+        			})
+        		}
+        	});
         });
         </script>
     </body>
