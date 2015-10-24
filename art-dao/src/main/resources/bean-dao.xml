@@ -118,4 +118,8 @@
 	<bean id="artMapper" parent="baseMapper" >
 		<property name="mapperInterface" value="com.whh.art.dao.mapper.ArtMapper" />
 	</bean>
+	
+	<bean id="optLogMapper" parent="baseMapper" >
+		<property name="mapperInterface" value="com.whh.art.dao.mapper.OptLogMapper" />
+	</bean>
 </beans>

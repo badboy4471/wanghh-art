@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,16 +41,34 @@ public class ArtController {
 	}
 	
 	@RequestMapping(value = "admin/art/detail", method = { RequestMethod.GET })
-	public String viewArtDetail(@RequestParam("id")int id) {
+	public String viewArtDetail(@RequestParam("id")int id,ModelMap model ) {
+		
+		ArtModel art = artService.getArt(id);
+		
+		model.addAttribute("art", art);
+		
+		
 		return "dialog/art_detail";
+	}
+	
+	@RequestMapping(value = "admin/art/del", method = { RequestMethod.GET })
+	public @ResponseBody
+	Result delArt(@RequestParam("id")int id,ModelMap model ) {
+		Result result = new Result(null);
+		ArtModel art = artService.getArt(id);
+		
+		if (art != null){
+			artService.delArt(id);
+		}else{
+			result.setCode(2404);
+		}
+		model.addAttribute("art", art);
+		return result;
 	}
 	
 	@RequestMapping(value = "admin/art/search", method = { RequestMethod.POST ,RequestMethod.GET},produces = "application/json")
 	public @ResponseBody
 	Result loadArts(
-			@RequestParam(value="name",required=false,defaultValue="")String name,
-			@RequestParam(value="beginTime",required=false,defaultValue="")String beginTime,
-			@RequestParam(value="endTime",required=false,defaultValue="")String endTime,
 			@RequestBody JSONParam[] params,
 			HttpSession session) {
 		    
@@ -57,7 +76,8 @@ public class ArtController {
 		this.convert2Map(paramMap, params);
 		Result result = new Result(null);
 		SearchModel search = new SearchModel();
-		search.setName(name);
+		search.setName((String)paramMap.get("name"));
+		search.setNumber((String)paramMap.get("number"));
 		int start = 0;
 		try{
 			start = Integer.parseInt((String)paramMap.get("iDisplayStart"));

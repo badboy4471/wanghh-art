@@ -21,6 +21,7 @@
 						</ul></li>
 				</ul>
 				<ul class="nav">
+					<!-- 
 					<li class="active"><a href="#">Dashboard</a></li>
 					<li class="dropdown"><a href="#" data-toggle="dropdown"
 						class="dropdown-toggle">Settings <b class="caret"></b>
@@ -64,6 +65,7 @@
 							<li><a tabindex="-1" href="#">Search</a></li>
 							<li><a tabindex="-1" href="#">Permissions</a></li>
 						</ul></li>
+					 -->
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

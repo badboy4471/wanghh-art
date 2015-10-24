@@ -99,4 +99,91 @@
 			art
 		where id = #{id}
 	</delete>
+	
+	
+	<select id="getMuseum" resultType="MuseumModel" parameterType="int">
+		select
+			id,name,location,createTime
+		from 
+			museum 
+		where
+			id = #{id}
+	</select>
+	
+	
+	<insert id="insertMuseum" parameterType="MuseumModel" useGeneratedKeys="true" keyProperty="id">
+		insert into 
+			museum (name,createTime,location)
+		values
+			(#{name},now(),#{locatoin})
+	</insert>
+	
+	<delete id="deletMuseum"  parameterType="int" >
+		delete from 
+			museum 
+		where id = #{id}
+	</delete>
+	
+	<update id="updateMuseum" parameterType="MuseumModel">
+		update museum 
+		set id = #{id}
+		<if test="name != null and name != ''">
+			,name = #{name}
+		</if>
+		<if test="location != null and location != ''">
+			,location = #{location}
+		</if>
+		where id = #{id}
+	</update>
+	
+	<select id="loadAllMuseum" resultType="MuseumModel">
+		select id,name,createTime,location from museum order by id desc
+	</select>
+	
+	<!-- 
+	void insertArt2Museum(int artId,int museumId);
+	
+	List<ArtModel> loadArtsFromMueum(int museumId,int start,int limit);
+	
+	int countArtsFromMueum(int museumId);
+	
+	void deleteMuseumArt(int museumId,int artId);
+	
+	void deleteMuseumArtById(int id);
+	 -->
+	 
+	 <insert id="insertArt2Museum" parameterType="ArtMuseumModel">
+	 	insert into art_museum 
+	 	(artId,museumId,createTime)
+	 	values
+	 	(#{artId},#{museumId},now())
+	 </insert>
+	 
+	 <select id="loadArtsFromMueum" parameterType="Map" resultType="ArtModel">
+	 	select 
+	 		a.id,a.artName,a.artNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artCert,a.artDesc
+	 	from 
+	 		art a,art_museum m
+	 	where a.id = m.artId and m.museumId = #{museumId}
+	 	order by id desc
+	 	limit #{start},#{limit}
+	 </select>
+	 
+	 <select id="countArtsFromMueum" parameterType="int" resultType="int">
+	 	select count(*) from art_museum where museumId = #{museumId}
+	 </select>
+	
+	<delete id="deleteMuseumArt" parameterType="Map">
+		delete from 
+			art_museum
+		where 
+			artId = ${artId} and museumId = ${museumId}
+	</delete>
+	
+	<delete id="deleteMuseumArtById" parameterType="int">
+		delete from 
+			art_museum
+		where 
+			id = #{id}
+	</delete>
 </mapper>

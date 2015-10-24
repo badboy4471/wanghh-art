@@ -2,17 +2,24 @@ package com.whh.art.web.controller;
 
 import java.io.PrintWriter;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.whh.art.dao.model.AdminModel;
+import com.whh.art.service.IOptLogService;
+
 public class LoginInterceptor extends HandlerInterceptorAdapter {
+	
+	@Resource
+	IOptLogService optLogService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-
+		AdminModel admin = null;
 		// System.out.println("[ServerName="+request.getServerName()+",LocalAddr="+request.getLocalAddr()+",LocalName="+request.getLocalName()+",LocalPort="+request.getLocalPort()+"]");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -41,7 +48,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				out.close();
 				return false;
 			}
+			admin = (AdminModel)obj;
 			
+			optLogService.insert(admin.getId(), uri);
 		}
 		return super.preHandle(request, response, handler);
 	}

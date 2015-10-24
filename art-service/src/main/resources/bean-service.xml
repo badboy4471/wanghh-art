@@ -13,5 +13,7 @@
 	
 	<bean id="adminService" class="com.whh.art.service.AdminServiceImpl" autowire="byName" />
 	<bean id="artService" class="com.whh.art.service.ArtServiceImpl" autowire="byName" />
+	
+	<bean id="optLogService" class="com.whh.art.service.OptLogServiceImpl" autowire="byName" />
 
 </beans>

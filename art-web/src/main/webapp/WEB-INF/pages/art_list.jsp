@@ -26,7 +26,7 @@
                 <!--/span-->
                 <div class="span9" id="content">
                       <!-- morris stacked chart -->
-
+	<p id="test111">test</p>
                      <!-- validation -->
                     <div class="row-fluid">
                          <!-- block -->
@@ -34,30 +34,26 @@
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left">作品列表</div>
                             </div>
+                            
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                <!-- 
+                                 
                                    <div class="table-toolbar">
                                       <div class="btn-group">
                                          <a href="${ctx }/admin/art/add.form"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
                                       </div>
                                       <div class="btn-group pull-right">
-                                         <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
-                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                         </ul>
+										<p><input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="编号" id="artNumber" type="text" ><input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="名称" id="artName" type="text" > <button class="btn" id="searchBtn"><i class="icon-search"></i>搜索</button>
+										</p>
                                       </div>
                                    </div>
-                                 -->
                                     <table cellspacing="0" class="table table-striped table-bordered" id="artList">
                                         <thead>
                                             <tr>
                                                 <th>缩略图</th>
+                                                <th>编号</th>
                                                 <th>名字</th>
-                                                <th>介绍</th>
-                                                <th>材料/尺寸</th>
+                                                <th>描述</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
@@ -91,7 +87,10 @@
 		var oTable = null; 
 		function retrieveData( sSource, aoData, fnCallback ) {  
 		    //将客户名称加入参数数组  
-		    //aoData.push( { "name": "customerName", "value": $("#customerName").val() } );  
+		    var name = $("#artName").val();
+			var number = $("#artNumber").val();
+			aoData.push({ "name": "name", "value": name});
+			aoData.push({ "name": "number", "value": number});
 		    $.ajax( {  
 		        "type": "POST",   
 		        "contentType": "application/json",  
@@ -106,22 +105,29 @@
 		function search() {
 			if (oTable == null) { //仅第一次检索时初始化Datatable  
 				oTable = $("#artList").dataTable({
+					"sDom": "<'row'l f<'search'> r>t<'row'<'span6'i><'span6'p>>",
 					"bProcessing": true,
 				    "sAjaxSource":"${ctx}/admin/art/search.form",
 				    "bServerSide":true,
 				    "aoColumns": [
-						{ "mData": 'imageUrl' },
+						{ "mData": 'artImage',
+						  "mRender" : function(data,type,row){
+							  return "<img src=\"${ctx}/"+data+"\" style=\"width: 80px\"/>";
+						  }
+						},
+						{ "mData": 'artNumber' },
 						{ "mData": 'artName' },
 						{ "mData": 'artDesc' },
-						{ "mData": 'artSize' },
 						{ "mData": 'id' ,
 						  "mRender": function ( data, type, row ) {
-							  return "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
+							  var detail = "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
+							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">删除</a>";
+							  return detail + " " + del;
 							}
 						}
 					],
 					"fnServerData": retrieveData,           //获取数据的处理函数  
-		            //"bFilter": false,                       //不使用过滤功能  
+		            "bFilter": false,                       //不使用过滤功能  
 		            "bLengthChange": false,                 //用户不可改变每页显示数量  
 		            "iDisplayLength": 10,                    //每页显示10条数据  
 		            "sPaginationType": "bootstrap",
@@ -140,16 +146,16 @@
 		            },
 		            
 			    });
+			}else{
+				oTable.fnDraw();
 			}
-			oTable.fnDraw(); 
 		}
 		
-		search();
 		
 		detail=function(title,id){
 			var d = dialog({
 			    title:title,
-			    width:400,
+			    width:500,
 			    height:500
 			});
 			$.ajax({
@@ -161,6 +167,27 @@
 			});
 			d.show();
 		}
+		
+	    
+	    
+		del=function(id){
+			$.ajax({
+			    url: "${ctx}/admin/art/del.form?id="+id,
+			    success: function (data) {
+			        if (data.code == 200){
+			        	oTable.fnDrow(false);
+			        }
+			    },
+			    cache: false
+			});
+		}
+		$(document).ready(function(){
+			search();
+			
+			$("body").on("click", '#searchBtn', function(){
+				search();
+			});
+		}) 
 		</script>
     </body>
 </html>
