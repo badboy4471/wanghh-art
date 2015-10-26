@@ -27,7 +27,7 @@ import com.whh.art.web.form.Result;
 
 @Controller
 public class ArtController {
-	
+
 	@Resource
 	IArtService artService;
 
@@ -35,75 +35,82 @@ public class ArtController {
 	public String viewArtAdd(HttpSession session) {
 		return "add_art";
 	}
-	
+
 	@RequestMapping(value = "admin/art/list", method = { RequestMethod.GET })
 	public String viewArtList() {
 		return "art_list";
 	}
-	
+
 	@RequestMapping(value = "admin/art/detail", method = { RequestMethod.GET })
-	public String viewArtDetail(@RequestParam("id")int id,ModelMap model ) {
-		
+	public String viewArtDetail(@RequestParam("id") int id, ModelMap model) {
+
 		ArtModel art = artService.getArt(id);
-		
+
 		model.addAttribute("art", art);
-		
-		
+
 		return "dialog/art_detail";
 	}
-	
+
+	@RequestMapping(value = "admin/art/out", method = { RequestMethod.GET })
+	public String viewArtOutPage(@RequestParam("artId") int artId,
+			HttpSession session, ModelMap map) {
+		
+		ArtModel art = artService.getArt(artId);
+		map.addAttribute("art", art);
+		return "art_out";
+	}
+
 	@RequestMapping(value = "admin/art/del", method = { RequestMethod.GET })
 	public @ResponseBody
-	Result delArt(@RequestParam("id")int id,ModelMap model ) {
+	Result delArt(@RequestParam("id") int id, ModelMap model) {
 		Result result = new Result(null);
 		ArtModel art = artService.getArt(id);
-		
-		if (art != null){
+
+		if (art != null) {
 			artService.delArt(id);
-		}else{
+		} else {
 			result.setCode(2404);
 		}
 		model.addAttribute("art", art);
 		return result;
 	}
-	
-	@RequestMapping(value = "admin/art/search", method = { RequestMethod.POST ,RequestMethod.GET},produces = "application/json")
+
+	@RequestMapping(value = "admin/art/search", method = { RequestMethod.POST,
+			RequestMethod.GET }, produces = "application/json")
 	public @ResponseBody
-	Result loadArts(
-			@RequestBody JSONParam[] params,
-			HttpSession session) {
-		    
+	Result loadArts(@RequestBody JSONParam[] params, HttpSession session) {
+
 		Map paramMap = new HashMap();
 		this.convert2Map(paramMap, params);
 		Result result = new Result(null);
 		SearchModel search = new SearchModel();
-		search.setName((String)paramMap.get("name"));
-		search.setNumber((String)paramMap.get("number"));
-		String museumStr = (String)paramMap.get("museumId");
-		try{
+		search.setName((String) paramMap.get("name"));
+		search.setNumber((String) paramMap.get("number"));
+		String museumStr = (String) paramMap.get("museumId");
+		try {
 			search.setBatchId(Integer.parseInt(museumStr));
-		}catch(Exception e){
+		} catch (Exception e) {
 			search.setBatchId(0);
 		}
-		
+
 		int start = 0;
-		try{
-			start = Integer.parseInt((String)paramMap.get("iDisplayStart"));
-		}catch(Exception e){
-			
+		try {
+			start = Integer.parseInt((String) paramMap.get("iDisplayStart"));
+		} catch (Exception e) {
+
 		}
 		int limit = 10;
-		try{
-			limit = Integer.parseInt((String)paramMap.get("iDisplayLength"));
-		}catch(Exception e){
-			
+		try {
+			limit = Integer.parseInt((String) paramMap.get("iDisplayLength"));
+		} catch (Exception e) {
+
 		}
 		search.setStart(start);
 		search.setLimit(limit);
 		List<ArtModel> arts = artService.searchArts(search);
 		int count = artService.countArts(search);
 		result.setAaData(arts);
-		result.setsEcho((String)paramMap.get("sEcho"));
+		result.setsEcho((String) paramMap.get("sEcho"));
 		result.setiTotalRecords(count);
 		result.setiTotalDisplayRecords(count);
 		return result;
@@ -111,17 +118,15 @@ public class ArtController {
 
 	@RequestMapping(value = "admin/art/save", method = { RequestMethod.POST })
 	public @ResponseBody
-	Result saveArt(
-			@ModelAttribute ArtSubmit artSubmit,
-			HttpSession session) {
+	Result saveArt(@ModelAttribute ArtSubmit artSubmit, HttpSession session) {
 		Result result = new Result(null);
 		ArtModel model = new ArtModel();
 		BeanUtils.copyProperties(artSubmit, model);
 		ArtModel art = artService.insertArt(model);
-		
-		if (art.getId() > 0){
+
+		if (art.getId() > 0) {
 			result.setCode(200);
-		}else{
+		} else {
 			result.setCode(-1);
 		}
 		return result;
@@ -135,9 +140,9 @@ public class ArtController {
 		boolean exist = artService.numberExist(artNumber);
 		return !exist;
 	}
-	
-	private void convert2Map(Map map,JSONParam[] params){
-		for (JSONParam param:params){
+
+	private void convert2Map(Map map, JSONParam[] params) {
+		for (JSONParam param : params) {
 			map.put(param.getName(), param.getValue());
 		}
 	}

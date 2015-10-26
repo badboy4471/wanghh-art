@@ -9,4 +9,12 @@
 		values
 		(#{time},#{adminId},#{url})
 	</insert>
+	
+	
+	<insert id="insertArtOut" parameterType="ArtOutModel">
+		insert into art_out (type,artId,createTime,memo,backTime)
+		values
+		(#{type},#{art.id},now(),#{memo},#{backTime})
+	</insert>
+	
 </mapper>

@@ -78,6 +78,7 @@
             <%@ include file="inc/footer.jsp" %>
         </div>
         <!--/.fluid-container-->
+        <link href="${ctx }/vendors/datepicker.css" rel="stylesheet" media="screen">
         <link href="${ctx }/vendors/uniform.default.css" rel="stylesheet" media="screen">
         <link href="${ctx }/vendors/artdialog/ui-dialog.css" rel="stylesheet" media="screen">
         <script src="${ctx }/vendors/jquery-1.9.1.js"></script>
@@ -88,6 +89,7 @@
 		<script src="${ctx }/assets/scripts.js"></script>
 		<script src="${ctx }/assets/DT_bootstrap.js"></script>
 		<script src="${ctx }/vendors/artdialog/dialog-min.js"></script>
+		<script src="${ctx }/vendors/bootstrap-datepicker.js"></script>
 		<script>
 		var oTable = null; 
 		function retrieveData( sSource, aoData, fnCallback ) {  
@@ -129,7 +131,8 @@
 							  var detail = "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
 							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">删除</a>";
 							  var archive = "<a href='###' data=\""+data+"\" class='archive'>归档</a>";
-							  return detail + " " + del + " " + archive;
+							  var goout = "<a href='${ctx}/admin/art/out.form?artId="+data+"' data='"+data+"'>出库</a>";
+							  return detail + " " + del + " " + archive + " " + goout;
 							}
 						}
 					],
@@ -206,6 +209,7 @@
 				})
 			}
 		}
+		
 		$(document).ready(function(){
 			search();
 			
@@ -230,6 +234,22 @@
 				d.show();
 			});
 			
+			$("body").on("click",'.goout',function(){
+				var artId = $(this).attr("data");
+				var d = dialog({
+				    title:"归档",
+					width:500,
+					height:500
+				});
+				$.ajax({
+					url: "${ctx}/admin/art/out.form?artId="+artId,
+					success: function (data) {
+						d.content(data);
+					},
+					cache: false
+				});
+				d.show();
+			});
 			
 			initSelect();
 			$("body").on("click","#museumId",function(){
