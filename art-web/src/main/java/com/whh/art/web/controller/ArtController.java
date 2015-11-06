@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.ArtModel;
+import com.whh.art.dao.model.ArtOutModel;
 import com.whh.art.dao.model.SearchModel;
 import com.whh.art.service.IArtService;
+import com.whh.art.service.IOptLogService;
+import com.whh.art.utils.ArtUtils;
 import com.whh.art.web.form.ArtSubmit;
 import com.whh.art.web.form.JSONParam;
 import com.whh.art.web.form.Result;
@@ -30,6 +33,8 @@ public class ArtController {
 
 	@Resource
 	IArtService artService;
+	@Resource
+	IOptLogService optLogService;
 
 	@RequestMapping(value = "admin/art/add", method = { RequestMethod.GET })
 	public String viewArtAdd(HttpSession session) {
@@ -129,6 +134,34 @@ public class ArtController {
 		} else {
 			result.setCode(-1);
 		}
+		return result;
+	}
+	
+	@RequestMapping(value = "admin/art/out/save", method = { RequestMethod.POST })
+	public @ResponseBody
+	Result saveArtOut(@RequestParam("memo") String memo,
+			@RequestParam("outType") String outType,
+			@RequestParam("returnTime") String returnTime,
+			@RequestParam("artId")int artId) {
+		Result result = new Result(null);
+		
+		ArtModel art = artService.getArt(artId);
+		if (art == null || art.getId() == 0){
+			result.setCode(0);
+			result.setMessage("参数不对，artId="+artId+"对应的数据不存在！");
+			return result;
+		}
+		
+		ArtOutModel out = new ArtOutModel();
+		
+		out.setArt(art);
+		if (StringUtils.hasText(returnTime)){
+			out.setBackTime(ArtUtils.getDate(returnTime));
+		}
+		out.setType(outType);
+		optLogService.insertArtOut(out);
+		result.setCode(200);
+		result.setMessage("保存成功！");
 		return result;
 	}
 

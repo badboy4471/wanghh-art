@@ -44,7 +44,7 @@
 												<label class="control-label">备注<span
 													class="required">*</span></label>
 												<div class="controls">
-													<textarea rows="3" cols="120" name="memo"
+													<textarea rows="3" style="width: 380px" cols="120" name="memo"
 														placeholder="借给了谁，联系电话，其他备注信息"></textarea>
 												</div>
 											</div>
@@ -53,10 +53,13 @@
 													class="required">*</span></label>
 												<div class="controls">
 													<input name="backDate" id="backDate" type="text" />
+													<input type="radio" style="margin-bottom: 5px;margin-left: 10px;margin-right: 5px" checked="checked" name="outType" value="RENT">出租
+													<input type="radio" style="margin-bottom: 5px;margin-left: 10px;margin-right: 5px" name="outType" value="SELL">出售 
+													
 												</div>
 											</div>
 											<div class="form-actions" style="margin-bottom: 0px;">
-												<button type="button" id="saveMuseum"
+												<button type="button" id="saveArtOut"
 													class="btn btn-primary">提交</button>
 												<button type="button" class="btn">重置</button>
 											</div>
@@ -136,16 +139,18 @@
 			$("#backDate").datepicker();
 		});
 		$(document).ready(function() {
-			$("#saveMuseum").click(function() {
-				var name = $("#name").val();
-				var location = $("#location").val();
+			$("#saveArtOut").click(function() {
+				var memo = $("#memo").val();
+				var returnTime = $("#returnTime").val();
+				var outType = $("#outType").val();
 				$.ajax({
 					method : "POST",
-					url : "${ctx }/admin/museum/save.form",
+					url : "${ctx }/admin/art/out/save.form",
 					dataType : "json",
 					data : {
-						name : name,
-						location : location
+						memo : memo,
+						returnTime : returnTime,
+						outType : outType
 					},
 					success : function(data) {
 						alert(data.message);
