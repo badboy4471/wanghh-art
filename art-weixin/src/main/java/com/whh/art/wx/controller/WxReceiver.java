@@ -55,7 +55,7 @@ public class WxReceiver {
 					.toUser(inMessage.getFromUserName()).build();
 
 			if (m != null) {
-				String rtnXML = XStreamTransformer.toXml((Class)this.getClass(), m);
+				String rtnXML = XStreamTransformer.toXml((Class)m.getClass(), m);
 				response.getWriter().write(rtnXML);
 			}
 
