@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.ArtModel;
+import com.whh.art.dao.model.SearchModel;
 import com.whh.art.service.IArtService;
 
 @Controller
@@ -64,13 +65,11 @@ public class WxReceiver {
 			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(
 					WxCpXmlMessage.class, request.getInputStream());
 
-			String code = inMessage.getContent();
+			String number = inMessage.getContent();
 			Item item = new Item();
 
 			try {
-				int artId = Integer.parseInt(code);
-
-				ArtModel art = artService.getArt(artId);
+				ArtModel art = artService.getArt(number);
 
 				if (art == null || art.getId() == 0) {
 					getDefaultItem(item);
