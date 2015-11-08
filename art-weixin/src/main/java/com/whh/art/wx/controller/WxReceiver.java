@@ -7,7 +7,8 @@ import me.chanjar.weixin.common.util.crypto.SHA1;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
-import me.chanjar.weixin.cp.bean.WxCpXmlOutTextMessage;
+import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage;
+import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage.Item;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
 
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,11 @@ public class WxReceiver {
 	private static String TOKEN = "junart123";
 	private static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";
 
+	@SuppressWarnings("all")
 	@RequestMapping(value = "art/wx/receiver", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json")
 	public @ResponseBody
-	String viewArtDetail(
+	String wxCenter(
 			@RequestParam(value = "signature", required = false) String signature,
 			@RequestParam(value = "timestamp", required = false) String timestamp,
 			@RequestParam(value = "nonce", required = false) String nonce,
@@ -53,13 +55,19 @@ public class WxReceiver {
 			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(
 					WxCpXmlMessage.class, request.getInputStream());
 
-			WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT().content("测试一下")
-					.fromUser(inMessage.getToUserName())
+			Item item = new Item();
+			item.setDescription("描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？");
+			item.setPicUrl("https://www.mlook.mobi/img/month_1509/201509100900289792_66_88.jpg");
+			item.setTitle("标题几个字标题几个字标题几个字标题几个字");
+			item.setUrl("http://www.qupai.me");
+
+			WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS()
+					.addArticle(item).fromUser(inMessage.getToUserName())
 					.toUser(inMessage.getFromUserName()).build();
 
-			if (m != null) {
-				String rtnXML = XStreamTransformer.toXml((Class) m.getClass(),
-						m);
+			if (news != null) {
+				String rtnXML = XStreamTransformer.toXml(
+						(Class) news.getClass(), news);
 				response.getWriter().write(rtnXML);
 			}
 
