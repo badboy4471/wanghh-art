@@ -8,6 +8,7 @@ import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutTextMessage;
+import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,16 +48,15 @@ public class WxReceiver {
 			config.setAesKey(EAK);
 			config.setCorpSecret(APPSECRET);
 
-			WxCpXmlMessage inMessage = WxCpXmlMessage.fromEncryptedXml(
-					request.getInputStream(), config, timestamp, nonce,
-					signature);
+			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(WxCpXmlMessage.class, request.getInputStream());
 
 			WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT().content("测试一下")
 					.fromUser(inMessage.getToUserName())
 					.toUser(inMessage.getFromUserName()).build();
 
 			if (m != null) {
-				response.getWriter().write(m.toEncryptedXml(config));
+				String rtnXML = XStreamTransformer.toXml((Class)this.getClass(), m);
+				response.getWriter().write(rtnXML);
 			}
 
 		} catch (Exception e1) {
