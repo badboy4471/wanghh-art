@@ -19,6 +19,7 @@ function deploy(){
     echo '部署--------------'
 
     cp ${duanqu_dir}/art-web/target/art.war webapps/art.war
+    cp ${duanqu_dir}/art-weixin/target/artwx.war webapps/artwx.war
 }
 
 echo 'repo update----------------'
