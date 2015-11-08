@@ -35,6 +35,8 @@ public class WxReceiver {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		System.out.println("接收微信信息！");
+		response.setContentType("text/html;charset=utf-8");
+		response.setStatus(HttpServletResponse.SC_OK);
 
 		try {
 			String mySignature = SHA1.gen(TOKEN, timestamp, nonce);
@@ -48,14 +50,16 @@ public class WxReceiver {
 			config.setAesKey(EAK);
 			config.setCorpSecret(APPSECRET);
 
-			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(WxCpXmlMessage.class, request.getInputStream());
+			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(
+					WxCpXmlMessage.class, request.getInputStream());
 
 			WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT().content("测试一下")
 					.fromUser(inMessage.getToUserName())
 					.toUser(inMessage.getFromUserName()).build();
 
 			if (m != null) {
-				String rtnXML = XStreamTransformer.toXml((Class)m.getClass(), m);
+				String rtnXML = XStreamTransformer.toXml((Class) m.getClass(),
+						m);
 				response.getWriter().write(rtnXML);
 			}
 
