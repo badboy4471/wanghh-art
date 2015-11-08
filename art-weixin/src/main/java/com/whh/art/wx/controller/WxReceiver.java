@@ -1,12 +1,9 @@
 package com.whh.art.wx.controller;
 
-import java.security.NoSuchAlgorithmException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import me.chanjar.weixin.common.util.crypto.SHA1;
-import me.chanjar.weixin.cp.api.WxCpConfigStorage;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
@@ -24,6 +21,7 @@ public class WxReceiver {
 	private static String APPID = "wx5d32a0a3aaa63013";
 	private static String APPSECRET = "fe67e928329a5d8d540090e3fb6aa704";
 	private static String TOKEN = "junart123";
+	private static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";
 
 	@RequestMapping(value = "art/wx/receiver", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json")
@@ -46,6 +44,8 @@ public class WxReceiver {
 			WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
 			config.setToken(TOKEN);
 			config.setCorpId(APPID);
+			config.setAesKey(EAK);
+			config.setCorpSecret(APPSECRET);
 
 			WxCpXmlMessage inMessage = WxCpXmlMessage.fromEncryptedXml(
 					request.getInputStream(), config, timestamp, nonce,
@@ -63,8 +63,8 @@ public class WxReceiver {
 			e1.printStackTrace();
 		}
 
-		return null;
-		// return echostr; 验证时return
+		// return null;
+		return echostr;
 	}
 
 }
