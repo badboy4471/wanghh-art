@@ -53,9 +53,6 @@ public class WxReceiver {
 		try {
 			String mySignature = SHA1.gen(TOKEN, timestamp, nonce);
 
-			System.out.println("mySignature:" + mySignature + ",signature:"
-					+ signature + ",equals:" + (signature.equals(mySignature)));
-
 			WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
 			config.setToken(TOKEN);
 			config.setCorpId(APPID);
