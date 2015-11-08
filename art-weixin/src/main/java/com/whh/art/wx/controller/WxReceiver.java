@@ -25,10 +25,12 @@ public class WxReceiver {
 	@RequestMapping(value = "art/wx/receiver", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json")
 	public @ResponseBody
-	String viewArtDetail(@RequestParam("signature") String signature,
-			@RequestParam("timestamp") String timestamp,
-			@RequestParam("nonce") String nonce,
-			@RequestParam("echostr") String echostr, HttpServletRequest request) {
+	String viewArtDetail(
+			@RequestParam(value = "signature", required = false) String signature,
+			@RequestParam(value = "timestamp", required = false) String timestamp,
+			@RequestParam(value = "nonce", required = false) String nonce,
+			@RequestParam(value = "echostr", required = false) String echostr,
+			HttpServletRequest request) {
 
 		System.out.println("接收微信信息！");
 
