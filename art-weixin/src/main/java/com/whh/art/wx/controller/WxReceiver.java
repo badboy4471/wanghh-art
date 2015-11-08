@@ -68,7 +68,7 @@ public class WxReceiver {
 			Item item = new Item();
 
 			try {
-				int artId = Integer.getInteger(code);
+				int artId = Integer.parseInt(code);
 
 				ArtModel art = artService.getArt(artId);
 
