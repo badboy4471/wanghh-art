@@ -1,5 +1,6 @@
 package com.whh.art.wx.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.whh.art.dao.model.ArtModel;
+import com.whh.art.service.IArtService;
+
 @Controller
 public class WxReceiver {
 
@@ -24,6 +28,11 @@ public class WxReceiver {
 	private static String APPSECRET = "fe67e928329a5d8d540090e3fb6aa704";
 	private static String TOKEN = "junart123";
 	private static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";
+
+	private static String DOMAIN = "http://121.40.172.232/art/detail.form?id=";
+
+	@Resource
+	IArtService artService;
 
 	@SuppressWarnings("all")
 	@RequestMapping(value = "art/wx/receiver", method = { RequestMethod.GET,
@@ -55,11 +64,26 @@ public class WxReceiver {
 			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(
 					WxCpXmlMessage.class, request.getInputStream());
 
+			String code = inMessage.getContent();
 			Item item = new Item();
-			item.setDescription("描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？");
-			item.setPicUrl("https://www.mlook.mobi/img/month_1509/201509100900289792_66_88.jpg");
-			item.setTitle("标题几个字标题几个字标题几个字标题几个字");
-			item.setUrl("http://www.qupai.me");
+
+			try {
+				int artId = Integer.getInteger(code);
+
+				ArtModel art = artService.getArt(artId);
+
+				if (art == null || art.getId() == 0) {
+					getDefaultItem(item);
+				} else {
+					item.setDescription(art.getArtDesc());
+					item.setPicUrl(art.getArtImage());
+					item.setTitle(art.getArtName());
+					item.setUrl(DOMAIN + art.getId());
+				}
+
+			} catch (Exception e) {
+				getDefaultItem(item);
+			}
 
 			WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS()
 					.addArticle(item).fromUser(inMessage.getToUserName())
@@ -77,6 +101,14 @@ public class WxReceiver {
 
 		// return null;
 		return echostr;
+	}
+
+	private void getDefaultItem(Item item) {
+
+		item.setDescription("描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？描述几个字？");
+		item.setPicUrl("https://www.mlook.mobi/img/month_1509/201509100900289792_66_88.jpg");
+		item.setTitle("标题几个字标题几个字标题几个字标题几个字");
+		item.setUrl("http://www.qupai.me");
 	}
 
 }
