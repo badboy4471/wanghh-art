@@ -12,7 +12,7 @@ public class SearchModel {
 	private Integer status;
 	private int id;
 	private int start;
-	private int limit;
+	private int limit = 20;
 	
 	public String getName() {
 		return name;
