@@ -1,13 +1,16 @@
 package com.whh.art.wx.controller;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import me.chanjar.weixin.common.util.crypto.SHA1;
-import me.chanjar.weixin.common.util.crypto.WxCryptUtil;
+import me.chanjar.weixin.cp.api.WxCpConfigStorage;
+import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
+import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
+import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
+import me.chanjar.weixin.cp.bean.WxCpXmlOutTextMessage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +33,7 @@ public class WxReceiver {
 			@RequestParam(value = "timestamp", required = false) String timestamp,
 			@RequestParam(value = "nonce", required = false) String nonce,
 			@RequestParam(value = "echostr", required = false) String echostr,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpServletResponse response) {
 
 		System.out.println("接收微信信息！");
 
@@ -40,23 +43,28 @@ public class WxReceiver {
 			System.out.println("mySignature:" + mySignature + ",signature:"
 					+ signature + ",equals:" + (signature.equals(mySignature)));
 
-		} catch (NoSuchAlgorithmException e1) {
+			WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
+			config.setToken(TOKEN);
+			config.setCorpId(APPID);
+
+			WxCpXmlMessage inMessage = WxCpXmlMessage.fromEncryptedXml(
+					request.getInputStream(), config, timestamp, nonce,
+					signature);
+
+			WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT().content("测试一下")
+					.fromUser(inMessage.getToUserName())
+					.toUser(inMessage.getFromUserName()).build();
+
+			if (m != null) {
+				response.getWriter().write(m.toEncryptedXml(config));
+			}
+
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
-		int i = 0;
-		byte[] b = new byte[1024];
-		try {
-			while ((i = request.getInputStream().read(b)) != -1) {
-				System.out.println(new String(b, "utf-8"));
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return echostr;
+		return null;
+		// return echostr; 验证时return
 	}
 
 }
