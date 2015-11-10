@@ -20,7 +20,7 @@ public class AliyunUpload {
 
 	private static final String OSS_ENDPOINT = "http://oss.aliyuncs.com/";
 	private final static String ACCESS_ID = "9Tb73Z5yBv0u3A9m";
-	private final static String ACCESS_KEY = "98pZP1p9jqgAxRdMRmsHyzUpyfc=";
+	private final static String ACCESS_KEY = "nRLgyCxVva1Qj6e2HiDrY00PjD0V1Q";
 	private static OSSClient client = null;
 
 	static {
@@ -67,6 +67,22 @@ public class AliyunUpload {
 			return key;
 		} else {
 			return null;
+		}
+	}
+
+	public static void main(String[] args) {
+		try {
+			/*File file = new File("/Users/tiger/Downloads/1111.mp4");
+			InputStream input = new FileInputStream(file);
+
+			String key = AliyunUpload.uploadArtImage(input, file.length());
+
+			System.out.println(key);*/
+			
+			client.deleteObject("art-images", "711963eb-58c2-4ad7-b0fd-b023ef44f48f.jpg");
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
