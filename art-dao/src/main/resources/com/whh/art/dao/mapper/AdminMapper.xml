@@ -53,6 +53,10 @@
 			(#{openid},#{createTime},#{avatar},#{userName})
 	</insert>
 	
+	<delete id="deleteUser" parameterType="String" >
+		delete from users where openid = #{openid}
+	</delete>
+	
 	<select id="getUser" parameterType="String" resultType="UserModel">
 		select 
 			id,openid,createTime,avatar,userName

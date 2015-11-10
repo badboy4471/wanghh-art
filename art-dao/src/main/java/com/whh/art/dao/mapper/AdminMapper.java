@@ -23,5 +23,7 @@ public interface AdminMapper {
 	List<UserModel> loadUserModel(SearchModel search);
 	
 	int countUsers(SearchModel search);
+	
+	void deleteUser(String openid);
 
 }

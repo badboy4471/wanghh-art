@@ -131,6 +131,10 @@ public class WxReceiver {
 			user.setCreateTime(inMessage.getCreateTime().intValue());
 			adminService.insertUser(user);
 		}
+		
+		if (inMessage.getEvent().equals("unsubscribe")){
+			adminService.deleteUser(inMessage.getFromUserName());
+		}
 		return null;
 	}
 

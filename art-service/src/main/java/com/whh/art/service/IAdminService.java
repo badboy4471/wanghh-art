@@ -10,5 +10,7 @@ public interface IAdminService {
 	AdminModel login(String userName,String password);
 	
 	void insertUser(UserModel user);
+	
+	void deleteUser(String openid);
 
 }

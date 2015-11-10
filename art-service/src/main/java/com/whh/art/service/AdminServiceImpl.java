@@ -34,4 +34,10 @@ public class AdminServiceImpl implements IAdminService {
 		}
 	}
 
+	@Override
+	public void deleteUser(String openid) {
+		adminMapper.deleteUser(openid);
+		
+	}
+
 }
