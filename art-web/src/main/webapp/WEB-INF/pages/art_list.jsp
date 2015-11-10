@@ -1,4 +1,5 @@
 <%@ page language="java"  isELIgnored="false" pageEncoding="UTF-8"%>
+<%@ page import="com.whh.art.untils.AliyunUpload" %>
 <%@ include file="inc/head.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -120,7 +121,7 @@
 				    "aoColumns": [
 						{ "mData": 'artImage',
 						  "mRender" : function(data,type,row){
-							  return "<img src=\"http://art-images.oss-cn-hangzhou.aliyuncs.com/"+data+"\" style=\"width: 80px\"/>";
+							  return "<img src=\"<%=AliyunUpload.IMAGE_DOMAIN%>/"+data+"\" style=\"width: 80px\"/>";
 						  }
 						},
 						{ "mData": 'artNumber' },

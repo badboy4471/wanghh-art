@@ -22,7 +22,11 @@ public class AliyunUpload {
 	private final static String ACCESS_ID = "9Tb73Z5yBv0u3A9m";
 	private final static String ACCESS_KEY = "nRLgyCxVva1Qj6e2HiDrY00PjD0V1Q";
 	private static OSSClient client = null;
-
+	
+	
+	public static final String IMAGE_DOMAIN = "http://art-images.oss-cn-hangzhou.aliyuncs.com/";
+	public static final String VIDEO_DOMAIN = "http://art-videos.oss-cn-hangzhou.aliyuncs.com/";
+	public static final String AUDIO_DOMAIN = "http://art-audios.oss-cn-hangzhou.aliyuncs.com/";
 	static {
 		ClientConfiguration config = new ClientConfiguration();
 		client = new OSSClient(OSS_ENDPOINT, ACCESS_ID, ACCESS_KEY, config);

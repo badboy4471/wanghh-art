@@ -19,11 +19,12 @@ import com.whh.art.web.form.Result;
 @Controller
 public class FileUploadController {
 
-	/*private static String FILE_ROOT = "artFiles/";
-	private static String IMAGE_FOLDER = "images/";
-	private static String AUDIO_FOLDER = "audios/";
-	private static String VIDEO_FOLDER = "videos/";
-	private static String OTHER = "other/";*/
+	/*
+	 * private static String FILE_ROOT = "artFiles/"; private static String
+	 * IMAGE_FOLDER = "images/"; private static String AUDIO_FOLDER = "audios/";
+	 * private static String VIDEO_FOLDER = "videos/"; private static String
+	 * OTHER = "other/";
+	 */
 
 	@RequestMapping(value = "admin/art/file/upload", method = { RequestMethod.POST }, produces = "application/json")
 	public @ResponseBody
@@ -42,8 +43,9 @@ public class FileUploadController {
 		String fullUrl = "";
 		if (FileType.IMAGE.toString().equalsIgnoreCase(type)) {
 			try {
-				fileName = AliyunUpload.uploadArtImage(file.getInputStream(), file.getBytes().length);
-				fullUrl = "http://art-images.oss-cn-hangzhou.aliyuncs.com/"+fileName;
+				fileName = AliyunUpload.uploadArtImage(file.getInputStream(),
+						file.getBytes().length);
+				fullUrl = AliyunUpload.IMAGE_DOMAIN + fileName;
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -51,10 +53,11 @@ public class FileUploadController {
 			}
 		}
 		if (FileType.AUDIO.toString().equalsIgnoreCase(type)) {
-			
+
 			try {
-				fileName = AliyunUpload.uploadAudio(file.getInputStream(), file.getBytes().length);
-				fullUrl = "http://art-audios.oss-cn-hangzhou.aliyuncs.com/"+fileName;
+				fileName = AliyunUpload.uploadAudio(file.getInputStream(),
+						file.getBytes().length);
+				fullUrl = AliyunUpload.AUDIO_DOMAIN + fileName;
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -63,16 +66,17 @@ public class FileUploadController {
 		}
 		if (FileType.VIDEO.toString().equalsIgnoreCase(type)) {
 			try {
-				fileName = AliyunUpload.uploadVideo(file.getInputStream(), file.getBytes().length);
-				fullUrl = "http://art-videos.oss-cn-hangzhou.aliyuncs.com/"+fileName;
+				fileName = AliyunUpload.uploadVideo(file.getInputStream(),
+						file.getBytes().length);
+				fullUrl = AliyunUpload.VIDEO_DOMAIN + fileName;
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("fullUrl", fullUrl);
 		map.put("url", fileName);

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.SearchModel;
 import com.whh.art.service.IArtService;
+import com.whh.art.untils.AliyunUpload;
 
 @Controller
 public class WxReceiver {
@@ -72,7 +73,7 @@ public class WxReceiver {
 					getDefaultItem(item);
 				} else {
 					item.setDescription(art.getArtDesc());
-					item.setPicUrl(art.getArtImage());
+					item.setPicUrl(AliyunUpload.IMAGE_DOMAIN+art.getArtImage());
 					item.setTitle(art.getArtName());
 					item.setUrl(DOMAIN + art.getId());
 				}
