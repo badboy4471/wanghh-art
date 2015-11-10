@@ -33,7 +33,7 @@ public class WxReceiver {
 	private static String TOKEN = "junart123";
 	private static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";
 
-	private static String DOMAIN = "http://121.40.172.232/art/detail.form?id=";
+	private static String DOMAIN = "http://121.40.172.232/art/art/detail.form?id=";
 
 	@Resource
 	IArtService artService;
