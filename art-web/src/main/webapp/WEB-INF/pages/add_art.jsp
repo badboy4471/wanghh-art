@@ -157,7 +157,7 @@
 					'uploader' : '${ctx}/admin/art/file/upload.form',
 					'onUploadSuccess' : function(file, data, response) {
 						var json = $.parseJSON(data);
-						var imageSrc = "${ctx}/"+json.data.fullUrl;
+						var imageSrc = json.data.fullUrl;
 						$("#showImage").html("<img src='"+imageSrc+"' width='50' height='50'/>");
 						$("#imageUrl").val(json.data.url);
 				    }
