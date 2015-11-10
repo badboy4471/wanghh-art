@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.ArtModel;
-import com.whh.art.dao.model.SearchModel;
 import com.whh.art.dao.model.UserModel;
-import com.whh.art.service.AdminServiceImpl;
 import com.whh.art.service.IAdminService;
 import com.whh.art.service.IArtService;
 import com.whh.art.untils.AliyunUpload;

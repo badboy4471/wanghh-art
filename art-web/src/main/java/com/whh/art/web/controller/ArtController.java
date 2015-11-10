@@ -46,7 +46,7 @@ public class ArtController {
 		return "art_list";
 	}
 
-	@RequestMapping(value = "admin/art/detail", method = { RequestMethod.GET })
+	@RequestMapping(value = {"admin/art/detail","art/detail"}, method = { RequestMethod.GET })
 	public String viewArtDetail(@RequestParam("id") int id, ModelMap model) {
 
 		ArtModel art = artService.getArt(id);
