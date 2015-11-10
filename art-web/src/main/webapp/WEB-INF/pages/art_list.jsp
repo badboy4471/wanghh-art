@@ -120,7 +120,7 @@
 				    "aoColumns": [
 						{ "mData": 'artImage',
 						  "mRender" : function(data,type,row){
-							  return "<img src=\"${ctx}/"+data+"\" style=\"width: 80px\"/>";
+							  return "<img src=\"http://art-images.oss-cn-hangzhou.aliyuncs.com//"+data+"\" style=\"width: 80px\"/>";
 						  }
 						},
 						{ "mData": 'artNumber' },

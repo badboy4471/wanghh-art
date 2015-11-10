@@ -79,7 +79,7 @@ public class AliyunUpload {
 
 			System.out.println(key);*/
 			
-			client.deleteObject("art-images", "711963eb-58c2-4ad7-b0fd-b023ef44f48f.jpg");
+			client.deleteObject("art-images", "545de9d2-9384-4838-abe4-8f4138adf141.jpg");
 
 		} catch (Exception e) {
 			e.printStackTrace();
