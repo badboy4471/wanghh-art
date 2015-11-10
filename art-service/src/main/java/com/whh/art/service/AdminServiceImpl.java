@@ -2,9 +2,10 @@ package com.whh.art.service;
 
 import com.whh.art.dao.mapper.AdminMapper;
 import com.whh.art.dao.model.AdminModel;
+import com.whh.art.dao.model.UserModel;
 
 public class AdminServiceImpl implements IAdminService {
-	
+
 	AdminMapper adminMapper;
 
 	@Override
@@ -15,7 +16,7 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public AdminModel login(String userName, String password) {
 		AdminModel admin = adminMapper.getAdmin(userName);
-		if (admin != null && admin.getPassword().equals(password)){
+		if (admin != null && admin.getPassword().equals(password)) {
 			return admin;
 		}
 		return null;
@@ -24,6 +25,13 @@ public class AdminServiceImpl implements IAdminService {
 	public void setAdminMapper(AdminMapper adminMapper) {
 		this.adminMapper = adminMapper;
 	}
-	
+
+	@Override
+	public void insertUser(UserModel user) {
+		UserModel u = adminMapper.getUser(user.getOpenid());
+		if (u == null){
+			adminMapper.insertUser(user);
+		}
+	}
 
 }
