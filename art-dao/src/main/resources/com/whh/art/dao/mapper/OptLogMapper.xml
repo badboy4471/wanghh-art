@@ -5,16 +5,35 @@
 <mapper namespace="com.whh.art.dao.mapper.OptLogMapper">
 
 	<insert id="insert" parameterType="OptLogModel">
-		insert into optlog (time,adminId,url)
+		insert into optlog
+		(time,adminId,url)
 		values
 		(#{time},#{adminId},#{url})
 	</insert>
-	
-	
+
+
 	<insert id="insertArtOut" parameterType="ArtOutModel">
-		insert into art_out (type,artId,createTime,memo,backTime)
+		insert into art_out
+		(type,artId,createTime,memo,backTime)
 		values
 		(#{type},#{art.id},now(),#{memo},#{backTime})
 	</insert>
-	
+
+	<select id="getWxAccessTokenModel" resultType="WxAccessTokenModel">
+		select
+		access_token,expires_in,create_time from accesstoken order by
+		create_time desc limit 1
+	</select>
+
+	<delete id="deleteAccessToken" parameterType="String">
+		delete from
+		accesstoken where access_token = #{accessToken}
+	</delete>
+
+	<insert id="insertAccessToken" parameterType="WxAccessTokenModel">
+		insert into
+		accesstoken (access_token,expires_in,create_time) values
+		(#{access_token},#{expires_in},#{create_time})
+	</insert>
+
 </mapper>

@@ -48,18 +48,21 @@
 	
 	<insert id="insertUser" parameterType="UserModel">
 		insert into 
-			users (openid,createTime,avatar,userName)
+			users (openId,nickname,sex,language,city,province,country,
+			headImgUrl,subscribeTime,unionId,sexId,remark,groupId)
 		values
-			(#{openid},#{createTime},#{avatar},#{userName})
+			(#{openId},#{nickname},#{sex},#{language},#{city},#{province},#{country}
+			,#{headImgUrl},#{subscribeTime},#{unionId},#{sexId},#{remark},#{groupId})
 	</insert>
 	
 	<delete id="deleteUser" parameterType="String" >
-		delete from users where openid = #{openid}
+		delete from users where openId = #{openid}
 	</delete>
 	
 	<select id="getUser" parameterType="String" resultType="UserModel">
 		select 
-			id,openid,createTime,avatar,userName
+			id,openId,nickname,sex,language,city,province,country,
+			headImgUrl,subscribeTime,unionId,sexId,remark,groupId
 		from
 			users
 		where openid = #{openid}
@@ -67,15 +70,16 @@
 	
 	<select id="loadUsers" parameterType="SearchModel" resultType="UserModel">
 		select 
-			id,openid,createTime,avatar,userName
+			id,openId,nickname,sex,language,city,province,country,
+			headImgUrl,subscribeTime,unionId,sexId,remark,groupId
 		from
 			users
 		<where>
 			<if test="number != null and number != ''">
-				and openid = #{number}
+				and openId = #{number}
 			</if>
 			<if test="name != null and name != ''">
-				and userName like #{name}
+				and nickname like #{name}
 			</if>
 		</where>
 		order by id desc limit #{start}, #{limit}
@@ -88,10 +92,10 @@
 			users
 		<where>
 			<if test="number != null and number != ''">
-				and openid = #{number}
+				and openId = #{number}
 			</if>
 			<if test="name != null and name != ''">
-				and userName like #{name}
+				and nickname like #{name}
 			</if>
 		</where>
 	</select>

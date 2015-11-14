@@ -5,6 +5,7 @@ import java.util.Date;
 import com.whh.art.dao.mapper.OptLogMapper;
 import com.whh.art.dao.model.ArtOutModel;
 import com.whh.art.dao.model.OptLogModel;
+import com.whh.art.dao.model.WxAccessTokenModel;
 
 public class OptLogServiceImpl implements IOptLogService {
 	
@@ -33,6 +34,24 @@ public class OptLogServiceImpl implements IOptLogService {
 
 	public void setOptLogMapper(OptLogMapper optLogMapper) {
 		this.optLogMapper = optLogMapper;
+	}
+
+	@Override
+	public WxAccessTokenModel getWxAccessTokenModel() {
+		
+		return optLogMapper.getWxAccessTokenModel();
+	}
+
+	@Override
+	public void deleteAccessToken(String accessToken) {
+		optLogMapper.deleteAccessToken(accessToken);
+		
+	}
+
+	@Override
+	public void insertAccessToken(WxAccessTokenModel token) {
+		optLogMapper.insertAccessToken(token);
+		
 	}
 
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.SearchModel;
-import com.whh.art.dao.model.UserModel;
+import com.whh.art.dao.model.WxUserModel;
 
 public interface AdminMapper {
 	
@@ -16,11 +16,11 @@ public interface AdminMapper {
 	
 	void updateAdmin(AdminModel admin);
 	
-	void insertUser(UserModel user);
+	void insertUser(WxUserModel user);
 	
-	UserModel getUser(String openid);
+	WxUserModel getUser(String openid);
 	
-	List<UserModel> loadUserModel(SearchModel search);
+	List<WxUserModel> loadUserModel(SearchModel search);
 	
 	int countUsers(SearchModel search);
 	

@@ -2,7 +2,7 @@ package com.whh.art.service;
 
 import com.whh.art.dao.mapper.AdminMapper;
 import com.whh.art.dao.model.AdminModel;
-import com.whh.art.dao.model.UserModel;
+import com.whh.art.dao.model.WxUserModel;
 
 public class AdminServiceImpl implements IAdminService {
 
@@ -27,8 +27,8 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	@Override
-	public void insertUser(UserModel user) {
-		UserModel u = adminMapper.getUser(user.getOpenid());
+	public void insertUser(WxUserModel user) {
+		WxUserModel u = adminMapper.getUser(user.getOpenId());
 		if (u == null){
 			adminMapper.insertUser(user);
 		}

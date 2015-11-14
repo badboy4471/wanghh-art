@@ -5,12 +5,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import me.chanjar.weixin.common.util.crypto.SHA1;
+import me.chanjar.weixin.cp.api.WxCpDepartAPITest;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage.Item;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.WxMpServiceImpl;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -20,18 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.ArtModel;
-import com.whh.art.dao.model.UserModel;
+import com.whh.art.dao.model.WxUserModel;
+import com.whh.art.dao.model.WxAccessTokenModel;
 import com.whh.art.service.IAdminService;
 import com.whh.art.service.IArtService;
 import com.whh.art.untils.AliyunUpload;
 
 @Controller
 public class WxReceiver {
-
-	private static String APPID = "wx5d32a0a3aaa63013";
-	private static String APPSECRET = "fe67e928329a5d8d540090e3fb6aa704";
-	private static String TOKEN = "junart123";
-	private static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";
 
 	private static String DOMAIN = "http://121.40.172.232/art/art/detail.form?id=";
 
@@ -55,13 +54,13 @@ public class WxReceiver {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		try {
-			String mySignature = SHA1.gen(TOKEN, timestamp, nonce);
+			String mySignature = SHA1.gen(AccessTokenUtil.TOKEN, timestamp, nonce);
 
 			WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
-			config.setToken(TOKEN);
-			config.setCorpId(APPID);
-			config.setAesKey(EAK);
-			config.setCorpSecret(APPSECRET);
+			config.setToken(AccessTokenUtil.TOKEN);
+			config.setCorpId(AccessTokenUtil.APPID);
+			config.setAesKey(AccessTokenUtil.EAK);
+			config.setCorpSecret(AccessTokenUtil.APPSECRET);
 
 			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(
 					WxCpXmlMessage.class, request.getInputStream());
@@ -83,7 +82,6 @@ public class WxReceiver {
 			e1.printStackTrace();
 		}
 
-		// return null;
 		return echostr;
 	}
 	
@@ -122,12 +120,16 @@ public class WxReceiver {
 	
 	
 	@SuppressWarnings("all")
-	private String handleEvent(WxCpXmlMessage inMessage){
+	private String handleEvent(final WxCpXmlMessage inMessage){
 		if (inMessage.getEvent().equals("subscribe")){
-			UserModel user = new UserModel();
-			user.setOpenid(inMessage.getFromUserName());
-			user.setCreateTime(inMessage.getCreateTime().intValue());
-			adminService.insertUser(user);
+			new Thread(){
+				public void run(){
+					System.out.println("++++++++++++++++++Thread++++++++++++++++++++++++++"+this.getName());
+					AccessTokenUtil util = new AccessTokenUtil();
+					WxUserModel user = util.getWxUser(inMessage.getFromUserName());
+					adminService.insertUser(user);
+				}
+			}.start();
 		}
 		
 		if (inMessage.getEvent().equals("unsubscribe")){
