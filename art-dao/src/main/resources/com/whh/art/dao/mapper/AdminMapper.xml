@@ -46,7 +46,7 @@
 		where id = #{id}
 	</update>
 	
-	<insert id="insertUser" parameterType="UserModel">
+	<insert id="insertUser" parameterType="WxUserModel">
 		insert into 
 			users (openId,nickname,sex,language,city,province,country,
 			headImgUrl,subscribeTime,unionId,sexId,remark,groupId)
@@ -59,7 +59,7 @@
 		delete from users where openId = #{openid}
 	</delete>
 	
-	<select id="getUser" parameterType="String" resultType="UserModel">
+	<select id="getUser" parameterType="String" resultType="WxUserModel">
 		select 
 			id,openId,nickname,sex,language,city,province,country,
 			headImgUrl,subscribeTime,unionId,sexId,remark,groupId
@@ -68,7 +68,7 @@
 		where openid = #{openid}
 	</select> 
 	
-	<select id="loadUsers" parameterType="SearchModel" resultType="UserModel">
+	<select id="loadUsers" parameterType="SearchModel" resultType="WxUserModel">
 		select 
 			id,openId,nickname,sex,language,city,province,country,
 			headImgUrl,subscribeTime,unionId,sexId,remark,groupId
