@@ -20,4 +20,8 @@ public class SystemConfigServiceImpl implements ISystemConfigService {
 
 	}
 
+	public void setSystemConfigMapper(SystemConfigMapper systemConfigMapper) {
+		this.systemConfigMapper = systemConfigMapper;
+	}
+	
 }
