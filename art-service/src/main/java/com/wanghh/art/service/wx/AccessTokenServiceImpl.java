@@ -1,4 +1,4 @@
-package com.whh.art.wx.controller;
+package com.wanghh.art.service.wx;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,8 +14,7 @@ import com.whh.art.dao.model.WxAccessTokenModel;
 import com.whh.art.dao.model.WxUserModel;
 import com.whh.art.service.IOptLogService;
 
-@Controller
-public class AccessTokenUtil {
+public class AccessTokenServiceImpl implements IAccessTokenService {
 
 	public static String APPID = "wx5d32a0a3aaa63013";
 	public static String APPSECRET = "fe67e928329a5d8d540090e3fb6aa704";
@@ -25,14 +24,10 @@ public class AccessTokenUtil {
 	private static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="
 			+ APPID + "&secret=" + APPSECRET;
 
-	@Resource
 	IOptLogService optLogService;
 
-	public AccessTokenUtil() {
 
-	}
-
-	WxAccessTokenModel getAccessToken() {
+	public WxAccessTokenModel getAccessToken() {
 
 		WxAccessTokenModel token = optLogService.getWxAccessTokenModel();
 
@@ -105,6 +100,7 @@ public class AccessTokenUtil {
 	 * @param openid
 	 * @return
 	 */
+	@Override
 	public WxUserModel getWxUser(String openid) {
 		String access_token = this.getAccessToken().getAccess_token();
 		
@@ -149,4 +145,9 @@ public class AccessTokenUtil {
 
 	}
 
+	public void setOptLogService(IOptLogService optLogService) {
+		this.optLogService = optLogService;
+	}
+
+	
 }

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wanghh.art.service.wx.AccessTokenServiceImpl;
+import com.wanghh.art.service.wx.IAccessTokenService;
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.WxUserModel;
 import com.whh.art.service.IAdminService;
@@ -34,6 +36,8 @@ public class WxReceiver {
 	IArtService artService;
 	@Resource
 	IAdminService adminService;
+	@Resource
+	IAccessTokenService accessTokenService;
 
 	@SuppressWarnings("all")
 	@RequestMapping(value = "art/wx/receiver", method = { RequestMethod.GET,
@@ -50,13 +54,13 @@ public class WxReceiver {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		try {
-			String mySignature = SHA1.gen(AccessTokenUtil.TOKEN, timestamp, nonce);
+			String mySignature = SHA1.gen(AccessTokenServiceImpl.TOKEN, timestamp, nonce);
 
 			WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
-			config.setToken(AccessTokenUtil.TOKEN);
-			config.setCorpId(AccessTokenUtil.APPID);
-			config.setAesKey(AccessTokenUtil.EAK);
-			config.setCorpSecret(AccessTokenUtil.APPSECRET);
+			config.setToken(AccessTokenServiceImpl.TOKEN);
+			config.setCorpId(AccessTokenServiceImpl.APPID);
+			config.setAesKey(AccessTokenServiceImpl.EAK);
+			config.setCorpSecret(AccessTokenServiceImpl.APPSECRET);
 
 			WxCpXmlMessage inMessage = XStreamTransformer.fromXml(
 					WxCpXmlMessage.class, request.getInputStream());
@@ -121,8 +125,7 @@ public class WxReceiver {
 			new Thread(){
 				public void run(){
 					System.out.println("++++++++++++++++++Thread++++++++++++++++++++++++++"+this.getName());
-					AccessTokenUtil util = new AccessTokenUtil();
-					WxUserModel user = util.getWxUser(inMessage.getFromUserName());
+					WxUserModel user = accessTokenService.getWxUser(inMessage.getFromUserName());
 					if (user != null){
 						adminService.insertUser(user);
 					}
