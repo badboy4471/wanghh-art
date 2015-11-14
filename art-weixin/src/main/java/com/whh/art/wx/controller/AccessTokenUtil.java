@@ -7,12 +7,14 @@ import javax.annotation.Resource;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.springframework.stereotype.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.whh.art.dao.model.WxAccessTokenModel;
 import com.whh.art.dao.model.WxUserModel;
 import com.whh.art.service.IOptLogService;
 
+@Controller
 public class AccessTokenUtil {
 
 	public static String APPID = "wx5d32a0a3aaa63013";
