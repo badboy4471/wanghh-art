@@ -1,5 +1,4 @@
 <%@ page language="java"  isELIgnored="false" pageEncoding="UTF-8"%>
-<%@ page import="com.whh.art.untils.AliyunUpload" %>
 <%@ include file="inc/head.jsp" %>
 <!DOCTYPE html>
 <html>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
@@ -47,13 +48,17 @@ public class ArtController {
 	}
 
 	@RequestMapping(value = {"admin/art/detail","art/detail"}, method = { RequestMethod.GET })
-	public String viewArtDetail(@RequestParam("id") int id, ModelMap model) {
+	public String viewArtDetail(@RequestParam("id") int id, ModelMap model,HttpServletRequest request) {
 
 		ArtModel art = artService.getArt(id);
 
 		model.addAttribute("art", art);
-
-		return "dialog/art_detail";
+		
+		if (request.getRequestURI().indexOf("admin")>=0){
+			return "dialog/art_detail";
+		}else{
+			return "art_detail";
+		}
 	}
 
 	@RequestMapping(value = "admin/art/out", method = { RequestMethod.GET })
