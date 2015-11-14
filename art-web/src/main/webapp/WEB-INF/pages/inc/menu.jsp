@@ -8,7 +8,7 @@
 		<li <c:if test="${local == 'art.add' }">class="active"</c:if>><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
 				添加作品</a></li>
 		
-		<li><a <c:if test="${local == 'user.list' }" href="${ctx }/admin/wx/user/list.form"><i class="icon-chevron-right"></i>
+		<li <c:if test="${local == 'user.list' }">class="active"</c:if>><a href="${ctx }/admin/wx/user/list.form"><i class="icon-chevron-right"></i>
 				用户列表</a></li>
 		<!-- 
 		<li><a href="tables.html"><i class="icon-chevron-right"></i>
