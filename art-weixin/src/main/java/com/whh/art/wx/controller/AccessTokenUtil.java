@@ -83,12 +83,18 @@ public class AccessTokenUtil {
 		}
 		System.out.println(pen.toString());
 
-		WxAccessTokenModel token = JSON.parseObject(pen.toString(),
-				WxAccessTokenModel.class);
+		try{
+			WxAccessTokenModel token = JSON.parseObject(pen.toString(),
+					WxAccessTokenModel.class);
 
-		token.setCreate_time(System.currentTimeMillis());
+			token.setCreate_time(System.currentTimeMillis());
+			return token;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 
-		return token;
+		return null;
 	}
 	
 	
@@ -99,9 +105,12 @@ public class AccessTokenUtil {
 	 */
 	public WxUserModel getWxUser(String openid) {
 		String access_token = this.getAccessToken().getAccess_token();
+		
+		if (access_token == null){
+			return null;
+		}
 		String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="
 				+ access_token + "&openid=" + openid + "&lang=zh_CN";
-		
 		
 		HttpClient client = new HttpClient();
 		client.getHttpConnectionManager().getParams()
@@ -127,10 +136,14 @@ public class AccessTokenUtil {
 		}
 		System.out.println(pen.toString());
 
-		WxUserModel user = JSON.parseObject(pen.toString(),
-				WxUserModel.class);
-
-		return user;
+		try{
+			WxUserModel user = JSON.parseObject(pen.toString(),
+					WxUserModel.class);
+			return user;
+		}catch(Exception e){
+			
+		}
+		return null;
 
 	}
 
