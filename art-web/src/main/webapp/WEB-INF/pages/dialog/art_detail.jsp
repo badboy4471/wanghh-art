@@ -5,7 +5,7 @@
   									<table class="table table-bordered" class="detail-table">
 						              <tbody>
 						               <tr>
-						                  <td colspan="4"><img src="${pageContext.request.contextPath }/${art.artImage }" style="width: 120px"/></td>
+						                  <td colspan="4"><img src="<%=AliyunUpload.IMAGE_DOMAIN%>/${art.artImage}" style="width: 120px"/></td>
 						                </tr>
 						                <tr>
 						                  <td>编号</td>
