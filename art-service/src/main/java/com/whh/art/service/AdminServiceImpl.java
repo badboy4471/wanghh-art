@@ -44,8 +44,8 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	@Override
-	public List<WxUserModel> loadUserModel(SearchModel search) {
-		return adminMapper.loadUserModel(search);
+	public List<WxUserModel> loadUsers(SearchModel search) {
+		return adminMapper.loadUsers(search);
 	}
 
 	@Override

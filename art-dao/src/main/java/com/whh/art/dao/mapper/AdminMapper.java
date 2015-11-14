@@ -20,7 +20,7 @@ public interface AdminMapper {
 	
 	WxUserModel getUser(String openid);
 	
-	List<WxUserModel> loadUserModel(SearchModel search);
+	List<WxUserModel> loadUsers(SearchModel search);
 	
 	int countUsers(SearchModel search);
 	

@@ -16,7 +16,7 @@ public interface IAdminService {
 	
 	void deleteUser(String openid);
 	
-	List<WxUserModel> loadUserModel(SearchModel search);
+	List<WxUserModel> loadUsers(SearchModel search);
 	
 	int countUsers(SearchModel search);
 

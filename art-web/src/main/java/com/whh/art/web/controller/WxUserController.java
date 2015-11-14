@@ -60,7 +60,7 @@ public class WxUserController extends BaseController {
 		
 		
 		int count = adminService.countUsers(search);
-		List<WxUserModel> users = adminService.loadUserModel(search);
+		List<WxUserModel> users = adminService.loadUsers(search);
 		
 		result.setAaData(users);
 		result.setsEcho((String) paramMap.get("sEcho"));
