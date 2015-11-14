@@ -1,4 +1,5 @@
 <%@ page language="java"  isELIgnored="false" pageEncoding="UTF-8"%>
+<%@ include file="../inc/head.jsp" %>
 		<div class="row-fluid">
                             <div class="block-content collapse in">
                                 <div class="span12">
