@@ -10,6 +10,7 @@ import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage.Item;
+import me.chanjar.weixin.cp.bean.WxCpXmlOutTextMessage;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
 
 import org.apache.commons.lang.StringUtils;
@@ -22,9 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wanghh.art.service.wx.AccessTokenServiceImpl;
 import com.wanghh.art.service.wx.IAccessTokenService;
 import com.whh.art.dao.model.ArtModel;
+import com.whh.art.dao.model.SystemConfigModel;
 import com.whh.art.dao.model.WxUserModel;
 import com.whh.art.service.IAdminService;
 import com.whh.art.service.IArtService;
+import com.whh.art.service.ISystemConfigService;
 import com.whh.art.untils.AliyunUpload;
 
 @Controller
@@ -38,6 +41,8 @@ public class WxReceiver {
 	IAdminService adminService;
 	@Resource
 	IAccessTokenService accessTokenService;
+	@Resource
+	ISystemConfigService systemConfigService;
 
 	@SuppressWarnings("all")
 	@RequestMapping(value = "art/wx/receiver", method = { RequestMethod.GET,
@@ -134,6 +139,18 @@ public class WxReceiver {
 					adminService.insertUser(user);
 				}
 			}.start();
+			
+			SystemConfigModel config = systemConfigService.getSystemConfig();
+			
+			WxCpXmlOutTextMessage text = WxCpXmlOutTextMessage.TEXT()
+					.content(config.getWelcomeMessage())
+					.fromUser(inMessage.getToUserName())
+					.toUser(inMessage.getFromUserName()).build();
+			
+			
+			String rtnXML = XStreamTransformer.toXml(
+					(Class) text.getClass(), text);
+			return rtnXML;	
 		}
 		
 		if (inMessage.getEvent().equals("unsubscribe")){

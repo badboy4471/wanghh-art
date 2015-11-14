@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.whh.art.dao.mapper.SystemConfigMapper">
+
+	<select id="getSystemConfig" resultType="SystemConfigModel">
+		select id,welcome_message as welcomeMessage from system_config order by id desc limit 1
+	</select>
+	
+	<update id="updateSystemConfig" parameterType="SystemConfigModel">
+		update system_config
+		set id = #{id}
+		<if test="welcomeMessage != null and welcomeMessage != ''">
+			,welcome_message = #{welcomeMessage}
+		</if>
+		
+		where id = #{id}
+	</update>
+
+</mapper>

@@ -122,4 +122,8 @@
 	<bean id="optLogMapper" parent="baseMapper" >
 		<property name="mapperInterface" value="com.whh.art.dao.mapper.OptLogMapper" />
 	</bean>
+	
+	<bean id="systemConfigMapper" parent="baseMapper" >
+		<property name="mapperInterface" value="com.whh.art.dao.mapper.SystemConfigMapper" />
+	</bean>
 </beans>

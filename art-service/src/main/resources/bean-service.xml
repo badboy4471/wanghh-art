@@ -17,5 +17,7 @@
 	<bean id="optLogService" class="com.whh.art.service.OptLogServiceImpl" autowire="byName" />
 	
 	<bean id="accessTokenService" class="com.wanghh.art.service.wx.AccessTokenServiceImpl" autowire="byName"/>
+	
+	<bean id="systemConfigService" class="com.whh.art.service.SystemConfigServiceImpl" autowire="byName"/>
 
 </beans>
