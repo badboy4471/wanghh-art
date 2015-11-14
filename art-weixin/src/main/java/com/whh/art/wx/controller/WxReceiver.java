@@ -5,15 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import me.chanjar.weixin.common.util.crypto.SHA1;
-import me.chanjar.weixin.cp.api.WxCpDepartAPITest;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage.Item;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
-import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.WxMpServiceImpl;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -24,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.WxUserModel;
-import com.whh.art.dao.model.WxAccessTokenModel;
 import com.whh.art.service.IAdminService;
 import com.whh.art.service.IArtService;
 import com.whh.art.untils.AliyunUpload;
