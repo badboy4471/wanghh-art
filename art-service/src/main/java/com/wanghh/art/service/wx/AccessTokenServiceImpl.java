@@ -3,16 +3,14 @@ package com.wanghh.art.service.wx;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.springframework.stereotype.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.whh.art.dao.model.WxAccessTokenModel;
 import com.whh.art.dao.model.WxUserModel;
 import com.whh.art.service.IOptLogService;
+import com.whh.art.untils.WxError;
 
 public class AccessTokenServiceImpl implements IAccessTokenService {
 
@@ -81,11 +79,21 @@ public class AccessTokenServiceImpl implements IAccessTokenService {
 		System.out.println(pen.toString());
 
 		try{
-			WxAccessTokenModel token = JSON.parseObject(pen.toString(),
-					WxAccessTokenModel.class);
+			
+			WxError error = JSON.parseObject(pen.toString(), WxError.class);
+		    try{
+		    	if (error.getErrcode() == 0){
+		    		WxAccessTokenModel token = JSON.parseObject(pen.toString(),
+							WxAccessTokenModel.class);
 
-			token.setCreate_time(System.currentTimeMillis());
-			return token;
+					token.setCreate_time(System.currentTimeMillis());
+					return token;
+		    	}
+		    }catch(Exception e){
+		    	
+		    }
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -135,9 +143,18 @@ public class AccessTokenServiceImpl implements IAccessTokenService {
 		System.out.println(pen.toString());
 
 		try{
-			WxUserModel user = JSON.parseObject(pen.toString(),
-					WxUserModel.class);
-			return user;
+			
+			WxError error = JSON.parseObject(pen.toString(), WxError.class);
+		    try{
+		    	if (error.getErrcode() == 0){
+		    		WxUserModel user = JSON.parseObject(pen.toString(),
+							WxUserModel.class);
+					return user;
+		    	}
+		    }catch(Exception e){
+		    	
+		    }
+			
 		}catch(Exception e){
 			
 		}
