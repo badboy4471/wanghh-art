@@ -1,5 +1,5 @@
 <%@ page language="java"  isELIgnored="false" pageEncoding="UTF-8"%>
-<%@ include file="inc/head.jsp" %>
+<%@ include file="../inc/head.jsp" %>
 <!DOCTYPE html>
 <html>
     
@@ -20,10 +20,10 @@
     </head>
     
     <body>
-        <%@ include file="inc/navbar.jsp" %>
+        <%@ include file="../inc/navbar.jsp" %>
         <div class="container-fluid">
             <div class="row-fluid">
-                <%@include file="inc/menu.jsp" %>
+                <%@include file="../inc/menu.jsp" %>
                 <!--/span-->
                 <div class="span9" id="content">
                       <!-- morris stacked chart -->
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <hr>
-            <%@ include file="inc/footer.jsp" %>
+            <%@ include file="../inc/footer.jsp" %>
         </div>
         <!--/.fluid-container-->
         <link href="${ctx }/vendors/datepicker.css" rel="stylesheet" media="screen">
