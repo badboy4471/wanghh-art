@@ -2,6 +2,7 @@ package com.whh.art.dao.model;
 
 public class WxUserModel {
 	
+	protected int id;
 	protected Boolean subscribe;
 	protected String openId;
 	protected String nickname;
@@ -99,6 +100,12 @@ public class WxUserModel {
 	}
 	public void setGroupId(Integer groupId) {
 		this.groupId = groupId;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	@Override
 	public String toString() {
