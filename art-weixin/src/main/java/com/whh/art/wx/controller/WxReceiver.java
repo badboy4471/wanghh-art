@@ -126,9 +126,12 @@ public class WxReceiver {
 				public void run(){
 					System.out.println("++++++++++++++++++Thread++++++++++++++++++++++++++"+this.getName());
 					WxUserModel user = accessTokenService.getWxUser(inMessage.getFromUserName());
-					if (user != null){
-						adminService.insertUser(user);
+					if (user == null){
+						user = new WxUserModel();
+						user.setOpenId(inMessage.getFromUserName());
+						user.setSubscribeTime(inMessage.getCreateTime());
 					}
+					adminService.insertUser(user);
 				}
 			}.start();
 		}
