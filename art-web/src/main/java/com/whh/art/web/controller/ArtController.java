@@ -30,7 +30,7 @@ import com.whh.art.web.form.JSONParam;
 import com.whh.art.web.form.Result;
 
 @Controller
-public class ArtController {
+public class ArtController extends BaseController {
 
 	@Resource
 	IArtService artService;
@@ -91,7 +91,7 @@ public class ArtController {
 	Result loadArts(@RequestBody JSONParam[] params, HttpSession session) {
 
 		Map paramMap = new HashMap();
-		this.convert2Map(paramMap, params);
+		super.convert2Map(paramMap, params);
 		Result result = new Result(null);
 		SearchModel search = new SearchModel();
 		search.setName((String) paramMap.get("name"));
@@ -179,9 +179,4 @@ public class ArtController {
 		return !exist;
 	}
 
-	private void convert2Map(Map map, JSONParam[] params) {
-		for (JSONParam param : params) {
-			map.put(param.getName(), param.getValue());
-		}
-	}
 }

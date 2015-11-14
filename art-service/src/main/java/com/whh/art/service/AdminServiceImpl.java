@@ -1,7 +1,10 @@
 package com.whh.art.service;
 
+import java.util.List;
+
 import com.whh.art.dao.mapper.AdminMapper;
 import com.whh.art.dao.model.AdminModel;
+import com.whh.art.dao.model.SearchModel;
 import com.whh.art.dao.model.WxUserModel;
 
 public class AdminServiceImpl implements IAdminService {
@@ -38,6 +41,16 @@ public class AdminServiceImpl implements IAdminService {
 	public void deleteUser(String openid) {
 		adminMapper.deleteUser(openid);
 		
+	}
+
+	@Override
+	public List<WxUserModel> loadUserModel(SearchModel search) {
+		return adminMapper.loadUserModel(search);
+	}
+
+	@Override
+	public int countUsers(SearchModel search) {
+		return adminMapper.countUsers(search);
 	}
 
 }
