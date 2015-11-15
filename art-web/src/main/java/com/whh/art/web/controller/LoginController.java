@@ -82,14 +82,13 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "admin/logout", method = { RequestMethod.GET })
-	public String logout(HttpSession session,ModelMap model,HttpServletResponse response) {
+	public void logout(HttpSession session,ModelMap model,HttpServletResponse response,HttpServletRequest request) {
 		session.removeAttribute(SESSION_KEY);
 		try {
-			response.sendRedirect("/");
+			response.sendRedirect(request.getContextPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 
 }
