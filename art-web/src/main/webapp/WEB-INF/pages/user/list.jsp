@@ -112,7 +112,10 @@
 				    "aoColumns": [
 						{ "mData": 'headImgUrl',
 						  "mRender" : function(data,type,row){
-							  return "<img src=\"<%=AliyunUpload.IMAGE_DOMAIN%>/"+data+"\" style=\"width: 80px\"/>";
+							  if (data == null || data == 'null'){
+								  data = "default.jpg";
+							  }
+							  return "<img src=\"<%=AliyunUpload.IMAGE_DOMAIN%>"+data+"\" style=\"width: 80px\"/>";
 						  }
 						},
 						{ "mData": 'nickname' },
