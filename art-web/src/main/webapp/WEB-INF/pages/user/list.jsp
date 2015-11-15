@@ -117,7 +117,11 @@
 						},
 						{ "mData": 'nickname' },
 						{ "mData": 'openId' },
-						{ "mData": 'subscribeTime' },
+						{ "mData": 'subscribeTime',
+						  "mRender":function(data,type,row){
+							return formatDate(data * 1000);
+							}
+						},
 						{ "mData": 'id' ,
 						  "mRender": function ( data, type, row ) {
 							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">删除</a>";
