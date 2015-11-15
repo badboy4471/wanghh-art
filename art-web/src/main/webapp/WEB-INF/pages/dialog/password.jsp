@@ -6,7 +6,6 @@
 			<div class="span12">
 				<form action="" id="form_sample_1" class="form-horizontal"
 					method="post">
-					<fieldset>
 						<div class="control-group">
 							<label class="control-label">原密码<span class="required">*</span></label>
 							<div class="controls">
@@ -30,7 +29,6 @@
 							<button type="button" id="changePassword" class="btn btn-primary">提交</button>
 							<button type="button" class="btn">重置</button>
 						</div>
-					</fieldset>
 				</form>
 			</div>
 		</div>
