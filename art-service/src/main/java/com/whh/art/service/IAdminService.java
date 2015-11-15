@@ -12,6 +12,8 @@ public interface IAdminService {
 	
 	AdminModel login(String userName,String password);
 	
+	void updateAdmin(AdminModel admin);
+	
 	void insertUser(WxUserModel user);
 	
 	void deleteUser(String openid);

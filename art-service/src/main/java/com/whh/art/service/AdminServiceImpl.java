@@ -53,4 +53,9 @@ public class AdminServiceImpl implements IAdminService {
 		return adminMapper.countUsers(search);
 	}
 
+	@Override
+	public void updateAdmin(AdminModel admin) {
+		adminMapper.updateAdmin(admin);
+	}
+
 }

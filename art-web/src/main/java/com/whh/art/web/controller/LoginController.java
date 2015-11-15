@@ -81,6 +81,42 @@ public class LoginController {
 	}
 	
 	
+	@RequestMapping(value = "admin/to/change/password", method = { RequestMethod.GET })
+	public String viewChangePassword(HttpSession session,ModelMap model) {
+		return "dialog/password";
+	}
+	
+	
+	@RequestMapping(value = "admin/change/password", method = { RequestMethod.POST,
+			RequestMethod.GET }, produces = "application/json")
+	public @ResponseBody
+	Result changePassword(@RequestParam("oldPassword") String oldPassword,
+			@RequestParam("newPassword2") String newPassword2,
+			@RequestParam("newPassword") String newPassword, HttpServletRequest request) {
+		Result result = new Result(null);
+
+		AdminModel admin = (AdminModel)request.getSession().getAttribute(SESSION_KEY);
+		if (newPassword.trim().equals(newPassword2.trim())){
+			if (admin.getPassword().equals(oldPassword)){
+				admin.setPassword(newPassword);
+				adminService.updateAdmin(admin);
+				
+				request.getSession().removeAttribute(SESSION_KEY);
+				result.setMessage("修改成功，请重新登录！");
+				result.setCode(200);
+			}else{
+				result.setCode(404);
+				result.setMessage("旧密码不对！");
+			}
+		}else{
+			result.setCode(404);
+			result.setMessage("两次新密码不一致！");
+		}
+		
+		return result;
+	}
+	
+	
 	@RequestMapping(value = "admin/logout", method = { RequestMethod.GET })
 	public void logout(HttpSession session,ModelMap model,HttpServletResponse response,HttpServletRequest request) {
 		session.removeAttribute(SESSION_KEY);

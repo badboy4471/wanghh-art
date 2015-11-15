@@ -1,4 +1,4 @@
-<%@ page language="java"  isELIgnored="false" pageEncoding="UTF-8"%>
+<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8"%>
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
@@ -10,14 +10,14 @@
 				<ul class="nav pull-right">
 					<li class="dropdown"><a href="#" role="button"
 						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-user"></i>${__session_user__.userName }
-							<i class="caret"></i>
+							class="icon-user"></i>${__session_user__.userName } <i
+							class="caret"></i>
 
 					</a>
 						<ul class="dropdown-menu">
-							<li><a tabindex="-1" href="#">Profile</a></li>
+							<li><a tabindex="-1" href="###">修改密码</a></li>
 							<li class="divider"></li>
-							<li><a tabindex="-1" href="${ctx }/admin/logout.form">Logout</a></li>
+							<li><a tabindex="-1" href="${ctx }/admin/logout.form">退出登录</a></li>
 						</ul></li>
 				</ul>
 				<ul class="nav">
@@ -72,3 +72,22 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		$("#addMuseum").click(function() {
+			var d = dialog({
+				title : '修改密码',
+				width : 400,
+				height : 300
+			});
+			$.ajax({
+				url : "/admin/to/change/password.form",
+				success : function(data) {
+					d.content(data);
+				},
+				cache : false
+			});
+			d.show();
+		});
+	});
+</script>
