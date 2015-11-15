@@ -7,21 +7,21 @@
 				<form action="" id="form_sample_1" class="form-horizontal"
 					method="post">
 						<div class="control-group">
-							<label class="control-label">原密码<span class="required">*</span></label>
+							<label class="control-label" style="width:100px">原密码<span class="required">*</span></label>
 							<div class="controls">
 								<input type="text" name="oldPassword" id="oldPassword" data-required="1"
 									class=" m-wrap" />
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">新密码<span class="required">*</span></label>
+							<label class="control-label" style="width:100px">新密码<span class="required">*</span></label>
 							<div class="controls">
 								<input name="newPassword" id="newPassword" type="text" />
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">新密码确认<span class="required">*</span></label>
-							<div class="controls">
+							<label class="control-label" style="width:100px">新密码确认<span class="required">*</span></label>
+							<div class="controls" style="margin-left:120px">
 								<input name="newPassword2" id="newPassword2" type="text" />
 							</div>
 						</div>

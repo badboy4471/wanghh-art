@@ -76,9 +76,7 @@
 	$(document).ready(function() {
 		$("#toChangePassword").click(function() {
 			var d = dialog({
-				title : '修改密码',
-				width : 400,
-				height : 300
+				title : '修改密码'
 			});
 			$.ajax({
 				url : "/admin/to/change/password.form",
