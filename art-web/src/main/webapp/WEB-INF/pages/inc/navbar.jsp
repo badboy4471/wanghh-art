@@ -17,7 +17,7 @@
 						<ul class="dropdown-menu">
 							<li><a tabindex="-1" href="#">Profile</a></li>
 							<li class="divider"></li>
-							<li><a tabindex="-1" href="login.html">Logout</a></li>
+							<li><a tabindex="-1" href="${ctx }/admin/logout.form">Logout</a></li>
 						</ul></li>
 				</ul>
 				<ul class="nav">

@@ -23,4 +23,7 @@
 			<el-ignored>true</el-ignored>
 		</jsp-property-group>
 	</jsp-config>
+	<welcome-file-list>
+		<welcome-file>login.html</welcome-file>
+	</welcome-file-list>
 </web-app>

@@ -1,9 +1,12 @@
 package com.whh.art.web.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -75,6 +78,18 @@ public class LoginController {
 		
 		
 		return "home";
+	}
+	
+	
+	@RequestMapping(value = "admin/logout", method = { RequestMethod.GET })
+	public String logout(HttpSession session,ModelMap model,HttpServletResponse response) {
+		session.removeAttribute(SESSION_KEY);
+		try {
+			response.sendRedirect("/");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
