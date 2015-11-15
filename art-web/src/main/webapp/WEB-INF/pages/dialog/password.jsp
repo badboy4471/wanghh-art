@@ -45,7 +45,7 @@
 				url : "${ctx }/admin/change/password.form",
 				dataType : "json",
 				data : {
-					oldPassword : name,
+					oldPassword : oldPassword,
 					newPassword : newPassword,
 					newPassword2 : newPassword2
 				},
