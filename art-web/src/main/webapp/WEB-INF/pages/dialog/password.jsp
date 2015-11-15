@@ -50,7 +50,6 @@
 					newPassword2 : newPassword2
 				},
 				success : function(data) {
-					alert(data.message);
 					if (data.code == 200){
 						alert(data.message);
 						dialog.getCurrent().close().remove();
