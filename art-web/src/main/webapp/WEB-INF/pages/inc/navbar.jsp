@@ -15,7 +15,7 @@
 
 					</a>
 						<ul class="dropdown-menu">
-							<li><a tabindex="-1" href="###">修改密码</a></li>
+							<li><a tabindex="-1" id="toChangePassword" href="###">修改密码</a></li>
 							<li class="divider"></li>
 							<li><a tabindex="-1" href="${ctx }/admin/logout.form">退出登录</a></li>
 						</ul></li>
@@ -74,7 +74,7 @@
 </div>
 <script>
 	$(document).ready(function() {
-		$("#addMuseum").click(function() {
+		$("#toChangePassword").click(function() {
 			var d = dialog({
 				title : '修改密码',
 				width : 400,
