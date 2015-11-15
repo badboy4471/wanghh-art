@@ -38,7 +38,7 @@ public class LoginController {
 			RequestMethod.GET }, produces = "application/json")
 	public @ResponseBody
 	Result login(@RequestParam("userName") String userName,
-			@RequestParam("password") String password, HttpSession session) {
+			@RequestParam("password") String password, HttpServletRequest request) {
 		Result result = new Result(null);
 
 		AdminModel admin = adminService.login(userName, password);
@@ -46,7 +46,7 @@ public class LoginController {
 		if (admin != null) {
 			result.setData(admin);
 
-			session.setAttribute(SESSION_KEY, admin);
+			request.getSession().setAttribute(SESSION_KEY, admin);
 
 		} else {
 			result.setCode(404);
