@@ -85,7 +85,7 @@ public class LoginController {
 	public void logout(HttpSession session,ModelMap model,HttpServletResponse response,HttpServletRequest request) {
 		session.removeAttribute(SESSION_KEY);
 		try {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+"/login.html");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
