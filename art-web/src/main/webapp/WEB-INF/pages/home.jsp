@@ -14,6 +14,7 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        <script src="${ctx }/vendors/jquery-1.9.1.js"></script>
         <script src="${ctx }/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
          <c:set var="local" value="home"></c:set>
     </head>
@@ -135,7 +136,6 @@
         </div>
         <!--/.fluid-container-->
         <link href="${ctx }/vendors/artdialog/ui-dialog.css" rel="stylesheet" media="screen">
-        <script src="${ctx }/vendors/jquery-1.9.1.min.js"></script>
         <script src="${ctx }/bootstrap/js/bootstrap.min.js"></script>
         <script src="${ctx }/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="${ctx }/assets/scripts.js"></script>

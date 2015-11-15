@@ -15,6 +15,7 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="${ctx }/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="${ctx }/vendors/jquery-1.9.1.js"></script>
 		<link rel="stylesheet" type="text/css" href="${ctx }/uploadify/uploadify.css">
 		 <c:set var="local" value="art.add"></c:set>
     </head>
@@ -136,7 +137,6 @@
         </div>
         <!--/.fluid-container-->
         <link href="${ctx }/vendors/uniform.default.css" rel="stylesheet" media="screen">
-        <script src="${ctx }/vendors/jquery-1.9.1.js"></script>
         <script src="${ctx }/bootstrap/js/bootstrap.min.js"></script>
         <script src="${ctx }/vendors/jquery.uniform.min.js"></script>
         <script src="${ctx }/vendors/chosen.jquery.min.js"></script>
