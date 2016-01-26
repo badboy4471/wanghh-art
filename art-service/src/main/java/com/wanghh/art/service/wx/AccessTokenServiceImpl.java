@@ -21,7 +21,7 @@ public class AccessTokenServiceImpl implements IAccessTokenService {
 	
 	public static String APPID = "wx7c6b13d91c03fdb8";
 	public static String APPSECRET = "48c4dd03142c5b86c33a427c3a1c26a4";
-	public static String TOKEN = "junart123";
+	public static String TOKEN = "junart_123";
 	public static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";
 
 	private static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="
