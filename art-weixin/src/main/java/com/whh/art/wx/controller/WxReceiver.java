@@ -94,14 +94,15 @@ public class WxReceiver {
 	@SuppressWarnings("all")
 	private String handleNumber(WxCpXmlMessage inMessage){
 		String number = inMessage.getContent();
-		Item item = new Item();
+		Item item = null;
 
 		try {
 			ArtModel art = artService.getArt(number);
 
 			if (art == null || art.getId() == 0) {
-				getDefaultItem(item);
+				
 			} else {
+				item = new Item();
 				item.setDescription(art.getArtDesc());
 				item.setPicUrl(AliyunUpload.IMAGE_DOMAIN+art.getArtImage());
 				item.setTitle(art.getArtName());
@@ -109,18 +110,30 @@ public class WxReceiver {
 			}
 
 		} catch (Exception e) {
-			getDefaultItem(item);
+			
 		}
+		if (item != null){
+			WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS()
+					.addArticle(item).fromUser(inMessage.getToUserName())
+					.toUser(inMessage.getFromUserName()).build();
 
-		WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS()
-				.addArticle(item).fromUser(inMessage.getToUserName())
-				.toUser(inMessage.getFromUserName()).build();
-
-		if (news != null) {
-			String rtnXML = XStreamTransformer.toXml(
-					(Class) news.getClass(), news);
-			return rtnXML;
+			if (news != null) {
+				String rtnXML = XStreamTransformer.toXml(
+						(Class) news.getClass(), news);
+				return rtnXML;
+			}
+		}else{
+			WxCpXmlOutTextMessage text = WxCpXmlOutMessage.TEXT()
+					.content("没有编号为：" + number + "的艺术品!")
+					.fromUser(inMessage.getToUserName())
+					.toUser(inMessage.getFromUserName()).build();
+			if (text != null) {
+				String rtnXML = XStreamTransformer.toXml(
+						(Class) text.getClass(), text);
+				return rtnXML;
+			}
 		}
+		
 		return null;
 	}
 	
