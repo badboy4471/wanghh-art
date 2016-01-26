@@ -113,7 +113,7 @@
 						{ "mData": 'headImgUrl',
 						  "mRender" : function(data,type,row){
 							  if (data == null || data == 'null'){
-								  data = <%=AliyunUpload.IMAGE_DOMAIN%>"default.jpg";
+								  data = "<%=AliyunUpload.IMAGE_DOMAIN%>default.jpg";
 							  }
 							  return "<img src=\""+data+"\" style=\"width: 80px\"/>";
 						  }
