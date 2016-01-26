@@ -33,7 +33,8 @@ import com.whh.art.untils.AliyunUpload;
 @Controller
 public class WxReceiver {
 
-	private static String DOMAIN = "http://121.40.172.232/art/art/detail.form?id=";
+//	private static String DOMAIN = "http://121.40.172.232/art/art/detail.form?id=";
+	private static String DOMAIN = "http://gl.791whys.com/art/art/detail.form?id=";
 
 	@Resource
 	IArtService artService;
