@@ -136,6 +136,8 @@ public class WxReceiver {
 						user = new WxUserModel();
 						user.setOpenId(inMessage.getFromUserName());
 						user.setSubscribeTime(inMessage.getCreateTime());
+					}else{
+						user.setSubscribeTime(inMessage.getCreateTime());
 					}
 					adminService.insertUser(user);
 				}
