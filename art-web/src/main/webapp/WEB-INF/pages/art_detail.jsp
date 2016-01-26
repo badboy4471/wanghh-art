@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>话题</title>
+<title>${art.artName }</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 <meta name="viewport" content="maximum-scale=1,initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
