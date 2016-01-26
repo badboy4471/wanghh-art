@@ -14,8 +14,13 @@ import com.whh.art.untils.WxError;
 
 public class AccessTokenServiceImpl implements IAccessTokenService {
 
-	public static String APPID = "wx5d32a0a3aaa63013";
+	/*public static String APPID = "wx5d32a0a3aaa63013";
 	public static String APPSECRET = "fe67e928329a5d8d540090e3fb6aa704";
+	public static String TOKEN = "junart123";
+	public static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";*/
+	
+	public static String APPID = "wx7c6b13d91c03fdb8";
+	public static String APPSECRET = "48c4dd03142c5b86c33a427c3a1c26a4";
 	public static String TOKEN = "junart123";
 	public static String EAK = "tRcAbyFvcsEOObrnhLjXslaTcsIH1mqiJmmoWvOdgSy";
 
