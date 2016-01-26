@@ -113,9 +113,9 @@
 						{ "mData": 'headImgUrl',
 						  "mRender" : function(data,type,row){
 							  if (data == null || data == 'null'){
-								  data = "default.jpg";
+								  data = <%=AliyunUpload.IMAGE_DOMAIN%>"default.jpg";
 							  }
-							  return "<img src=\"<%=AliyunUpload.IMAGE_DOMAIN%>"+data+"\" style=\"width: 80px\"/>";
+							  return "<img src=\""+data+"\" style=\"width: 80px\"/>";
 						  }
 						},
 						{ "mData": 'nickname' },
