@@ -90,7 +90,7 @@
 			art
 			(artName,artNumber,artYear,artAuthor,artMaterial,artSize,artCert,artDesc,createTime,artImage,artAudio)
 		values
-			(#{artName},#{artNumber},#{artYear},#{artAuthor},#{artSize},#{artMaterial},#{artCert},#{artDesc},now(),#{imageUrl},#{audioUrl})
+			(#{artName},#{artNumber},#{artYear},#{artAuthor},#{artMaterial},#{artSize},#{artCert},#{artDesc},now(),#{imageUrl},#{audioUrl})
 	</insert>
 
 	<update id="updateArtImage" parameterType="map">
