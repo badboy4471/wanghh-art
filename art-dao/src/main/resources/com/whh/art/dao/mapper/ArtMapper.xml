@@ -6,7 +6,7 @@
 
 	<select id="getArt" resultType="ArtModel" parameterType="int">
 		select
-			id,artName,artNumber,artImage,artYear,artAuthor,artSize,artCert,artDesc
+			id,artName,artNumber,artImage,artYear,artAuthor,artSize,artMaterial,artCert,artDesc
 		from 
 			art 
 		where
@@ -16,7 +16,7 @@
 
 	<select id="searchArts" resultType="ArtModel" parameterType="SearchModel">
 		select
-			a.id,a.artName,a.artNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artCert,a.artDesc
+			a.id,a.artName,a.artNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
 		from 
 		<if test="batchId > 0">
 			art a ,art_museum m
@@ -177,7 +177,7 @@
 	 
 	 <select id="loadArtsFromMueum" parameterType="Map" resultType="ArtModel">
 	 	select 
-	 		a.id,a.artName,a.artNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artCert,a.artDesc
+	 		a.id,a.artName,a.artNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
 	 	from 
 	 		art a,art_museum m
 	 	where a.id = m.artId and m.museumId = #{museumId}
