@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import me.chanjar.weixin.common.util.crypto.SHA1;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
+import me.chanjar.weixin.cp.bean.WxCpXmlOutImageMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage.Item;
@@ -158,14 +159,16 @@ public class WxReceiver {
 			
 			SystemConfigModel config = systemConfigService.getSystemConfig();
 			
-			WxCpXmlOutTextMessage text = WxCpXmlOutTextMessage.TEXT()
+			/*WxCpXmlOutTextMessage text = WxCpXmlOutTextMessage.TEXT()
 					.content(config.getWelcomeMessage())
 					.fromUser(inMessage.getToUserName())
-					.toUser(inMessage.getFromUserName()).build();
+					.toUser(inMessage.getFromUserName()).build();*/
+			
+			WxCpXmlOutNewsMessage news = this.buildCompanyDesc(inMessage);
 			
 			
 			String rtnXML = XStreamTransformer.toXml(
-					(Class) text.getClass(), text);
+					(Class) news.getClass(), news);
 			return rtnXML;	
 		}
 		
@@ -173,6 +176,24 @@ public class WxReceiver {
 			adminService.deleteUser(inMessage.getFromUserName());
 		}
 		return null;
+	}
+	
+	/**
+	 * 组装企业介绍信息
+	 * @param inMessage
+	 * @return
+	 */
+	private WxCpXmlOutNewsMessage buildCompanyDesc(WxCpXmlMessage inMessage) {
+		Item item = new Item();
+		item.setDescription("791艺术街区，位于南昌市三经路与五纬路交汇处，与省委、省军区毗邻，地理位置得天独厚。街区于二0一0年开始规划,经过一年多时间的打造和招商,于二0一二年七月 九日正式开街,前期投资5亿元，后续经营类投资1亿元，形成了以四经路步行街、爱国东路和五纬路为主干道，总长660米，融艺术品展示和销售、艺术研究与创作、艺术品信息发布为一体，汇聚陶瓷艺术、书画艺术、雕塑艺术等多种艺术形态的现代艺术街区。  如今，791已经成为江西本土文化的符号之一，江西文化行业的标杆和南昌“文艺复兴”的起始点，将引领“以艺术繁荣城市文化，以艺术影响生活方式”的新风向。");
+		item.setPicUrl("http://art-images.oss-cn-hangzhou.aliyuncs.com/system/791-big.jpg");
+		item.setTitle("791艺术街区介绍");
+		item.setUrl("http://gl.791whys.com/company.html");
+
+		WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS().addArticle(item)
+				.fromUser(inMessage.getToUserName())
+				.toUser(inMessage.getFromUserName()).build();
+		return news;
 	}
 
 	private void getDefaultItem(Item item) {
