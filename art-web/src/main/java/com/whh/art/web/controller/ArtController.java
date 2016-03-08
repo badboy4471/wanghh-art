@@ -24,6 +24,7 @@ import com.whh.art.dao.model.ArtOutModel;
 import com.whh.art.dao.model.SearchModel;
 import com.whh.art.service.IArtService;
 import com.whh.art.service.IOptLogService;
+import com.whh.art.utils.ArtErrorCode;
 import com.whh.art.utils.ArtUtils;
 import com.whh.art.web.form.ArtSubmit;
 import com.whh.art.web.form.JSONParam;
@@ -130,6 +131,11 @@ public class ArtController extends BaseController {
 	public @ResponseBody
 	Result saveArt(@ModelAttribute ArtSubmit artSubmit, HttpSession session) {
 		Result result = new Result(null);
+		
+		if (artService.getArt(artSubmit.getArtNumber()) != null) {
+			result.setCode(ArtErrorCode.DUPLICATE.getCode());
+			result.setMessage(ArtErrorCode.DUPLICATE.getMessage());
+		}
 		ArtModel model = new ArtModel();
 		BeanUtils.copyProperties(artSubmit, model);
 		ArtModel art = artService.insertArt(model);
@@ -137,7 +143,8 @@ public class ArtController extends BaseController {
 		if (art.getId() > 0) {
 			result.setCode(200);
 		} else {
-			result.setCode(-1);
+			result.setCode(ArtErrorCode.SYSTEM_ERROR.getCode());
+			result.setMessage(ArtErrorCode.SYSTEM_ERROR.getMessage());
 		}
 		return result;
 	}

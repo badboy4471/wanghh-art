@@ -7,6 +7,7 @@ public class SearchModel {
 	private int batchId;
 	private String name;
 	private String number;
+	private String innerNumber;
 	private Date beginDate;
 	private Date endDate;
 	private Integer status;
@@ -67,6 +68,12 @@ public class SearchModel {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getInnerNumber() {
+		return innerNumber;
+	}
+	public void setInnerNumber(String innerNumber) {
+		this.innerNumber = innerNumber;
 	}
 	
 }

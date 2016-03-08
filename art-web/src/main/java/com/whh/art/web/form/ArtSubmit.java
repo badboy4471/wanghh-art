@@ -4,6 +4,7 @@ package com.whh.art.web.form;
 public class ArtSubmit {
 	private int id = 0;
 	private String artNumber;
+	private String artInnerNumber;//内部编号
 	private String artName;
 	private String artSize;
 	private String artMaterial;
@@ -80,6 +81,12 @@ public class ArtSubmit {
 	}
 	public void setAudioUrl(String audioUrl) {
 		this.audioUrl = audioUrl;
+	}
+	public String getArtInnerNumber() {
+		return artInnerNumber;
+	}
+	public void setArtInnerNumber(String artInnerNumber) {
+		this.artInnerNumber = artInnerNumber;
 	}
 	@Override
 	public String toString() {

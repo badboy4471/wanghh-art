@@ -74,6 +74,12 @@
   								</div>
   							</div>
   							<div class="control-group">
+  								<label class="control-label">内部编号<span class="required">*</span></label>
+  								<div class="controls">
+  									<input type="text" name="artInnerNumber" id="artInnerNumber" data-required="1" class="span6 m-wrap"/>
+  								</div>
+  							</div>
+  							<div class="control-group">
   								<label class="control-label">名称<span class="required">*</span></label>
   								<div class="controls">
   									<input name="artName" type="text" class="span6 m-wrap"/>

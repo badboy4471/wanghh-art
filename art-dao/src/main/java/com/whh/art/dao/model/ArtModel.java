@@ -3,6 +3,7 @@ package com.whh.art.dao.model;
 public class ArtModel {
 	private int id;
 	private String artNumber;
+	private String artInnerNumber;//内部编号
 	private String artName;
 	private String artSize;
 	private String artMaterial;
@@ -70,8 +71,12 @@ public class ArtModel {
 	public String getArtDesc() {
 		return artDesc;
 	}
-	
-	
+	public String getArtInnerNumber() {
+		return artInnerNumber;
+	}
+	public void setArtInnerNumber(String artInnerNumber) {
+		this.artInnerNumber = artInnerNumber;
+	}
 	public String getImageUrl() {
 		return imageUrl;
 	}

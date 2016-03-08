@@ -6,7 +6,7 @@
 
 	<select id="getArt" resultType="ArtModel" parameterType="int">
 		select
-			id,artName,artNumber,artImage,artYear,artAuthor,artSize,artMaterial,artCert,artDesc
+			id,artName,artNumber, artInnerNumber,artImage,artYear,artAuthor,artSize,artMaterial,artCert,artDesc
 		from 
 			art 
 		where
@@ -16,7 +16,7 @@
 
 	<select id="searchArts" resultType="ArtModel" parameterType="SearchModel">
 		select
-			a.id,a.artName,a.artNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
+			a.id,a.artName,a.artNumber,a.artInnerNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
 		from 
 		<if test="batchId > 0">
 			art a ,art_museum m
@@ -33,6 +33,9 @@
 			</if>
 			<if test="number != null and number != ''">
 				and a.artNumber like #{number}
+			</if>
+			<if test="innerNumber != null and innerNumber != ''">
+				and a.artInnerNumber like #{innerNumber}
 			</if>
 			<if test="id > 0">
 				and a.id = #{id}
@@ -70,6 +73,9 @@
 			<if test="number != null and number != ''">
 				and a.artNumber like #{number}
 			</if>
+			<if test="innerNumber != null and innerNumber != ''">
+				and a.artInnerNumber like #{innerNumber}
+			</if>
 			<if test="id > 0">
 				and a.id = #{id}
 			</if>
@@ -88,9 +94,9 @@
 	<insert id="insertArt" parameterType="ArtModel" useGeneratedKeys="true" keyProperty="id">
 		insert into 
 			art
-			(artName,artNumber,artYear,artAuthor,artMaterial,artSize,artCert,artDesc,createTime,artImage,artAudio)
+			(artName,artNumber,artInnerNumber,artYear,artAuthor,artMaterial,artSize,artCert,artDesc,createTime,artImage,artAudio)
 		values
-			(#{artName},#{artNumber},#{artYear},#{artAuthor},#{artMaterial},#{artSize},#{artCert},#{artDesc},now(),#{imageUrl},#{audioUrl})
+			(#{artName},#{artNumber},#{artInnerNumber},#{artYear},#{artAuthor},#{artMaterial},#{artSize},#{artCert},#{artDesc},now(),#{imageUrl},#{audioUrl})
 	</insert>
 
 	<update id="updateArtImage" parameterType="map">
@@ -177,7 +183,7 @@
 	 
 	 <select id="loadArtsFromMueum" parameterType="Map" resultType="ArtModel">
 	 	select 
-	 		a.id,a.artName,a.artNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
+	 		a.id,a.artName,a.artNumber,a.artInnerNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
 	 	from 
 	 		art a,art_museum m
 	 	where a.id = m.artId and m.museumId = #{museumId}
