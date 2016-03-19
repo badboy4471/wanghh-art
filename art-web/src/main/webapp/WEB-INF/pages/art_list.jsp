@@ -123,16 +123,23 @@
 							  return "<img src=\"<%=AliyunUpload.IMAGE_DOMAIN%>/"+data+"\" style=\"width: 80px\"/>";
 						  }
 						},
-						{ "mData": 'artNumber' },
+						{ "mData": 'artNumber' ,
+						  "mRender": function ( data, type, row ) {
+							  var number = "编号："+row.artNumber;
+							  var innerNumber = "内部编号："+row.artInnerNumber;
+							  return number + "<br/>"+innerNumber;
+							}
+						},
 						{ "mData": 'artName' },
 						{ "mData": 'artDesc' },
 						{ "mData": 'id' ,
 						  "mRender": function ( data, type, row ) {
 							  var detail = "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
-							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">删除</a>";
+							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"delete\">删除</a>";
 							  var archive = "<a href='###' data=\""+data+"\" class='archive'>归档</a>";
-							  var goout = "<a href='${ctx}/admin/art/out.form?artId="+data+"' data='"+data+"'>出库</a>";
-							  return detail + " " + del + " " + archive + " " + goout;
+							  var goout = "<a class=\"goout\" href='${ctx}/admin/art/out.form?artId="+data+"' data='"+data+"'>出库</a>";
+							  var edit = "<a href=\"${ctx}/admin/art/edit.form?artId="+data+"\">编辑</a>";
+							  return edit + " " + detail + " " + del + " " + archive + " " + goout;
 							}
 						}
 					],
