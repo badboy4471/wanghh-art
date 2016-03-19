@@ -138,8 +138,8 @@
 							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"delete\">删除</a>";
 							  var archive = "<a href='###' data=\""+data+"\" class='archive'>归档</a>";
 							  var goout = "<a class=\"goout\" href='${ctx}/admin/art/out.form?artId="+data+"' data='"+data+"'>出库</a>";
-							  var edit = "<a href=\"${ctx}/admin/art/edit.form?artId="+data+"\">编辑</a>";
-							  return edit + " " + detail + " " + del + " " + archive + " " + goout;
+							  var edit = "<a href=\"${ctx}/admin/art/edit.form?id="+data+"\">编辑</a>";
+							  return edit + " " + detail + " " + del + " " + goout;
 							}
 						}
 					],
