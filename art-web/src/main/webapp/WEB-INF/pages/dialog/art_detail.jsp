@@ -10,7 +10,7 @@
 						                </tr>
 						                <c:if test="${not empty artAudio }">
 									    <tr>
-									    <td colspan="4"><div class="title"><audio src="<%=AliyunUpload.AUDIO_DOMAIN%>/${art.artAudio}"></div></td>
+									    <td colspan="4"><div class="title"><audio controls="controls" src="<%=AliyunUpload.AUDIO_DOMAIN%>/${art.artAudio}"></div></td>
 									    </tr>
 									    </c:if>
 						                <tr>

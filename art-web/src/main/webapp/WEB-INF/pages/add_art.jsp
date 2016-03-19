@@ -69,7 +69,7 @@
                                 	<input class="input-file uniform_on" id="artAudio" type="file"  multiple="true">
                                 	<div id="playAudio">
                                 	<c:if test="${ not empty art.artAudio }">
-                                		<audio src="<%=AliyunUpload.AUDIO_DOMAIN %>${art.artAudio}" width="50" height="50"/>
+                                		<audio controls="controls" src="<%=AliyunUpload.AUDIO_DOMAIN %>${art.artAudio}" width="50" height="50"/>
                                 	</c:if>
                                 	</div>
                                 	<input type="hidden" name="artAudio" id="audioUrl" value="${art.artAudio }"/>
