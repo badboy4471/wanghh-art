@@ -127,7 +127,7 @@
   							<div class="control-group">
   								<label class="control-label">描述</label>
   								<div class="controls">
-  									<textarea rows="3" cols="120" value="${art.artDesc }" name="artDesc"></textarea>
+  									<textarea rows="3" cols="120" name="artDesc">${art.artDesc }</textarea>
   								</div>
   							</div>
   							<div class="form-actions">
