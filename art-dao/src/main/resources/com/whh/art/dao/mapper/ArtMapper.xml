@@ -48,13 +48,13 @@
 				a.id = m.artId and m.museumId = #{batchId}
 			</if>
 			<if test="name != null and name != ''">
-				and a.artName like #{name}
+				and a.artName like CONCAT('%', #{name}, '%') 
 			</if>
 			<if test="number != null and number != ''">
-				and a.artNumber like #{number}
+				and a.artNumber like CONCAT(#{number}, '%') 
 			</if>
 			<if test="innerNumber != null and innerNumber != ''">
-				and a.artInnerNumber like #{innerNumber}
+				and a.artInnerNumber like CONCAT(#{innerNumber}, '%') 
 			</if>
 			<if test="id > 0">
 				and a.id = #{id}
@@ -87,13 +87,13 @@
 				a.id = m.artId and m.museumId = #{batchId}
 			</if>
 			<if test="name != null and name != ''">
-				and a.artName like #{name}
+				and a.artName like CONCAT('%', #{name}, '%') 
 			</if>
 			<if test="number != null and number != ''">
-				and a.artNumber like #{number}
+				and a.artNumber like CONCAT(#{number}, '%') 
 			</if>
 			<if test="innerNumber != null and innerNumber != ''">
-				and a.artInnerNumber like #{innerNumber}
+				and a.artInnerNumber like CONCAT(#{innerNumber}, '%') 
 			</if>
 			<if test="id > 0">
 				and a.id = #{id}
