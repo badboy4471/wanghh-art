@@ -188,15 +188,17 @@
 	    
 	    
 		del=function(id){
-			$.ajax({
-			    url: "${ctx}/admin/art/del.form?id="+id,
-			    success: function (data) {
-			        if (data.code == 200){
-			        	oTable.fnDrow(false);
-			        }
-			    },
-			    cache: false
-			});
+			if(confirm("删除艺术品？")){
+				$.ajax({
+				    url: "${ctx}/admin/art/del.form?id="+id,
+				    success: function (data) {
+				        if (data.code == 200){
+				        	oTable.fnDrow(false);
+				        }
+				    },
+				    cache: false
+				});
+			}
 		};
 		
 		initSelect = function(){
