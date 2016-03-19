@@ -48,5 +48,7 @@ public interface ArtMapper {
 			@Param("artId") int artId);
 
 	void deleteMuseumArtById(int id);
+	
+	void updateArt(ArtModel art);
 
 }

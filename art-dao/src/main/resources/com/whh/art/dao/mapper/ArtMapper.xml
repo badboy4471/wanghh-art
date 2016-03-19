@@ -6,17 +6,36 @@
 
 	<select id="getArt" resultType="ArtModel" parameterType="int">
 		select
-			id,artName,artNumber, artInnerNumber,artImage,artYear,artAuthor,artSize,artMaterial,artCert,artDesc
+			id,artName,artNumber, artInnerNumber,artImage,artAudio,artYear,artAuthor,artSize,artMaterial,artCert,artDesc
 		from 
 			art 
 		where
 			id = #{id}
 	</select>
 
+	<update id="updateArt" parameterType="ArtModel">
+		update 
+			artName = #{artName},
+			artNumber = #{artNumber},
+			artInnerNumber = #{artInnerNumber},
+			<if test="artImage != null and artImage != ''">
+				artImage = #{artImage},
+			</if>
+			<if test="artAudio != null and artAudio != ''">
+				artAudio = #{artAudio},
+			</if>
+			artYear = #{artYear},
+			artAuthor = #{artAuthor},
+			artSize = #{artSize},
+			artMaterial = #{artMaterial},
+			artCert = #{artCert},
+			artDesc = #{artDesc}
+		where id = #{id}
+	</update>
 
 	<select id="searchArts" resultType="ArtModel" parameterType="SearchModel">
 		select
-			a.id,a.artName,a.artNumber,a.artInnerNumber,a.artImage,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
+			a.id,a.artName,a.artNumber,a.artInnerNumber,a.artImage,a.artAudio,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
 		from 
 		<if test="batchId > 0">
 			art a ,art_museum m
