@@ -50,7 +50,7 @@
 								Your form validation is successful!
 							</div>
 								<!-- id -->
-							 <input type="hidden" name="id" value="${art.id }"/>
+							 <input type="hidden" name="id" id="id" value="${art.id }"/>
 							<div class="control-group">
                                 <label class="control-label" for="fileInput">图片*</label>
                                 <div class="controls">

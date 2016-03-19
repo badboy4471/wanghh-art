@@ -22,7 +22,10 @@ var FormValidation = function () {
                         remote:{
                         	type:"POST",
                         	url:"/art/admin/art/number/valid.form",
-                        	data:{artNumber:function(){return $("#artNumber").val()}}
+                        	data:{
+                        		id:function(){return $("#id").val()},
+                        		artNumber:function(){return $("#artNumber").val()}
+                        	}
                         }
                     },
                     artSize: {

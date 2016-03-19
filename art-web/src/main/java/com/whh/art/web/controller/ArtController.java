@@ -8,10 +8,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -193,7 +193,7 @@ public class ArtController extends BaseController {
 		ArtOutModel out = new ArtOutModel();
 		
 		out.setArt(art);
-		if (StringUtils.hasText(returnTime)){
+		if (StringUtils.isNotBlank(returnTime)){
 			out.setBackTime(ArtUtils.getDate(returnTime));
 		}
 		out.setType(outType);
@@ -207,9 +207,25 @@ public class ArtController extends BaseController {
 			RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody
 	boolean validArtNumber(@RequestParam("artNumber") String artNumber,
-			HttpSession session) {
-		boolean exist = artService.numberExist(artNumber);
-		return !exist;
+			@RequestParam("id") String idStr, HttpSession session) {
+		int id = 0;
+		if (StringUtils.isNotBlank(idStr)) {
+			try {
+				id = Integer.parseInt(idStr);
+			} catch (Exception e) {
+			}
+		}
+		ArtModel art = artService.getArt(artNumber);
+
+		if (art == null) {
+			return true;
+		} else {
+			if (art.getId() != id) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	}
 
 }
