@@ -21,7 +21,7 @@ var FormValidation = function () {
                         required: true,
                         remote:{
                         	type:"POST",
-                        	url:"/art/admin/art/number/valid.form",
+                        	url:"/admin/art/number/valid.form",
                         	data:{
                         		id:function(){return $("#id").val()},
                         		artNumber:function(){return $("#artNumber").val()}
