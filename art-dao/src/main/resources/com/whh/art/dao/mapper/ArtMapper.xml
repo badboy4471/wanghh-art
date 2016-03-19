@@ -14,7 +14,7 @@
 	</select>
 
 	<update id="updateArt" parameterType="ArtModel">
-		update 
+		update art set
 			artName = #{artName},
 			artNumber = #{artNumber},
 			artInnerNumber = #{artInnerNumber},
