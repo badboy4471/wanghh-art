@@ -57,7 +57,7 @@
                                 	<input class="input-file uniform_on span6 m-wrap" id="artImage" multiple="true" type="file">
                                 	<div id="showImage">
                                 	<c:if test="${ not empty art.artImage }">
-                                		<img src="<%=AliyunUpload.VIDEO_DOMAIN %>${art.artImage}" width="50" height="50"/>
+                                		<img src="<%=AliyunUpload.IMAGE_DOMAIN %>${art.artImage}" width="50" height="50"/>
                                 	</c:if>
                                 	</div>
                                 	<input type="hidden" name="artImage" id="imageUrl" value="${art.artImage }"/>
