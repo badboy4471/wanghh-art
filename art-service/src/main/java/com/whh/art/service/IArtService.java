@@ -45,4 +45,6 @@ public interface IArtService {
 	void deleteMuseumArt(int museumId, int artId);
 
 	void deleteMuseumArtById(int id);
+	
+	void updateArt(ArtModel art);
 }

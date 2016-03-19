@@ -134,9 +134,15 @@ public class ArtServiceImpl implements IArtService {
 		}
 	}
 
+	@Override
+	public void updateArt(ArtModel art) {
+		artMapper.updateArt(art);
+	}
 
 	@Override
 	public void deleteMuseumArtById(int id) {
 		artMapper.deleteMuseumArtById(id);
 	}
+
+
 }
