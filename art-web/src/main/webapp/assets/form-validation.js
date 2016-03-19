@@ -108,7 +108,7 @@ var FormValidation = function () {
                         url:"/art/admin/art/save.form",
                         data:form1.serialize(),
                         success: function(data){
-                        	alert(data.code);
+                        	alert("["+data.code+"]:"+data.message);
                         }
                     });
                 }
