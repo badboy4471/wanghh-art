@@ -195,7 +195,7 @@
 				    url: "${ctx}/admin/art/del.form?id="+id,
 				    success: function (data) {
 				        if (data.code == 200){
-				        	oTable.fnDrow(false);
+				        	alert(data.message);
 				        }
 				    },
 				    cache: false
