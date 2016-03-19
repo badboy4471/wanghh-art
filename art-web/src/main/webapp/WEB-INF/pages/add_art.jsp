@@ -49,76 +49,85 @@
 								<button class="close" data-dismiss="alert"></button>
 								Your form validation is successful!
 							</div>
-							 
+								<!-- id -->
+							 <input type="hidden" name="id" value="${art.id }"/>
 							<div class="control-group">
                                 <label class="control-label" for="fileInput">图片*</label>
                                 <div class="controls">
                                 	<input class="input-file uniform_on span6 m-wrap" id="artImage" name="artImage" multiple="true" type="file">
-                                	<div id="showImage"></div>
-                                	<input type="hidden" name="imageUrl" id="imageUrl"/>
+                                	<div id="showImage">
+                                	<c:if test="${ not empty art.artImage }">
+                                		<img src="<%=AliyunUpload.VIDEO_DOMAIN %>${art.imageUrl}" width="50" height="50"/>
+                                	</c:if>
+                                	</div>
+                                	<input type="hidden" name="imageUrl" id="imageUrl" value="${art.imageUrl }"/>
                             	</div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="fileInput">语音播报</label>
                                 <div class="controls">
                                 	<input class="input-file uniform_on" id="artAudio" name="artAudio" type="file"  multiple="true">
-                                	<div id="playAudio"></div>
-                                	<input type="hidden" name="audioUrl" id="audioUrl"/>
+                                	<div id="playAudio">
+                                	<c:if test="${ not empty art.artImage }">
+                                		<audio src="<%=AliyunUpload.AUDIO_DOMAIN %>${art.audioUrl}" width="50" height="50"/>
+                                	</c:if>
+                                	</div>
+                                	<input type="hidden" name="audioUrl" id="audioUrl" value="${art.audioUrl }"/>
                             	</div>
                             </div>
                             
   							<div class="control-group">
   								<label class="control-label">编号<span class="required">*</span></label>
   								<div class="controls">
-  									<input type="text" name="artNumber" id="artNumber" data-required="1" class="span6 m-wrap"/>
+  									<input type="text" name="artNumber" id="artNumber" value="${art.artNumber }" data-required="1" class="span6 m-wrap"/>
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">内部编号<span class="required">*</span></label>
   								<div class="controls">
-  									<input type="text" name="artInnerNumber" id="artInnerNumber" data-required="1" class="span6 m-wrap"/>
+  									<input type="text" name="artInnerNumber" id="artInnerNumber" value="${art.artInnerNumber }" data-required="1" class="span6 m-wrap"/>
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">名称<span class="required">*</span></label>
   								<div class="controls">
-  									<input name="artName" type="text" class="span6 m-wrap"/>
+  									<input name="artName" type="text" value="${art.artName }" class="span6 m-wrap"/>
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">尺寸<span class="required">*</span></label>
   								<div class="controls">
-  									<input name="artSize" type="text" class="span6 m-wrap"/> e.g: 80*60
+  									<input name="artSize" type="text" value="${art.artSize }" class="span6 m-wrap"/> e.g: 80*60
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">材质<span class="required">*</span></label>
   								<div class="controls">
-  									<input name="artMaterial" type="text" class="span6 m-wrap"/> e.g: 瓷板.陶瓷颜料
+  									<input name="artMaterial" type="text" value="${art.artMaterial }" class="span6 m-wrap"/> e.g: 瓷板.陶瓷颜料
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">作者<span class="required">*</span></label>
   								<div class="controls">
-  									<input name="artAuthor" type="text" class="span6 m-wrap"/>
+  									<input name="artAuthor" type="text" value="${art.artAuthor }" class="span6 m-wrap"/>
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">证书<span class="required">*</span></label>
   								<div class="controls">
-  									<input name="artCert" type="text" class="span6 m-wrap"/>
+  									<input name="artCert" type="text" value="${art.artCert }" class="span6 m-wrap"/>
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">年份</label>
   								<div class="controls">
-  									<input name="artYear" type="text" class="span6 m-wrap"/> e.g: 2014年7月
+  									<input name="artYear" type="text" value="${art.artYear }" class="span6 m-wrap"/> e.g: 2014年7月
   								</div>
   							</div>
   							<div class="control-group">
   								<label class="control-label">描述</label>
   								<div class="controls">
-  									<textarea rows="3" cols="120" name="artDesc"></textarea>
+  									<textarea rows="3" cols="120" value="${art.artDesc }" name="artDesc"></textarea>
   								</div>
   							</div>
   							<div class="form-actions">
