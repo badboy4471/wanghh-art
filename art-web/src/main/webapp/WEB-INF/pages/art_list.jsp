@@ -133,7 +133,7 @@
 							}
 						},
 						{ "mData": 'artName'},
-						{ "mData": 'artDesc' ,"sWidth" : "40%"},
+						{ "mData": 'artDesc' ,"sWidth" : "350px"},
 						{ "mData": 'id',
 						  "mRender": function ( data, type, row ) {
 							  var detail = "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
