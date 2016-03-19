@@ -8,7 +8,7 @@
 						               <tr>
 						                  <td colspan="4"><img src="<%=AliyunUpload.IMAGE_DOMAIN%>/${art.artImage}" style="width: 120px"/></td>
 						                </tr>
-						                <c:if test="${not empty artAudio }">
+						                <c:if test="${not empty art.artAudio }">
 									    <tr>
 									    <td colspan="4"><div class="title"><audio controls="controls" src="<%=AliyunUpload.AUDIO_DOMAIN%>/${art.artAudio}">你的浏览器不支持</audio></div></td>
 									    </tr>
@@ -16,26 +16,26 @@
 						                <tr>
 						                  <td>编号</td>
 						                  <td>${art.artNumber }</td>
+						                  <td>内部编号</td>
+						                  <td>${art.artInnerNumber }</td>
+						                </tr>
+						                <tr>
 						                  <td>名称</td>
 						                  <td>${art.artName }</td>
-						                </tr>
-						                <tr>
 						                  <td>尺寸</td>
 						                  <td>${art.artSize }</td>
-						                  <td>材质</td>
-						                  <td>${art.artMaterial }</td>
 						                </tr>
 						                <tr>
+						                  <td>材质</td>
+						                  <td>${art.artMaterial }</td>
 						                  <td>作者</td>
 						                  <td>${art.artAuthor }</td>
-						                  <td>证书：</td>
-						                  <td>${art.artCert }</td>
 						                </tr>
 						                <tr>
 						                  <td>年份：</td>
 						                  <td>${art.artYear }</td>
-						                  <td></td>
-						                  <td></td>
+						                  <td>证书：</td>
+						                  <td>${art.artCert }</td>
 						                </tr>
 						                <tr>
 						                  <td colspan="4">描述</td>
