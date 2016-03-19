@@ -61,6 +61,16 @@ public class ArtController extends BaseController {
 			return "art_detail";
 		}
 	}
+	
+	@RequestMapping(value = {"admin/art/edit"}, method = { RequestMethod.GET })
+	public String viewArtEdit(@RequestParam("id") int id, ModelMap model,HttpServletRequest request) {
+
+		ArtModel art = artService.getArt(id);
+
+		model.addAttribute("art", art);
+		
+		return "add_art";
+	}
 
 	@RequestMapping(value = "admin/art/out", method = { RequestMethod.GET })
 	public String viewArtOutPage(@RequestParam("artId") int artId,
@@ -131,22 +141,38 @@ public class ArtController extends BaseController {
 	public @ResponseBody
 	Result saveArt(@ModelAttribute ArtSubmit artSubmit, HttpSession session) {
 		Result result = new Result(null);
-		
-		if (artService.getArt(artSubmit.getArtNumber()) != null) {
-			result.setCode(ArtErrorCode.DUPLICATE.getCode());
-			result.setMessage(ArtErrorCode.DUPLICATE.getMessage());
-		}
 		ArtModel model = new ArtModel();
 		BeanUtils.copyProperties(artSubmit, model);
-		ArtModel art = artService.insertArt(model);
-
-		if (art.getId() > 0) {
-			result.setCode(200);
-		} else {
-			result.setCode(ArtErrorCode.SYSTEM_ERROR.getCode());
-			result.setMessage(ArtErrorCode.SYSTEM_ERROR.getMessage());
+		if (artSubmit.getId() > 0){ //编辑
+			ArtModel art = artService.getArt(artSubmit.getArtNumber());
+			if (art != null && art.getId() != artSubmit.getId()) {
+				result.setCode(ArtErrorCode.DUPLICATE.getCode());
+				result.setMessage(ArtErrorCode.DUPLICATE.getMessage());
+				return result;
+			}
+			try{
+				artService.updateArt(model);
+				result.setCode(200);
+			}catch(Exception e){
+				result.setCode(ArtErrorCode.SYSTEM_ERROR.getCode());
+				result.setMessage(ArtErrorCode.SYSTEM_ERROR.getMessage());
+			}
+			return result;
+		}else{
+			try{
+				ArtModel art = artService.insertArt(model);
+				if (art.getId() > 0) {
+					result.setCode(200);
+				} else {
+					result.setCode(ArtErrorCode.SYSTEM_ERROR.getCode());
+					result.setMessage(ArtErrorCode.SYSTEM_ERROR.getMessage());
+				}
+			}catch(Exception e){
+				result.setCode(ArtErrorCode.SYSTEM_ERROR.getCode());
+				result.setMessage(ArtErrorCode.SYSTEM_ERROR.getMessage());
+			}
+			return result;
 		}
-		return result;
 	}
 	
 	@RequestMapping(value = "admin/art/out/save", method = { RequestMethod.POST })
