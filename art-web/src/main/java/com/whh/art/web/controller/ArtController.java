@@ -107,13 +107,8 @@ public class ArtController extends BaseController {
 		SearchModel search = new SearchModel();
 		search.setName((String) paramMap.get("name"));
 		search.setNumber((String) paramMap.get("number"));
-		String museumStr = (String) paramMap.get("museumId");
-		try {
-			search.setBatchId(Integer.parseInt(museumStr));
-		} catch (Exception e) {
-			search.setBatchId(0);
-		}
-
+		String innerNumber = (String) paramMap.get("innerNumber");
+		search.setInnerNumber(innerNumber);
 		int start = 0;
 		try {
 			start = Integer.parseInt((String) paramMap.get("iDisplayStart"));

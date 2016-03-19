@@ -45,10 +45,13 @@
                                       </div>
                                       <div class="btn-group pull-right">
 										<p>
+										<!-- 
 										<select style="width: 150px;margin-bottom:0px;margin-right: 5px;" id="museumId" name="museumId">
                                               <option value="0">请选择艺术馆</option>
                                         </select>
+                                         -->
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="编号" id="artNumber" type="text" >
+										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="内部编号" id="artInnerNumber" type="text" >
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="名称" id="artName" type="text" > <button class="btn" id="searchBtn"><i class="icon-search"></i>搜索</button>
 										</p>
                                       </div>
@@ -96,9 +99,10 @@
 		    //将客户名称加入参数数组  
 		    var name = $("#artName").val();
 			var number = $("#artNumber").val();
+			var innerNumber = $("#artInnerNumber").val();
 			aoData.push({ "name": "name", "value": name});
 			aoData.push({ "name": "number", "value": number});
-			aoData.push({"name":"museumId","value":$("#museumId").val()});
+			aoData.push({"name":"innerNumber","value":innerNumber});
 		    $.ajax( {  
 		        "type": "POST",   
 		        "contentType": "application/json",  
