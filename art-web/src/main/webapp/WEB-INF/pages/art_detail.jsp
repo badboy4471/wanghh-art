@@ -104,7 +104,7 @@ tr td:nth-child(odd){ color:#999;}
     </tr>
     <c:if test="${not empty artAudio }">
     <tr>
-    <td colspan="4"><div class="title"><audio controls="controls" src="<%=AliyunUpload.AUDIO_DOMAIN%>/${art.artAudio}"></div></td>
+    <td colspan="4"><div class="title"><audio controls="controls" src="<%=AliyunUpload.AUDIO_DOMAIN%>/${art.artAudio}">你的浏览器不支持</audio></div></td>
     </tr>
     </c:if>
     <tr>
