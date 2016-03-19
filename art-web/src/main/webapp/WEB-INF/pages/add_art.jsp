@@ -54,25 +54,25 @@
 							<div class="control-group">
                                 <label class="control-label" for="fileInput">图片*</label>
                                 <div class="controls">
-                                	<input class="input-file uniform_on span6 m-wrap" id="artImage" name="artImage" multiple="true" type="file">
+                                	<input class="input-file uniform_on span6 m-wrap" id="artImage" multiple="true" type="file">
                                 	<div id="showImage">
                                 	<c:if test="${ not empty art.artImage }">
-                                		<img src="<%=AliyunUpload.VIDEO_DOMAIN %>${art.imageUrl}" width="50" height="50"/>
+                                		<img src="<%=AliyunUpload.VIDEO_DOMAIN %>${art.artImage}" width="50" height="50"/>
                                 	</c:if>
                                 	</div>
-                                	<input type="hidden" name="imageUrl" id="imageUrl" value="${art.imageUrl }"/>
+                                	<input type="hidden" name="artImage" id="imageUrl" value="${art.artImage }"/>
                             	</div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="fileInput">语音播报</label>
                                 <div class="controls">
-                                	<input class="input-file uniform_on" id="artAudio" name="artAudio" type="file"  multiple="true">
+                                	<input class="input-file uniform_on" id="artAudio" type="file"  multiple="true">
                                 	<div id="playAudio">
-                                	<c:if test="${ not empty art.artImage }">
-                                		<audio src="<%=AliyunUpload.AUDIO_DOMAIN %>${art.audioUrl}" width="50" height="50"/>
+                                	<c:if test="${ not empty art.artAudio }">
+                                		<audio src="<%=AliyunUpload.AUDIO_DOMAIN %>${art.artAudio}" width="50" height="50"/>
                                 	</c:if>
                                 	</div>
-                                	<input type="hidden" name="audioUrl" id="audioUrl" value="${art.audioUrl }"/>
+                                	<input type="hidden" name="artAudio" id="audioUrl" value="${art.artAudio }"/>
                             	</div>
                             </div>
                             

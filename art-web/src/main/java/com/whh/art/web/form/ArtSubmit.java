@@ -12,8 +12,8 @@ public class ArtSubmit {
 	private String artCert;
 	private String artYear;
 	private String artDesc;
-	private String imageUrl;
-	private String audioUrl;
+	private String artImage;
+	private String artAudio;
 	
 	public String getArtNumber() {
 		return artNumber;
@@ -70,17 +70,17 @@ public class ArtSubmit {
 		this.id = id;
 	}
 	
-	public String getImageUrl() {
-		return imageUrl;
+	public String getArtImage() {
+		return artImage;
 	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setArtImage(String artImage) {
+		this.artImage = artImage;
 	}
-	public String getAudioUrl() {
-		return audioUrl;
+	public String getArtAudio() {
+		return artAudio;
 	}
-	public void setAudioUrl(String audioUrl) {
-		this.audioUrl = audioUrl;
+	public void setArtAudio(String artAudio) {
+		this.artAudio = artAudio;
 	}
 	public String getArtInnerNumber() {
 		return artInnerNumber;

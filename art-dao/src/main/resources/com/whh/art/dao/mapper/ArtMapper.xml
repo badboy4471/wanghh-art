@@ -115,14 +115,14 @@
 			art
 			(artName,artNumber,artInnerNumber,artYear,artAuthor,artMaterial,artSize,artCert,artDesc,createTime,artImage,artAudio)
 		values
-			(#{artName},#{artNumber},#{artInnerNumber},#{artYear},#{artAuthor},#{artMaterial},#{artSize},#{artCert},#{artDesc},now(),#{imageUrl},#{audioUrl})
+			(#{artName},#{artNumber},#{artInnerNumber},#{artYear},#{artAuthor},#{artMaterial},#{artSize},#{artCert},#{artDesc},now(),#{artImage},#{artAudio})
 	</insert>
 
 	<update id="updateArtImage" parameterType="map">
 		update 
 			art
 		set 
-			artImage = #{artImageUrl}
+			artImage = #{artImage}
 		where 
 			id = #{id}
 	</update>
@@ -131,7 +131,7 @@
 		update 
 			art
 		set 
-			artAudio = #{artAudioUrl}
+			artAudio = #{artAudio}
 		where 
 			id = #{id}
 	</update>

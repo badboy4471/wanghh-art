@@ -102,6 +102,11 @@ tr td:nth-child(odd){ color:#999;}
   <tr>
     <td colspan="4"><div class="title"><img src="<%=AliyunUpload.IMAGE_DOMAIN%>/${art.artImage}"></div></td>
     </tr>
+    <c:if test="${not empty artAudio }">
+    <tr>
+    <td colspan="4"><div class="title"><audio src="<%=AliyunUpload.AUDIO_DOMAIN%>/${art.artAudio}"></div></td>
+    </tr>
+    </c:if>
     <tr>
   <td colspan="4"><div class="title">描述</div>
 <div class="des">${art.artDesc }</div></td>

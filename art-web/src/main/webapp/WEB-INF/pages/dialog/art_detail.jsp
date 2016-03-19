@@ -8,6 +8,11 @@
 						               <tr>
 						                  <td colspan="4"><img src="<%=AliyunUpload.IMAGE_DOMAIN%>/${art.artImage}" style="width: 120px"/></td>
 						                </tr>
+						                <c:if test="${not empty artAudio }">
+									    <tr>
+									    <td colspan="4"><div class="title"><audio src="<%=AliyunUpload.AUDIO_DOMAIN%>/${art.artAudio}"></div></td>
+									    </tr>
+									    </c:if>
 						                <tr>
 						                  <td>编号</td>
 						                  <td>${art.artNumber }</td>

@@ -12,8 +12,7 @@ public class ArtModel {
 	private String artYear;
 	private String artImage;
 	private String artDesc;
-	private String imageUrl;
-	private String audioUrl;
+	private String artAudio;
 	public int getId() {
 		return id;
 	}
@@ -77,17 +76,12 @@ public class ArtModel {
 	public void setArtInnerNumber(String artInnerNumber) {
 		this.artInnerNumber = artInnerNumber;
 	}
-	public String getImageUrl() {
-		return imageUrl;
+	
+	public String getArtAudio() {
+		return artAudio;
 	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-	public String getAudioUrl() {
-		return audioUrl;
-	}
-	public void setAudioUrl(String audioUrl) {
-		this.audioUrl = audioUrl;
+	public void setArtAudio(String artAudio) {
+		this.artAudio = artAudio;
 	}
 	@Override
 	public String toString() {
