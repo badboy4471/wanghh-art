@@ -119,22 +119,22 @@
 				    "bServerSide":true,
 				    "aoColumns": [
 						{ "mData": 'artImage',
-						  "sWidth" : "14%",
+						  //"sWidth" : "14%",
 						  "mRender" : function(data,type,row){
 							  return "<img src=\"<%=AliyunUpload.IMAGE_DOMAIN%>/"+data+"\" style=\"width: 80px\"/>";
 						  }
 						},
 						{ "mData": 'artNumber' ,
-							"sWidth" : "15%",
+							//"sWidth" : "15%",
 						  "mRender": function ( data, type, row ) {
 							  var number = "编号："+row.artNumber;
 							  var innerNumber = "内部编号："+row.artInnerNumber;
 							  return number + "<br/><br/>"+innerNumber;
 							}
 						},
-						{ "mData": 'artName' ,"sWidth" : "16%",},
-						{ "mData": 'artDesc' ,"sWidth" : "40%",},
-						{ "mData": 'id' ,"sWidth" : "14%",
+						{ "mData": 'artName'},
+						{ "mData": 'artDesc' ,"sWidth" : "40%"},
+						{ "mData": 'id',
 						  "mRender": function ( data, type, row ) {
 							  var detail = "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
 							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"delete\">删除</a>";
