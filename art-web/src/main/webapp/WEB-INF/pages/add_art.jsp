@@ -43,7 +43,7 @@
 						<fieldset>
 							<div class="alert alert-error hide">
 								<button class="close" data-dismiss="alert"></button>
-								You have some form errors. Please check below.
+								表单有误！请认真检查！
 							</div>
 							<div class="alert alert-success hide">
 								<button class="close" data-dismiss="alert"></button>
