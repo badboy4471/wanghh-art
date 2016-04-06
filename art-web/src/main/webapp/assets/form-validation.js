@@ -105,7 +105,7 @@ var FormValidation = function () {
                     error1.hide();
                     $.ajax({
                         type:"POST",
-                        url:"/art/admin/art/save.form",
+                        url:"/admin/art/save.form",
                         data:form1.serialize(),
                         success: function(data){
                         	alert("["+data.code+"]:"+data.message);
