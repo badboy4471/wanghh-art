@@ -50,7 +50,9 @@
 								Your form validation is successful!
 							</div>
 								<!-- id -->
-							 <input type="hidden" name="id" id="id" value="${art.id }"/>
+							<c:if test="${not empty art.id }">
+								<input type="hidden" name="id" id="id" value="${art.id }"/>
+							</c:if>
 							<div class="control-group">
                                 <label class="control-label" for="fileInput">图片*</label>
                                 <div class="controls">
