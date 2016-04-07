@@ -60,7 +60,7 @@
                     </div>
                     <div class="row-fluid">
                         <c:forEach var="menu" items="${menus }" varStatus="midx">
-                        <c:if test="${ not empty menus.name }">
+                        <c:if test="${ not empty menu.name }">
                         <div class="span6">
                             <!-- block -->
                             <div class="block">
