@@ -6,7 +6,7 @@
 
 	<insert id="addWeixinMenu" parameterType="WeixinMenuModel">
 		insert into 
-			weixin_menu (id,pid,name,key,url,media_id,type)
+			weixin_menu (id,pid,name,`key`,url,media_id,type)
 		values
 			(#{id},#{pid},#{name},#{key},#{url},#{media_id},#{type})
 	</insert>
@@ -20,7 +20,7 @@
 	
 	<select id="getWeixinMenu" resultType="WeixinMenuModel" parameterType="int">
 		select 
-			id,pid,name,key,url,media_id,type 
+			id,pid,name,`key`,url,media_id,type 
 		from
 			weixin_menu
 		where 
@@ -29,7 +29,7 @@
 	
 	<select id="loadWeixinMenus" resultType="WeixinMenuModel" parameterType="int">
 		select 
-			id,pid,name,key,url,media_id,type 
+			id,pid,name,`key`,url,media_id,type 
 		from
 			weixin_menu
 		where 
