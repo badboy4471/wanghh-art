@@ -115,7 +115,7 @@
                                         <tbody>
                                             <tr>
                                                 <td style="border-top: none;text-align: center;">
-                                                    <a href="###" class="addMemu"><img alt="add" src="${ctx }/images/big-add.png"></a>
+                                                    <a href="###" pid="0" class="addMenu"><img alt="add" src="${ctx }/images/big-add.png"></a>
                                                 </td>
                                             </tr>
                                         </tbody>
