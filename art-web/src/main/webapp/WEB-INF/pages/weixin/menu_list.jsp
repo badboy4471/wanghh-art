@@ -29,11 +29,11 @@
                 <div class="span9" id="content">
                     <div class="row-fluid">
                         <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <button type="button" id="flushtowx" data-dismiss="alert">同步到微信</button>
                             <h4>本地JSON</h4>
                             ${localJson }</div>
                         <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <button type="button" id="clearwxmenu" data-dismiss="alert">删除微信菜单</button>
                             <h4>远端JSON</h4>
                             ${remoteJson }</div>
                             <!-- 
@@ -66,7 +66,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left"><a href="###" class="museumRemove" data="${menu }"><i class="icon-remove"></i></a> ${menu.name }/${menu.type }/${menu.key }${menu.url }</div>
-                                    <div class="pull-right"><span class="badge badge-info"></span>
+                                    <div class="pull-right"><span class="badge badge-info addSubMenu" pid="${menu.id }">添加子菜单</span>
 
                                     </div>
                                 </div>
@@ -78,6 +78,7 @@
                                                 <th>菜单名</th>
                                                 <th>菜单类型</th>
                                                 <th>KEY</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -87,6 +88,7 @@
                                                 <td>${sub_menu.name }</td>
                                                 <td>${sub_menu.type }</td>
                                                 <td>${sub_menu.key }${sub_menu.url }</td>
+                                                <td><a class="delSubMenu" id="${sub_menu.id }" href="###">删除</a></td>
                                             </tr>
                                             </c:forEach>
                                         </tbody>
@@ -149,7 +151,76 @@
             // Easy pie charts
             $('.chart').easyPieChart({animate: 1000});
         });
-        
+        $(document).ready(function(){
+        	$(".addSubMenu").click(function(){
+        		var d = dialog({
+        		    title:'添加子菜单',
+        		    width:550,
+        			height:260
+        		});
+        		$.ajax({
+        		    url: "${ctx}/admin/weixin/submenu/add.form",
+        		    success: function (data) {
+        		        d.content(data);
+        		    },
+        		    cache: false
+        		});
+        		d.show();
+        	});
+        	
+        	$(".delSubMenu").click(function(){
+        		if(confirm("删除微信菜单？")){
+        			var museumId = $(this).attr("data");
+        			$.ajax({
+        				url:"${ctx}/admin/weixin/menu/delete.form",
+        				dataType:"json",
+        				data:{museumId:museumId},
+        				method:"POST",
+        				success:function(data){
+        					alert(data.message);
+        					if (data.code == 200){
+        						window.location.reload();
+        					}
+        				}
+        			})
+        		}
+        	});
+        	
+        	$(".flushtowx").click(function(){
+        		if(confirm("确定更新菜单到微信？")){
+        			$.ajax({
+        				url:"${ctx}/admin/weixin/menu/flush.form",
+        				dataType:"json",
+        				data:{museumId:museumId},
+        				method:"GET",
+        				success:function(data){
+        					alert(data.message);
+        					if (data.code == 200){
+        						window.location.reload();
+        					}
+        				}
+        			})
+        		}
+        	});
+        	
+        	$(".clearwxmenu").click(function(){
+        		if(confirm("确定清空微信菜单？")){
+        			var museumId = $(this).attr("data");
+        			$.ajax({
+        				url:"${ctx}/admin/weixin/menu/clear.form",
+        				dataType:"json",
+        				data:{museumId:museumId},
+        				method:"GET",
+        				success:function(data){
+        					alert(data.message);
+        					if (data.code == 200){
+        						window.location.reload();
+        					}
+        				}
+        			})
+        		}
+        	});
+        });
         </script>
     </body>
 

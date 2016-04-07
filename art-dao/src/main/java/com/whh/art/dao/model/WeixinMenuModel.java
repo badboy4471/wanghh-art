@@ -10,6 +10,7 @@ public class WeixinMenuModel {
 	private String name;
 	private String key;
 	private String url;
+	private String media_id;
 	private List<WeixinMenuModel> sub_nemu;
 
 	public String getType() {
@@ -67,5 +68,13 @@ public class WeixinMenuModel {
 
 	public void setPid(int pid) {
 		this.pid = pid;
+	}
+
+	public String getMedia_id() {
+		return media_id;
+	}
+
+	public void setMedia_id(String media_id) {
+		this.media_id = media_id;
 	}
 }
