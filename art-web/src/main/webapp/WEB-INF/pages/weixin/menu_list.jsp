@@ -191,7 +191,6 @@
         			$.ajax({
         				url:"${ctx}/admin/weixin/menu/flush.form",
         				dataType:"json",
-        				data:{museumId:museumId},
         				method:"GET",
         				success:function(data){
         					alert(data.message);
@@ -205,11 +204,9 @@
         	
         	$("#clearwxmenu").click(function(){
         		if(confirm("确定清空微信菜单？")){
-        			var museumId = $(this).attr("data");
         			$.ajax({
         				url:"${ctx}/admin/weixin/menu/clear.form",
         				dataType:"json",
-        				data:{museumId:museumId},
         				method:"GET",
         				success:function(data){
         					alert(data.message);
