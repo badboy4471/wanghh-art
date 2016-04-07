@@ -161,11 +161,9 @@
         		var pid = $(this).attr("pid");
         		$.ajax({
         		    url: "${ctx}/admin/weixin/menu/add.form",
-        		    dataType:"json",
     				data:{pid:pid},
     				method:"GET",
         		    success: function (data) {
-        		    	alert(data);
         		        d.content(data);
         		    },
         		    cache: false
