@@ -10,6 +10,9 @@
 		
 		<li <c:if test="${local == 'user.list' }">class="active"</c:if>><a href="${ctx }/admin/wx/user/list.form"><i class="icon-chevron-right"></i>
 				用户列表</a></li>
+				
+		<li <c:if test="${local == 'weixin.menu' }">class="active"</c:if>><a href="${ctx }/admin/weixin/menu/view.form"><i class="icon-chevron-right"></i>
+				自定义菜单</a></li>
 		<!-- 
 		<li><a href="tables.html"><i class="icon-chevron-right"></i>
 				Tables</a></li>

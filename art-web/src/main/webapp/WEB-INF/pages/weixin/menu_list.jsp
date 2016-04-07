@@ -4,7 +4,7 @@
 <html class="no-js">
     
     <head>
-        <title>Admin Home Page</title>
+        <title>791艺术街区-自定义菜单</title>
         <!-- Bootstrap -->
         <link href="${ctx }/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="${ctx }/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -16,14 +16,14 @@
         <![endif]-->
         <script src="${ctx }/vendors/jquery-1.9.1.js"></script>
         <script src="${ctx }/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-         <c:set var="local" value="home"></c:set>
+         <c:set var="local" value="weixin.menu"></c:set>
     </head>
     
     <body>
-        <%@ include file="inc/navbar.jsp" %>
+        <%@ include file="../inc/navbar.jsp" %>
         <div class="container-fluid">
             <div class="row-fluid">
-                <%@ include file="inc/menu.jsp" %>
+                <%@ include file="../inc/menu.jsp" %>
                 
                 <!--/span-->
                 <div class="span9" id="content">
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <hr>
-            <%@ include file="inc/footer.jsp" %>
+            <%@ include file="../inc/footer.jsp" %>
         </div>
         <!--/.fluid-container-->
         <link href="${ctx }/vendors/artdialog/ui-dialog.css" rel="stylesheet" media="screen">
