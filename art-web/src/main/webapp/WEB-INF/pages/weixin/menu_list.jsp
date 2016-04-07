@@ -65,7 +65,7 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left"><a href="###" class="museumRemove" data="${menu.id }"><i class="icon-remove"></i></a> ${menu.name }/${menu.type }/${menu.key }${menu.url }</div>
+                                    <div class="muted pull-left"><a href="###" class="delMenu" id="${menu.id }"><i class="icon-remove"></i></a> ${menu.name } - ${menu.key }${menu.url }</div>
                                     <div class="pull-right"><span class="badge badge-info addSubMenu" pid="${menu.id }">添加子菜单</span>
 
                                     </div>
@@ -171,7 +171,7 @@
         		d.show();
         	});
         	
-        	$(".delSubMenu").click(function(){
+        	$(".delSubMenu,.delMenu").click(function(){
         		if(confirm("删除微信菜单？")){
         			var id = $(this).attr("id");
         			$.ajax({

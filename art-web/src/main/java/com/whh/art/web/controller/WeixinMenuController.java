@@ -77,6 +77,21 @@ public class WeixinMenuController {
 
 		return new Result(null);
 	}
+	
+	
+	/**
+	 * 删除数据库的菜单
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "admin/weixin/menu/delete", method = { RequestMethod.GET })
+	public @ResponseBody
+	Result deleteWxMenu(@RequestParam("id") int id) {
+
+		weixinService.deleteWeixinMenuFromDB(id);
+
+		return new Result(null);
+	}
 
 	/**
 	 * 把菜单刷新到微信
