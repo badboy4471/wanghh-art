@@ -126,4 +126,8 @@
 	<bean id="systemConfigMapper" parent="baseMapper" >
 		<property name="mapperInterface" value="com.whh.art.dao.mapper.SystemConfigMapper" />
 	</bean>
+	
+	<bean id="weixinMenuMapper" parent="baseMapper" >
+		<property name="mapperInterface" value="com.whh.art.dao.mapper.WeixinMenuMapper" />
+	</bean>
 </beans>

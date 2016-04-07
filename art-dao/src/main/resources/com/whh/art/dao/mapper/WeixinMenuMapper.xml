@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.whh.art.dao.mapper.WeixinMenuMapper">
+
+	<insert id="addWeixinMenu" parameterType="WeixinMenuModel">
+		insert into 
+			weixin_menu (id,pid,name,key,url,media_id,type)
+		values
+			(#{id},#{pid},#{name},#{key},#{url},#{media_id},#{type})
+	</insert>
+
+	<delete id="deleteWeixinMenu" parameterType="int">
+		delete from 
+			weixin_menu 
+		where 
+			id = #{id}
+	</delete>
+	
+	<select id="getWeixinMenu" resultType="WeixinMenuModel" parameterType="int">
+		select 
+			id,pid,name,key,url,media_id,type 
+		from
+			weixin_menu
+		where 
+			id = #{id} 
+	</select>
+	
+	<select id="loadWeixinMenus" resultType="WeixinMenuModel" parameterType="int">
+		select 
+			id,pid,name,key,url,media_id,type 
+		from
+			weixin_menu
+		where 
+			pid = #{pid}
+	</select>
+	
+</mapper>
