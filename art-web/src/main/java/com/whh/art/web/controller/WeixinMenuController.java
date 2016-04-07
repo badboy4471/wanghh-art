@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.WeixinMenuModel;
 import com.whh.art.service.IWeixinService;
@@ -24,7 +25,7 @@ public class WeixinMenuController {
 	@RequestMapping(value = "admin/weixin/menu/view", method = { RequestMethod.GET })
 	public String viewMenus(HttpSession session, ModelMap model) {
 		List<WeixinMenuModel> tree = weixinService.loadWeixinMenus();
-		
+
 		WeixinMenuModel blank = new WeixinMenuModel();
 		tree.add(blank);
 
@@ -47,7 +48,8 @@ public class WeixinMenuController {
 	}
 
 	@RequestMapping(value = "admin/weixin/menu/save", method = { RequestMethod.GET })
-	public Result menuSave(@RequestParam("pid") int pid,
+	public @ResponseBody
+	Result menuSave(@RequestParam("pid") int pid,
 			@RequestParam("name") String name,
 			@RequestParam("type") String type,
 			@RequestParam("param") String param, ModelMap model) {
@@ -82,7 +84,8 @@ public class WeixinMenuController {
 	 * @return
 	 */
 	@RequestMapping(value = "admin/weixin/menu/flush", method = { RequestMethod.GET })
-	public Result flush2Wx() {
+	public @ResponseBody
+	Result flush2Wx() {
 		List<WeixinMenuModel> tree = weixinService.loadWeixinMenus();
 
 		weixinService.createWeixinMenu2MP(tree);
@@ -96,7 +99,8 @@ public class WeixinMenuController {
 	 * @return
 	 */
 	@RequestMapping(value = "admin/weixin/menu/clear", method = { RequestMethod.GET })
-	public Result clearWxMenu() {
+	public @ResponseBody
+	Result clearWxMenu() {
 
 		weixinService.deleteWeixinMenuFromMP();
 
