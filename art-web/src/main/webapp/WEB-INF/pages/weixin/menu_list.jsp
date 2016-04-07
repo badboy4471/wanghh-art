@@ -156,7 +156,7 @@
         		var d = dialog({
         		    title:'添加子菜单',
         		    width:550,
-        			height:260
+        			height:300
         		});
         		var pid = $(this).attr("pid");
         		$.ajax({

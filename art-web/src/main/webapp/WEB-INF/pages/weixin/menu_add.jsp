@@ -6,7 +6,7 @@
 			<div class="span12">
 				<form action="" id="form_sample_1" class="form-horizontal"
 					method="post">
-					<input type="hidden" name="pid" value="${pid }"/>
+					<input type="hidden" id="pid" name="pid" value="${pid }"/>
 					<fieldset>
 						<div class="control-group">
 							<label class="control-label">菜单名称：<span class="required">*</span></label>
@@ -42,11 +42,13 @@
 		$("#saveMenu").click(function() {
 			var name = $("#name").val();
 			var param = $("#param").val();
+			var pid = $("pid").val();
 			$.ajax({
 				method : "POST",
 				url : "${ctx }/admin/weixin/menu/save.form",
 				dataType : "json",
 				data : {
+					pid : pid,
 					name : name,
 					type : 'view',
 					param : param
