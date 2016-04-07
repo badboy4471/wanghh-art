@@ -160,9 +160,10 @@
         		});
         		var pid = $(this).attr("pid");
         		$.ajax({
-        		    url: "${ctx}/admin/weixin/submenu/add.form",
+        		    url: "${ctx}/admin/weixin/menu/add.form",
         		    dataType:"json",
     				data:{pid:pid},
+    				method:"GET",
         		    success: function (data) {
         		        d.content(data);
         		    },
@@ -178,7 +179,7 @@
         				url:"${ctx}/admin/weixin/menu/delete.form",
         				dataType:"json",
         				data:{id:id},
-        				method:"POST",
+        				method:"GET",
         				success:function(data){
         					alert(data.message);
         					if (data.code == 200){
