@@ -115,7 +115,7 @@
                                         <tbody>
                                             <tr>
                                                 <td style="border-top: none;text-align: center;">
-                                                    <a href="###" id="addMuseum"><img alt="add" src="${ctx }/images/big-add.png"></a>
+                                                    <a href="###" class="addMemu"><img alt="add" src="${ctx }/images/big-add.png"></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -152,7 +152,7 @@
             $('.chart').easyPieChart({animate: 1000});
         });
         $(document).ready(function(){
-        	$(".addSubMenu").click(function(){
+        	$(".addSubMenu,.addMenu").click(function(){
         		var d = dialog({
         		    title:'添加子菜单',
         		    width:550,
@@ -165,6 +165,7 @@
     				data:{pid:pid},
     				method:"GET",
         		    success: function (data) {
+        		    	alert(data);
         		        d.content(data);
         		    },
         		    cache: false
