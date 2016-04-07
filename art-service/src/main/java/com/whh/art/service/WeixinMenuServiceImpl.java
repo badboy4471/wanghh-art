@@ -109,7 +109,7 @@ public class WeixinMenuServiceImpl implements IWeixinService {
 			// 循环获取二级菜单
 			List<WeixinMenuModel> sub_menus = weixinMenuMapper
 					.loadWeixinMenus(menu.getId());
-			menu.setSub_nemu(sub_menus);
+			menu.setSub_menu(sub_menus);
 		}
 		return roots;
 	}
@@ -148,8 +148,8 @@ public class WeixinMenuServiceImpl implements IWeixinService {
 				BeanUtils.copyProperties(button, model);
 				// 二级菜单
 				List<WeixinMenuBean> sub_buttons = new ArrayList<WeixinMenuBean>();
-				if (model.getSub_nemu() != null) {
-					for (WeixinMenuModel sub_menu : model.getSub_nemu()) {
+				if (model.getSub_menu() != null) {
+					for (WeixinMenuModel sub_menu : model.getSub_menu()) {
 						WeixinMenuBean sub_button = new WeixinMenuBean();
 						try {
 							BeanUtils.copyProperties(sub_button, sub_menu);
@@ -196,7 +196,7 @@ public class WeixinMenuServiceImpl implements IWeixinService {
 		// 二级
 		List<WeixinMenuModel> subs = new ArrayList<WeixinMenuModel>();
 		subs.add(root1);
-		root2.setSub_nemu(subs);
+		root2.setSub_menu(subs);
 
 		tree.add(root2);
 

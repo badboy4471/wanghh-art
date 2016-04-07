@@ -11,7 +11,7 @@ public class WeixinMenuModel {
 	private String key;
 	private String url;
 	private String media_id;
-	private List<WeixinMenuModel> sub_nemu;
+	private List<WeixinMenuModel> sub_menu;
 
 	public String getType() {
 		return type;
@@ -57,13 +57,12 @@ public class WeixinMenuModel {
 		return pid;
 	}
 
-
-	public List<WeixinMenuModel> getSub_nemu() {
-		return sub_nemu;
+	public List<WeixinMenuModel> getSub_menu() {
+		return sub_menu;
 	}
 
-	public void setSub_nemu(List<WeixinMenuModel> sub_nemu) {
-		this.sub_nemu = sub_nemu;
+	public void setSub_menu(List<WeixinMenuModel> sub_menu) {
+		this.sub_menu = sub_menu;
 	}
 
 	public void setPid(int pid) {
