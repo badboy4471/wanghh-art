@@ -186,7 +186,7 @@
         		}
         	});
         	
-        	$(".flushtowx").click(function(){
+        	$("#flushtowx").click(function(){
         		if(confirm("确定更新菜单到微信？")){
         			$.ajax({
         				url:"${ctx}/admin/weixin/menu/flush.form",
@@ -203,7 +203,7 @@
         		}
         	});
         	
-        	$(".clearwxmenu").click(function(){
+        	$("#clearwxmenu").click(function(){
         		if(confirm("确定清空微信菜单？")){
         			var museumId = $(this).attr("data");
         			$.ajax({

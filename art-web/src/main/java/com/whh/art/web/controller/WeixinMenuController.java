@@ -24,6 +24,9 @@ public class WeixinMenuController {
 	@RequestMapping(value = "admin/weixin/menu/view", method = { RequestMethod.GET })
 	public String viewMenus(HttpSession session, ModelMap model) {
 		List<WeixinMenuModel> tree = weixinService.loadWeixinMenus();
+		
+		WeixinMenuModel blank = new WeixinMenuModel();
+		tree.add(blank);
 
 		model.put("menus", tree);
 
