@@ -42,7 +42,7 @@
 		$("#saveMenu").click(function() {
 			var name = $("#name").val();
 			var param = $("#param").val();
-			var pid = $("pid").val();
+			var pid = $("#pid").val();
 			$.ajax({
 				method : "POST",
 				url : "${ctx }/admin/weixin/menu/save.form",
