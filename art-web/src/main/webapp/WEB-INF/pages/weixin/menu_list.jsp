@@ -158,8 +158,11 @@
         		    width:550,
         			height:260
         		});
+        		var pid = $(this).attr("pid");
         		$.ajax({
         		    url: "${ctx}/admin/weixin/submenu/add.form",
+        		    dataType:"json",
+    				data:{pid:pid},
         		    success: function (data) {
         		        d.content(data);
         		    },
@@ -170,11 +173,11 @@
         	
         	$(".delSubMenu").click(function(){
         		if(confirm("删除微信菜单？")){
-        			var museumId = $(this).attr("data");
+        			var id = $(this).attr("id");
         			$.ajax({
         				url:"${ctx}/admin/weixin/menu/delete.form",
         				dataType:"json",
-        				data:{museumId:museumId},
+        				data:{id:id},
         				method:"POST",
         				success:function(data){
         					alert(data.message);

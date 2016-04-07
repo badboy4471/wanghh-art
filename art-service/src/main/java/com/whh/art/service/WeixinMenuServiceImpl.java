@@ -43,7 +43,7 @@ public class WeixinMenuServiceImpl implements IWeixinService {
 					+ "?access_token=" + token.getAccess_token());
 			try {
 				String json = this.weixinMenuJsonBuilder(tree);
-				httppost.setEntity(new StringEntity(json));
+				httppost.setEntity(new StringEntity(json,"UTF-8"));
 				HttpResponse response = httpClient.execute(httppost);
 				HttpEntity entity = response.getEntity();
 				String postResult = EntityUtils.toString(entity, "UTF-8");

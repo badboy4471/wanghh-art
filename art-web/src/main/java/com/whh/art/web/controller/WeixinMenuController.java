@@ -47,7 +47,7 @@ public class WeixinMenuController {
 		return "weixin/menu_add";
 	}
 
-	@RequestMapping(value = "admin/weixin/menu/save", method = { RequestMethod.GET })
+	@RequestMapping(value = "admin/weixin/menu/save", method = { RequestMethod.POST })
 	public @ResponseBody
 	Result menuSave(@RequestParam("pid") int pid,
 			@RequestParam("name") String name,
