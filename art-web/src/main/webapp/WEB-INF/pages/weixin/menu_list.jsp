@@ -1,5 +1,5 @@
 <%@ page language="java"  isELIgnored="false" pageEncoding="UTF-8"%>
-<%@ include file="inc/head.jsp" %>
+<%@ include file="../inc/head.jsp" %>
 <!DOCTYPE html>
 <html class="no-js">
     
