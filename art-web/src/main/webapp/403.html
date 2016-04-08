@@ -14,14 +14,16 @@
     <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
   <body id="login">
-    <div class="container">
+    <div class="container form-signin" style="max-width:450px">
+    	
         <h2 class="form-signin-heading">你没有权限访问这个功能！</h2>
         <div id="userNameDiv">
-        请选择一个更高权限的用户名登录，或者联系系统管理员！ -- <a href="login.html">登录</a>
+        	请选择一个更高权限的用户名登录  <a href="login.html">登录</a>
         </div>
         <div id="passwordDiv">
-        <a href="javascript:history.go(-1)">返回上一页</a>
+        	<a href="mailto:dreamdu@163.com?subject=权限不够！">联系系统管理员！</a>
         </div>
+        <button onclick="history.go(-1)" class="btn btn-large btn-primary" type="button">返回上一页</button>
     </div> <!-- /container -->
     <script src="vendors/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
