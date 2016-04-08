@@ -114,9 +114,12 @@
 	
 	<select id="getAdminRole" parameterType="int" resultType="SystemRoleModel">
 		select
-			roke_key,memo 
+			sr.id,sr.role_key,sr.memo 
 		from 
-			admin_role
-		where admin_id = #{id}
+			admin_role ar,system_role sr
+		where 
+			ar.role_key = sr.role_key
+		and
+			ar.admin_id = #{id}
 	</select>
 </mapper>
