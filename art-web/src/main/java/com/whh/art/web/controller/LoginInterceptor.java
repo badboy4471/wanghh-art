@@ -65,7 +65,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				Set<SystemActionModel> actions = (Set)rights;
 				boolean hasRight = this.hasRight(admin.getId(), uri, actions);
 				if (!hasRight){
-					PrintWriter out = response.getWriter();
+					/*PrintWriter out = response.getWriter();
 					StringBuilder builder = new StringBuilder();
 					builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");
 					builder.append("alert(\"你没有权限访问该功能,请更换有更高权限的账号进行登录！\");");
@@ -74,7 +74,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					//builder.append("/login.html\";");
 					builder.append("</script>");
 					out.print(builder.toString());
-					out.close();
+					out.close();*/
+					response.sendRedirect(request.getContextPath()+"/403.html");
 					return false;
 				}
 			}
