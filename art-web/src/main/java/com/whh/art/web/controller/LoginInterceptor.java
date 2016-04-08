@@ -69,9 +69,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					StringBuilder builder = new StringBuilder();
 					builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");
 					builder.append("alert(\"你没有权限访问该功能,请更换有更高权限的账号进行登录！\");");
-					builder.append("window.top.location.href=\"");
-					builder.append(request.getContextPath());
-					builder.append("/login.html\";</script>");
+					//builder.append("window.top.location.href=\"");
+					//builder.append(request.getContextPath());
+					//builder.append("/login.html\";");
+					builder.append("</script>");
 					out.print(builder.toString());
 					out.close();
 					return false;
