@@ -1,10 +1,18 @@
 package com.whh.art.service;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.whh.art.dao.mapper.AdminMapper;
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.SearchModel;
+import com.whh.art.dao.model.SystemActionModel;
+import com.whh.art.dao.model.SystemRoleModel;
 import com.whh.art.dao.model.WxUserModel;
 
 public class AdminServiceImpl implements IAdminService {
@@ -32,7 +40,7 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public void insertUser(WxUserModel user) {
 		WxUserModel u = adminMapper.getUser(user.getOpenId());
-		if (u == null){
+		if (u == null) {
 			adminMapper.insertUser(user);
 		}
 	}
@@ -40,7 +48,7 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public void deleteUser(String openid) {
 		adminMapper.deleteUser(openid);
-		
+
 	}
 
 	@Override
@@ -56,6 +64,20 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public void updateAdmin(AdminModel admin) {
 		adminMapper.updateAdmin(admin);
+	}
+
+	@Override
+	public Set<SystemActionModel> loadSystemActions(int adminId) {
+		Set<SystemActionModel> actions = new HashSet<SystemActionModel>();
+		List<SystemRoleModel> roles = adminMapper.getAdminRole(adminId);
+		if (roles != null) {
+			for (SystemRoleModel role : roles) {
+				List<SystemActionModel> actions1 = adminMapper
+						.loadRoleRight(role.getRole_key());
+				actions.addAll(actions1);
+			}
+		}
+		return actions;
 	}
 
 }

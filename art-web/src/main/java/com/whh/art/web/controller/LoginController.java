@@ -3,6 +3,7 @@ package com.whh.art.web.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.MuseumModel;
+import com.whh.art.dao.model.SystemActionModel;
 import com.whh.art.service.IAdminService;
 import com.whh.art.service.IArtService;
 import com.whh.art.web.form.MuseumForm;
@@ -28,6 +30,7 @@ import com.whh.art.web.form.Result;
 public class LoginController {
 
 	public static String SESSION_KEY = "__session_user__";
+	public static String USER_RIGHT_KEY = "__user_right_key__";
 
 	@Resource
 	IAdminService adminService;
@@ -45,8 +48,9 @@ public class LoginController {
 
 		if (admin != null) {
 			result.setData(admin);
-
 			request.getSession().setAttribute(SESSION_KEY, admin);
+			Set<SystemActionModel> actions = adminService.loadSystemActions(admin.getId());
+			request.getSession().setAttribute(USER_RIGHT_KEY, actions);
 
 		} else {
 			result.setCode(404);

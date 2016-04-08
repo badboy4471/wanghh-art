@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.SearchModel;
+import com.whh.art.dao.model.SystemActionModel;
+import com.whh.art.dao.model.SystemRoleModel;
 import com.whh.art.dao.model.WxUserModel;
 
 public interface AdminMapper {
@@ -25,5 +27,19 @@ public interface AdminMapper {
 	int countUsers(SearchModel search);
 	
 	void deleteUser(String openid);
+	
+	/**
+	 * 获取角色的权限
+	 * @param roleKey
+	 * @return
+	 */
+	List<SystemActionModel> loadRoleRight(String roleKey);
+	
+	/**
+	 * 获取系统用户的角色列表
+	 * @param adminId
+	 * @return
+	 */
+	List<SystemRoleModel> getAdminRole(int adminId);
 
 }

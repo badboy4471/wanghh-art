@@ -99,4 +99,24 @@
 			</if>
 		</where>
 	</select>
+	
+	
+	<select id="loadRoleRight" parameterType="String" resultType="SystemActionModel">
+		select 
+			a.id,a.action,a.type,a.action_key,a.memo 
+		from 
+			system_action a,system_role_action ra 
+		where 
+			a.action_key = ra.action_key 
+		and 
+			ra.role_key = #{role_key}
+	</select>
+	
+	<select id="getAdminRole" parameterType="int" resultType="SystemRoleModel">
+		select
+			id,roke_key,memo 
+		from 
+			admin_role
+		where admin_id = #{id}
+	</select>
 </mapper>
