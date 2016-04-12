@@ -61,7 +61,7 @@
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left"><a href="###" class="delMenu" id="${menu.id }"><i class="icon-remove"></i></a> ${menu.name } - ${menu.key }${menu.url }</div>
-                            	<div class="pull-right"><span class="badge badge-info addSubMenu" pid="${menu.id }">添加子菜单</span>
+                            	<div class="pull-right"><span class="badge badge-info addSubMenu" pid="${menu.id }">添加子菜单</span></div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
