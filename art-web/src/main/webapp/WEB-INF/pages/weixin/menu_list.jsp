@@ -54,87 +54,75 @@
                             </div>
                              -->
                         </div>
+                    <c:forEach var="menu" items="${menus }" varStatus="midx">
+                    <c:if test="${ not empty menu.name }">
                     <div class="row-fluid">
                         <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left"><a href="###" class="delMenu" id="${menu.id }"><i class="icon-remove"></i></a> ${menu.name } - ${menu.key }${menu.url }</div>
+                            	<div class="pull-right"><span class="badge badge-info addSubMenu" pid="${menu.id }">添加子菜单</span>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+  									<table class="table">
+						              <thead>
+						                <tr>
+						                  <th>#</th>
+                                          <th>菜单名</th>
+                                          <th>菜单类型</th>
+                                          <th>KEY</th>
+                                          <th></th>
+						                </tr>
+						              </thead>
+						              <tbody>
+						              	<c:forEach items="${menu.sub_menu }" var="sub_menu" varStatus="idx">
+                                        <tr>
+                                           <td>${idx.count }</td>
+                                           <td>${sub_menu.name }</td>
+                                           <td>${sub_menu.type }</td>
+                                           <td>${sub_menu.key }${sub_menu.url }</td>
+                                           <td><a class="delSubMenu" id="${sub_menu.id }" href="###">删除</a></td>
+                                        </tr>
+                                        </c:forEach>
+						              </tbody>
+						            </table>
+                                </div>
+                            </div>
+                        </div>
                         <!-- /block -->
                     </div>
+                    </c:if>
+                    <c:if test="${empty menu.name}">
                     <div class="row-fluid">
-                        <c:forEach var="menu" items="${menus }" varStatus="midx">
-                        <c:if test="${ not empty menu.name }">
-                        <div class="span6">
-                            <!-- block -->
-                            <div class="block">
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left"><a href="###" class="delMenu" id="${menu.id }"><i class="icon-remove"></i></a> ${menu.name } - ${menu.key }${menu.url }</div>
-                                    <div class="pull-right"><span class="badge badge-info addSubMenu" pid="${menu.id }">添加子菜单</span>
-
-                                    </div>
-                                </div>
-                                <div class="block-content collapse in">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>菜单名</th>
-                                                <th>菜单类型</th>
-                                                <th>KEY</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${menu.sub_menu }" var="sub_menu" varStatus="idx">
-                                            <tr>
-                                                <td>${idx.count }</td>
-                                                <td>${sub_menu.name }</td>
-                                                <td>${sub_menu.type }</td>
-                                                <td>${sub_menu.key }${sub_menu.url }</td>
-                                                <td><a class="delSubMenu" id="${sub_menu.id }" href="###">删除</a></td>
-                                            </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">添加主菜单</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+  									<table class="table">
+						              <thead>
+						                <tr>
+						                  <th></th>
+						                </tr>
+						              </thead>
+						              <tbody>
+						              	<tr>
+                                        	<td style="border-top: none;text-align: center;">
+                                  				<a href="###" pid="0" class="addMenu"><img alt="add" src="${ctx }/images/big-add.png"></a>
+                                      		</td>
+                                        </tr>
+						              </tbody>
+						            </table>
                                 </div>
                             </div>
-                            <!-- /block -->
                         </div>
-                        </c:if>
-                        <c:if test="${empty menu.name}">
-                            <div class="span6">
-                            <!-- block -->
-                            <div class="block">
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">添加</div>
-                                </div>
-                                <div class="block-content collapse in">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td style="border-top: none;text-align: center;">
-                                                    <a href="###" pid="0" class="addMenu"><img alt="add" src="${ctx }/images/big-add.png"></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- /block -->
-                        </div>
-                        </c:if>
-                        <c:if test="${midx.count%2 == 0 }">
-                            </div>
-                            <div class="row-fluid">
-                        </c:if>
-                        
-                        
-                        </c:forEach>
+                        <!-- /block -->
                     </div>
-                    
-                    
+                    </c:if>
+                    </c:forEach>
                 </div>
             </div>
             <hr>
@@ -147,10 +135,6 @@
         <script src="${ctx }/assets/scripts.js"></script>
         <script src="${ctx }/vendors/artdialog/dialog-min.js"></script>
         <script>
-        $(function() {
-            // Easy pie charts
-            $('.chart').easyPieChart({animate: 1000});
-        });
         $(document).ready(function(){
         	$(".addSubMenu,.addMenu").click(function(){
         		var d = dialog({
