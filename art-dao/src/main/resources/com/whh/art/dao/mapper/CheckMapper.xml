@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.whh.art.dao.mapper.CheckMapper">
+
+	<insert id="addReceipt" useGeneratedKeys="true" keyProperty="id"  parameterType="ReceiptModel">
+		insert into 
+			receipt
+			(memo,createUid,type)
+		values
+			(#{memo},#{createUid},#{type})
+	</insert>
+
+	<insert id="addCheckNode" useGeneratedKeys="true" keyProperty="id" parameterType="CheckNodeModel">
+		insert into
+			check_process
+			(receiptId,checkUid,parentId)
+		values
+			(#{receiptId},#{checkUid},#{parentId})
+	</insert>
+	
+	<update id="upadteReceipt" parameterType="ReceiptModel">
+		update 
+			receipt
+		<set>
+			lastUpdateTime = #{lastUpdateTime},
+			status = #{status},
+			checkMemo = #{checkMemo}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateCheckProcess" parameterType="CheckNodeModel">
+		update 
+			check_process
+		<set>
+			<if test="checkTime != null and checkTime != ''">
+				checkTime = #{checkTime},
+			</if>
+			status = #{status},
+			checkMemo = #{checkMemo}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<select id="getReceipt" parameterType="int" resultType="ReceiptModel">
+		select 
+			id,memo,createTime,createUid,status,checkMemo,type,lastUpdateTime
+		from 
+			receipt
+		where id = #{id}
+	</select>
+	
+	<select id="getCheckNode" parameterType="int" resultType="CheckNodeModel">
+		select 
+			id,receiptId,checkUid,checkTime,status,checkMemo,parentId
+		from
+			check_process
+		where id = #{id}
+	</select>
+	
+	
+	<select id="getCheckProcess" parameterType="int" resultType="CheckNodeModel">
+		select 
+			id,receiptId,checkUid,checkTime,status,checkMemo,parentId
+		from
+			check_process
+		where receiptId = #{receiptId}
+	</select>
+	
+	<select id="loadReceipts" parameterType="map" resultType="ReceiptModel">
+		select 
+			id,memo,createTime,createUid,status,checkMemo,type,lastUpdateTime
+		from 
+			receipt
+		where 
+			uid = #{uid}
+		and 
+			status = #{search.status}
+		order by
+			id desc
+		limit #{search.start},#{search.limit}
+	</select>
+	
+	<select id="countReceipts" parameterType="map" resultType="int">
+		select 
+			count(*)
+		from 
+			receipt
+		where 
+			uid = #{uid}
+		and 
+			status = #{search.status}
+	</select>
+	
+</mapper>

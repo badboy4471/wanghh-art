@@ -130,4 +130,8 @@
 	<bean id="weixinMenuMapper" parent="baseMapper" >
 		<property name="mapperInterface" value="com.whh.art.dao.mapper.WeixinMenuMapper" />
 	</bean>
+	
+	<bean id="checkMapper" parent="baseMapper" >
+		<property name="mapperInterface" value="com.whh.art.dao.mapper.CheckMapper" />
+	</bean>
 </beans>
