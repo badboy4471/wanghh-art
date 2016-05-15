@@ -31,9 +31,37 @@ public class CheckServiceImpl implements ICheckService {
 
 	}
 
+	@Override
+	public void addReceipt(ReceiptModel receipt) {
+		try {
+			checkMapper.addReceipt(receipt);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void submitCheck(int receiptId, int[] uids) {
+		try {
+			int parentId = 0;
+			for (int i = 0; i < uids.length; i++) {
+				CheckNodeModel checkNode = new CheckNodeModel();
+				checkNode.setCheckUid(uids[i]);
+				checkNode.setParentId(parentId);
+				checkNode.setReceiptId(receiptId);
+				checkMapper.addCheckNode(checkNode);
+				if (checkNode.getId() > 0) {
+					parentId = checkNode.getId();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void setCheckMapper(CheckMapper checkMapper) {
 		this.checkMapper = checkMapper;
 	}
 
-	
 }

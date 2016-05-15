@@ -28,31 +28,10 @@
                 <!--/span-->
                 <div class="span9" id="content">
                     <div class="row-fluid">
-                        <div class="alert alert-success">
-                            <button type="button" id="flushtowx" data-dismiss="alert">同步到微信</button>
-                            <h4>本地JSON</h4>
-                            ${localJson }</div>
-                        <div class="alert alert-success">
-                            <button type="button" id="clearwxmenu" data-dismiss="alert">删除微信菜单</button>
-                            <h4>远端JSON</h4>
-                            ${remoteJson }</div>
-                            <!-- 
-                            <div class="navbar">
-                                <div class="navbar-inner">
-                                    <ul class="breadcrumb">
-                                        <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                        <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                        <li>
-                                            <a href="#">Dashboard</a> <span class="divider">/</span>    
-                                        </li>
-                                        <li>
-                                            <a href="#">Settings</a> <span class="divider">/</span> 
-                                        </li>
-                                        <li class="active">Tools</li>
-                                    </ul>
-                                </div>
-                            </div>
-                             -->
+                        <div style="word-break:break-all;" class="alert alert-success">
+                            <button type="button" id="flushtowx" data-dismiss="alert">同步到微信</button>  <button type="button" id="clearwxmenu" data-dismiss="alert">删除微信菜单</button>
+                        </div>
+                  
                         </div>
                     <c:forEach var="menu" items="${menus }" varStatus="midx">
                     <c:if test="${ not empty menu.name }">
@@ -81,7 +60,7 @@
                                            <td>${idx.count }</td>
                                            <td>${sub_menu.name }</td>
                                            <td>${sub_menu.type }</td>
-                                           <td>${sub_menu.key }${sub_menu.url }</td>
+                                           <td style="word-break:break-all;width:50%">${sub_menu.key }${sub_menu.url }</td>
                                            <td><a class="delSubMenu" id="${sub_menu.id }" href="###">删除</a></td>
                                         </tr>
                                         </c:forEach>

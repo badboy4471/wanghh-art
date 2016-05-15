@@ -8,6 +8,9 @@
 		<li <c:if test="${local == 'art.add' }">class="active"</c:if>><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
 				添加作品</a></li>
 		
+		<li <c:if test="${local == 'receipt.add' }">class="active"</c:if>><a href="${ctx }/admin/receipt/add.form"><i class="icon-chevron-right"></i>
+				创建审核单</a></li>
+		
 		<li <c:if test="${local == 'user.list' }">class="active"</c:if>><a href="${ctx }/admin/wx/user/list.form"><i class="icon-chevron-right"></i>
 				用户列表</a></li>
 				
