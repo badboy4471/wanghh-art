@@ -38,7 +38,7 @@
                             <div class="block-content collapse in">
                                 <div class="span12">
 					<!-- BEGIN FORM-->
-					<form action="${ctx }/admin/receipt/save.form" id="form_sample_1" class="form-horizontal" method="post">
+					<form action="${ctx }/admin/receipt/save.form" id="receipt" class="form-horizontal" method="post">
 						<fieldset>
 							<div class="alert alert-error hide">
 								<button class="close" data-dismiss="alert"></button>
@@ -64,7 +64,7 @@
   								</div>
   							</div>
   							<div class="form-actions">
-  								<button type="submit" class="btn btn-primary">提交</button>
+  								<button type="button" class=" submit btn btn-primary">提交</button>
   								<button type="button" class="btn">重置</button>
   							</div>
 						</fieldset>
@@ -91,5 +91,20 @@
 		<script type="text/javascript" src="${ctx }/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
 		<script src="${ctx }/assets/form-validation.js"></script>
 		<script src="${ctx }/assets/scripts.js"></script>
+		
+		<script type="text/javascript">
+			$(".submit").click({
+				var form1 = $("#receipt");
+				$.ajax({
+                    type:"POST",
+                    url:"/admin/receipt/save.form",
+                    data:form1.serialize(),
+                    success: function(data){
+                    	alert("["+data.code+"]:"+data.message);
+                    }
+                });
+				
+			});
+		</script>
     </body>
 </html>
