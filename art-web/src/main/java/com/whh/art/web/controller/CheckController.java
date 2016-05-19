@@ -24,7 +24,7 @@ public class CheckController extends BaseController {
 
 	@RequestMapping(value = "admin/receipt/add", method = { RequestMethod.GET })
 	public String viewReceiptList() {
-		return "check/receipt_add.jsp";
+		return "check/receipt_add";
 	}
 
 	@RequestMapping(value = "admin/receipt/save", method = { RequestMethod.POST })
