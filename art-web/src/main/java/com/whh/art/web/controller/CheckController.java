@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.ReceiptModel.ReceiptStatus;
 import com.whh.art.dao.model.ReceiptModel.ReceiptType;
@@ -31,7 +32,7 @@ public class CheckController extends BaseController {
 	public @ResponseBody
 	Result saveReceipt(@ModelAttribute ReceiptSubmit receipt,
 			HttpSession session) {
-		int uid = (Integer) session.getAttribute(LoginController.SESSION_KEY);
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
 		ReceiptModel model = new ReceiptModel();
 		model.setCreateUid(uid);
 		model.setMemo(receipt.getMemo());
