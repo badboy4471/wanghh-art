@@ -60,7 +60,7 @@
   							<div class="control-group">
   								<label class="control-label">描述</label>
   								<div class="controls">
-  									<textarea rows="3" cols="120" name="artDesc">${receipt.memo }</textarea>
+  									<textarea rows="3" cols="120" name="memo">${receipt.memo }</textarea>
   								</div>
   							</div>
   							<div class="form-actions">
