@@ -1,5 +1,5 @@
 <%@ page language="java"  isELIgnored="false" pageEncoding="UTF-8"%>
-<%@ include file="inc/head.jsp" %>
+<%@ include file="../inc/head.jsp" %>
 <!DOCTYPE html>
 <html>
     
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <hr>
-            <%@ include file="inc/footer.jsp" %>
+            <%@ include file="../inc/footer.jsp" %>
         </div>
         <!--/.fluid-container-->
         <link href="${ctx }/vendors/uniform.default.css" rel="stylesheet" media="screen">
