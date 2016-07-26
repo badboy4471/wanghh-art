@@ -39,7 +39,7 @@
                             <div class="block-content collapse in">
                                 <div class="span12">
 					<!-- BEGIN FORM-->
-					<form action="${ctx }/admin/art/save.form" id="form_sample_1" class="form-horizontal" method="post">
+					<form action="${ctx }/admin/check/detail/save.form" id="form_sample_1" class="form-horizontal" method="post">
 						<fieldset>
 							<div class="alert alert-error hide">
 								<button class="close" data-dismiss="alert"></button>
@@ -53,6 +53,33 @@
 							<c:if test="${not empty art.id }">
 								<input type="hidden" name="id" id="id" value="${art.id }"/>
 							</c:if>
+							<div class="control-group">
+                                <label class="control-label" for="fileInput">审批单</label>
+                                <div class="controls">
+                                	<select id="receipt" >
+                                		<c:forEach items="${receipts}" var="receipt">
+                                			<option value="${ receipt.id}" <c:if test="${receipt.id == receiptId }">selected="selected" </c:if>>${receipt.memo }</option>
+                                		</c:forEach>
+                                	</select>
+                            	</div>
+                            </div>
+                            <!-- 1、购买 2、借入 3、还回 4、出售 5、借出 6、还出 -->
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="fileInput">原因</label>
+                                <div class="controls">
+                                	<select id="receipt">
+                                		<option value="1">购买</option>
+                                		<option value="2">借入</option>
+                                		<option value="3">还回</option>
+                                		<option value="4">出售</option>
+                                		<option value="5">借出</option>
+                                		<option value="6">还出</option>
+                                	</select>
+                            	</div>
+                            </div>
+                            
+                            
 							<div class="control-group">
                                 <label class="control-label" for="fileInput">图片*</label>
                                 <div class="controls">

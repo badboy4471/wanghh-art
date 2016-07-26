@@ -1,8 +1,11 @@
 package com.whh.art.service;
 
+import java.util.List;
+
 import com.whh.art.dao.mapper.CheckMapper;
 import com.whh.art.dao.model.CheckNodeModel;
 import com.whh.art.dao.model.ReceiptModel;
+import com.whh.art.dao.model.SearchModel;
 
 public class CheckServiceImpl implements ICheckService {
 
@@ -59,9 +62,17 @@ public class CheckServiceImpl implements ICheckService {
 		}
 
 	}
+	@Override
+	public List loadMyReceipt(int uid, SearchModel search) {
+		
+		return checkMapper.loadReceipts(uid, search);
+	}
+	
 
 	public void setCheckMapper(CheckMapper checkMapper) {
 		this.checkMapper = checkMapper;
 	}
+
+	
 
 }

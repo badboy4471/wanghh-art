@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.ArtOutModel;
+import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.SearchModel;
 import com.whh.art.service.IArtService;
+import com.whh.art.service.ICheckService;
 import com.whh.art.service.IOptLogService;
 import com.whh.art.utils.ArtErrorCode;
 import com.whh.art.utils.ArtUtils;
@@ -37,9 +40,29 @@ public class ArtController extends BaseController {
 	IArtService artService;
 	@Resource
 	IOptLogService optLogService;
+	@Resource
+	ICheckService checkService;
 
 	@RequestMapping(value = "admin/art/add", method = { RequestMethod.GET })
-	public String viewArtAdd(HttpSession session) {
+	public String viewArtAdd(
+			HttpSession session,
+			ModelMap model,
+			@RequestParam(value = "receiptId", required = false, defaultValue = "0") int receiptId) {
+		AdminModel user = (AdminModel) session
+				.getAttribute(LoginController.SESSION_KEY);
+	
+		SearchModel search = new SearchModel();
+		search.setLimit(0);
+		search.setStatus(0);//等待提交审核
+		List<ReceiptModel> receipts = checkService.loadMyReceipt(user.getId(), search);
+		
+		if (receipts == null || receipts.size() == 0){
+			return "404";
+		}
+		
+		model.put("receipts", receipts);
+		model.put("receiptId", receiptId);
+		
 		return "add_art";
 	}
 

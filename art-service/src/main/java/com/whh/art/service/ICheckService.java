@@ -1,6 +1,9 @@
 package com.whh.art.service;
 
+import java.util.List;
+
 import com.whh.art.dao.model.ReceiptModel;
+import com.whh.art.dao.model.SearchModel;
 
 public interface ICheckService {
 	
@@ -22,4 +25,12 @@ public interface ICheckService {
 	 * @param uids
 	 */
 	void submitCheck(int receiptId,int[] uids);
+	
+	/**
+	 * 获取我的审核单
+	 * @param uid
+	 * @param status
+	 * @return
+	 */
+	List loadMyReceipt(int uid,SearchModel search);
 }
