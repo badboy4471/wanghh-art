@@ -75,7 +75,7 @@
 		from 
 			receipt
 		where 
-			uid = #{uid}
+			createUid = #{uid}
 		and 
 			status = #{search.status}
 		order by
