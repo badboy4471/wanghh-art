@@ -80,7 +80,9 @@
 			status = #{search.status}
 		order by
 			id desc
-		limit #{search.start},#{search.limit}
+		<if test="search.limit > 0">
+			limit #{search.start},#{search.limit}
+		</if>
 	</select>
 	
 	<select id="countReceipts" parameterType="map" resultType="int">
