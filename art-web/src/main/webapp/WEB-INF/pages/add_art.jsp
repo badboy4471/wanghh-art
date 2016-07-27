@@ -56,7 +56,7 @@
 							<div class="control-group">
                                 <label class="control-label" for="fileInput">审批单</label>
                                 <div class="controls">
-                                	<select id="receipt" >
+                                	<select name="receiptId" id="receipt" >
                                 		<c:forEach items="${receipts}" var="receipt">
                                 			<option value="${ receipt.id}" <c:if test="${receipt.id == receiptId }">selected="selected" </c:if>>${receipt.memo }</option>
                                 		</c:forEach>
@@ -68,7 +68,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="fileInput">原因</label>
                                 <div class="controls">
-                                	<select id="receipt">
+                                	<select name="come" id="receipt">
                                 		<option value="1">购买</option>
                                 		<option value="2">借入</option>
                                 		<option value="3">还回</option>
