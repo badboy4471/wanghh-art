@@ -36,13 +36,13 @@
 <script>
 	$(document).ready(function() {
 		
-		$(".allUser"),click(function(){
+		$(".allUser").click(function(){
 			var value = $(this).val();
 			var text = $(this).text();
 			alert(value + text);
 			var isSelected = $(this).attr("checked");
 			if (isSelected){
-				$("#selected").append("<input class='allUser' name='checkUser' id='"+value+"' type='checkbox' value='"+value+"'>"+text);
+				$("#selected").append("<input class='selectedUser' name='checkUser' id='"+value+"' type='checkbox' value='"+value+"'>"+text);
 			}else{
 				$("#"+value).remove();
 			}
