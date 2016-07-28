@@ -130,7 +130,7 @@
 				    "aoColumns": [
 						{ "mData": 'id'},
 						{ "mData": 'memo'},
-						{ "mData": 'createTime'，
+						{ "mData": 'createTime',
 						  "mRender" : function(data,type,row){
 							  return Date(parseInt(data)).toLocaleString().replace(/:\d{1,2}$/,' ');
 						  }
