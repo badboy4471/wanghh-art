@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.whh.art.dao.mapper.CheckMapper;
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.ArtOutModel;
+import com.whh.art.dao.model.CheckDetailModel;
 import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.SearchModel;
 import com.whh.art.service.IArtService;
@@ -236,7 +238,17 @@ public class ArtController extends BaseController {
 		ArtModel art = artService.getArt(artNumber);
 
 		if (art == null) {
-			return true;
+			
+			CheckDetailModel model = checkService.getCheckDetail(artNumber);
+			if (model == null){
+				return true;
+			}else{
+				if (model.getId() != id) {
+					return false;
+				} else {
+					return true;
+				}
+			}
 		} else {
 			if (art.getId() != id) {
 				return false;

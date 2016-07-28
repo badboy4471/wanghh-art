@@ -106,4 +106,13 @@
 			#{type},#{come},#{createUid},#{receiptId})
 	</insert>
 	
+	
+	<select id="getCheckDetail" parameterType="String" resultType="CheckDetailModel">
+		select
+			id,artName,artNumber, artInnerNumber,artImage,artAudio,artYear,artAuthor,artSize,artMaterial,artCert,artDesc
+		from 
+			check_detail 
+		where
+			artNumber = #{artNumber}
+	</select>
 </mapper>

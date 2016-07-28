@@ -86,6 +86,11 @@ public class CheckServiceImpl implements ICheckService {
 		
 	}
 
+	@Override
+	public CheckDetailModel getCheckDetail(String artNumber) {
+		return checkMapper.getCheckDetail(artNumber);
+	}
+
 	
 
 }

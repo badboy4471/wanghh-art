@@ -73,4 +73,6 @@ public interface CheckMapper {
 	
 	int insertCheckDetail(CheckDetailModel detail);
 	
+	CheckDetailModel getCheckDetail(String artNumber);
+	
 }

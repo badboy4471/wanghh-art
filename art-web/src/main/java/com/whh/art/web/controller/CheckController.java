@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.AdminModel;
-import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.CheckDetailModel;
 import com.whh.art.dao.model.ReceiptModel;
-import com.whh.art.dao.model.SearchModel;
 import com.whh.art.dao.model.ReceiptModel.ReceiptStatus;
 import com.whh.art.dao.model.ReceiptModel.ReceiptType;
+import com.whh.art.dao.model.SearchModel;
 import com.whh.art.service.ICheckService;
 import com.whh.art.utils.ArtErrorCode;
 import com.whh.art.web.form.ArtSubmit;

@@ -36,4 +36,6 @@ public interface ICheckService {
 	List loadMyReceipt(int uid,SearchModel search);
 	
 	CheckDetailModel insertCheckDetail(CheckDetailModel model);
+	
+	CheckDetailModel getCheckDetail(String artNumber);
 }
