@@ -97,10 +97,10 @@ public class CheckController extends BaseController {
 		try {
 			limit = Integer.parseInt((String) paramMap.get("iDisplayLength"));
 		} catch (Exception e) {
-
+			
 		}
 		search.setStart(start);
-		search.setLimit(0);//全部取出
+		search.setLimit(limit);
 		List<CheckDetailModel> checkDetails = this.checkService.searchCheckdetail(search);
 		int count = checkService.countCheckDetail(search);
 		result.setAaData(checkDetails);
