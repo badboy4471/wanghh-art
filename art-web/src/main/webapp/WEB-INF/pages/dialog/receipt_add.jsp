@@ -33,25 +33,5 @@
 	</div>
 </div>
 <script>
-	$(document).ready(function() {
-		$("#saveReceipt").click(function() {
-			var memo = $("#memo").val();
-			var type = $("#type").val();
-			$.ajax({
-				method : "POST",
-				url : "${ctx }/admin/receipt/save.form",
-				dataType : "json",
-				data : {
-					memo : memo,
-					type : type
-				},
-				success : function(data) {
-					alert(data.message);
-					if (data.code == 200){
-						dialog.getCurrent().close().remove();
-					}
-				}
-			});
-		});
-	});
+	
 </script>
