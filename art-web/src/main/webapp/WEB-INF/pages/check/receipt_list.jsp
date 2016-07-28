@@ -240,13 +240,12 @@
 		});
 			
 			
+		search();
+			
+		$("body").on("click", '#searchBtn', function(){
 			search();
+		});
 			
-			$("body").on("click", '#searchBtn', function(){
-				search();
-			});
-			
-		}) 
 		</script>
     </body>
 </html>
