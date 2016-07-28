@@ -66,7 +66,7 @@ public class CheckController extends BaseController {
 		SearchModel search = new SearchModel();
 		
 		String statusStr = (String)paramMap.get("status");
-		int status = 0;
+		Integer status = null;
 		if (StringUtils.isNotBlank(statusStr)){
 			try{
 				status = Integer.parseInt(statusStr);
