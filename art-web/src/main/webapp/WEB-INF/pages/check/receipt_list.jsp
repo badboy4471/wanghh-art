@@ -130,8 +130,30 @@
 				    "aoColumns": [
 						{ "mData": 'id'},
 						{ "mData": 'memo'},
-						{ "mData": 'createTime'},
-						{ "mData": 'status' },
+						{ "mData": 'createTime'，
+						  "mRender" : function(data,type,row){
+							  return Date(parseInt(data)).toLocaleString().replace(/:\d{1,2}$/,' ');
+						  }
+						},
+						{ "mData": 'type',
+						  "mRender" : function(data,type,row){
+								return data == 1?'出库':'入库';
+						   }	
+						},
+						{ "mData": 'status',
+						  "mRender":function(data,type,row){
+							  	if (data == 0)
+							  		return "待提交审核";
+								if (data == 1)
+									return "审核中";
+								if (data == 2)
+									return "审核通过";
+								if (data == 3)
+									return "审核不通过";
+								
+								return "未知状态";
+							}
+						},
 						{ "mData": 'id'}
 					],
 					"fnServerData": retrieveData,           //获取数据的处理函数  
