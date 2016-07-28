@@ -161,7 +161,13 @@
 								return "未知状态";
 							}
 						},
-						{ "mData": 'id'}
+						{ "mData": 'id',
+						  "mRender" : function(data,type,row){
+							  var add = "<a href=\"${ctx}/admin/art/add.form?receiptId="+data+"\">添加</a>";
+							  var detail = "<a href=\"${ctx}/admin/art/add.form?receiptId="+data+"\">明细</a>";
+							  return add + " " + detail;
+						  }
+						}
 					],
 					"fnServerData": retrieveData,           //获取数据的处理函数  
 		            "bFilter": false,                       //不使用过滤功能  
