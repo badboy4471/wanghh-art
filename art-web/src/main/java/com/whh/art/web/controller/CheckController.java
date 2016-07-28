@@ -117,8 +117,10 @@ public class CheckController extends BaseController {
 	public @ResponseBody
 	Result saveArt(@ModelAttribute ArtSubmit artSubmit, HttpSession session) {
 		Result result = new Result(null);
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
 		CheckDetailModel checkDetail = new CheckDetailModel();
 		BeanUtils.copyProperties(artSubmit, checkDetail);
+		checkDetail.setCreateUid(uid);
 		if (artSubmit.getId() > 0){ //编辑
 			return result;
 		}else{

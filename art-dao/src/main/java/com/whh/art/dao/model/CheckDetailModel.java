@@ -5,7 +5,7 @@ public class CheckDetailModel extends ArtModel {
 	private int come;
 	private int type;
 	private int receiptId;
-	private int ceeateUid;
+	private int createUid;
 	
 	public int getCome() {
 		return come;
@@ -25,16 +25,17 @@ public class CheckDetailModel extends ArtModel {
 	public void setReceiptId(int receiptId) {
 		this.receiptId = receiptId;
 	}
-	public int getCeeateUid() {
-		return ceeateUid;
+	
+	public int getCreateUid() {
+		return createUid;
 	}
-	public void setCeeateUid(int ceeateUid) {
-		this.ceeateUid = ceeateUid;
+	public void setCreateUid(int createUid) {
+		this.createUid = createUid;
 	}
 	@Override
 	public String toString() {
 		return "CheckDetailModel [come=" + come + ", type=" + type
-				+ ", receiptId=" + receiptId + ", ceeateUid=" + ceeateUid + "]";
+				+ ", receiptId=" + receiptId + ", createUid=" + createUid + "]";
 	}
 	
 }
