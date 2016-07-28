@@ -63,7 +63,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			if (rights != null){
 				uri = uri.replaceAll(".form", "");
 				Set<SystemActionModel> actions = (Set)rights;
-				boolean hasRight = this.hasRight(admin.getId(), uri, actions);
+				boolean hasRight = this.hasRight(admin, uri, actions);
 				if (!hasRight){
 					/*PrintWriter out = response.getWriter();
 					StringBuilder builder = new StringBuilder();
@@ -86,7 +86,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	}
 	
 	
-	private boolean hasRight(int adminId, String action,Set<SystemActionModel> actions) {
+	private boolean hasRight(AdminModel admin, String action,Set<SystemActionModel> actions) {
+		if (admin.getId() == 1){
+			return true;
+		}
 		Map<String, String> rights = this.change2Map(actions);
 		return StringUtils.isNotEmpty(rights.get(action));
 	}

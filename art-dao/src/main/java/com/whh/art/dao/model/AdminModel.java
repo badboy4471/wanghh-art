@@ -8,6 +8,7 @@ public class AdminModel {
 	private String userName;
 	private String password;
 	private Date createTime;
+	private int roleId;
 	public int getId() {
 		return id;
 	}
@@ -31,6 +32,13 @@ public class AdminModel {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	
+	public int getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 	@Override
 	public String toString() {

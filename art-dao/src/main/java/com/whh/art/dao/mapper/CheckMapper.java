@@ -70,6 +70,4 @@ public interface CheckMapper {
 	 */
 	int countReceipts(@Param("uid")int uid,@Param("search") SearchModel search);
 	
-	
-
 }
