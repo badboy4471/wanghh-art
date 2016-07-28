@@ -41,7 +41,7 @@
                                  
                                    <div class="table-toolbar">
                                       <div class="btn-group">
-                                         <a href="${ctx }/admin/receipt/add.form"><button id="addReceipt" class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
+                                         <a href="###"><button id="addReceipt" class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
                                       </div>
                                       <div class="btn-group pull-right">
 										<p>
