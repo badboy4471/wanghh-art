@@ -30,5 +30,7 @@ public interface IAdminService {
 	 * @return
 	 */
 	public Set<SystemActionModel> loadSystemActions(int adminId);
+	
+	public List<AdminModel> loadAllAdmin();
 
 }

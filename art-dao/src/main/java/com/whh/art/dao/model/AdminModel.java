@@ -9,6 +9,7 @@ public class AdminModel {
 	private String password;
 	private Date createTime;
 	private int roleId;
+	private String nickName;
 	public int getId() {
 		return id;
 	}
@@ -39,6 +40,12 @@ public class AdminModel {
 	}
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	@Override
 	public String toString() {

@@ -80,4 +80,8 @@ public class AdminServiceImpl implements IAdminService {
 		return actions;
 	}
 
+	@Override
+	public List<AdminModel> loadAllAdmin(){
+		return adminMapper.loadAllAdmin();
+	}
 }

@@ -158,7 +158,8 @@
 						  "mRender" : function(data,type,row){
 							  var add = "<a href=\"${ctx}/admin/art/add.form?receiptId="+data+"\">添加</a>";
 							  var detail = "<a href=\"${ctx}/admin/check/detail/list/view.form?receiptId="+data+"\">明细</a>";
-							  return add + " " + detail;
+							  var submit = "<a href=\"###\"onClick=\"check_detail('"+data+"')\" >提交审核</a>";
+							  return add + " " + detail + "<br/>"+ submit;
 						  }
 						}
 					],
@@ -204,7 +205,22 @@
 			d.show();
 		}
 		
-	    
+		check_submit=function(id){
+			var d = dialog({
+			    title:"提交审核",
+			    width:500,
+			    height:500
+			});
+			$.ajax({
+			    url: "${ctx}/admin/check/submit/view.form?receiptId="+id,
+			    success: function (data) {
+			        d.content(data);
+			    },
+			    cache: false
+			});
+			d.show();
+		}
+		
 	    
 		del=function(id){
 			if(confirm("删除艺术品？")){

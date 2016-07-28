@@ -24,6 +24,7 @@ import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.ReceiptModel.ReceiptStatus;
 import com.whh.art.dao.model.ReceiptModel.ReceiptType;
 import com.whh.art.dao.model.SearchModel;
+import com.whh.art.service.IAdminService;
 import com.whh.art.service.ICheckService;
 import com.whh.art.utils.ArtErrorCode;
 import com.whh.art.web.form.ArtSubmit;
@@ -36,6 +37,8 @@ public class CheckController extends BaseController {
 
 	@Resource
 	ICheckService checkService;
+	@Resource
+	IAdminService adminService;
 
 	@RequestMapping(value = "admin/receipt/add", method = { RequestMethod.GET })
 	public String viewReceiptAdd() {
@@ -52,6 +55,16 @@ public class CheckController extends BaseController {
 			ModelMap model) {
 		model.put("receiptId",receiptId);
 		return "check/check_detail_list";
+	}
+	
+	@RequestMapping(value = "admin/check/submit/view", method = { RequestMethod.GET })
+	public String viewCheckSubmit(@RequestParam("receiptId") int receiptId,
+			ModelMap model) {
+		
+		List<AdminModel> admins = adminService.loadAllAdmin();
+		model.put("receiptId", receiptId);
+		model.put("admins", admins);
+		return "dialog/check_submit";
 	}
 	
 	

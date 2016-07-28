@@ -41,5 +41,7 @@ public interface AdminMapper {
 	 * @return
 	 */
 	List<SystemRoleModel> getAdminRole(int adminId);
+	
+	List<AdminModel> loadAllAdmin(); 
 
 }

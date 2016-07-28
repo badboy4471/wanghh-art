@@ -6,17 +6,25 @@
 
 	<select id="getAdmin" resultType="AdminModel" parameterType="String">
 		select
-			id,userName,password,createTime
+			id,userName,password,createTime,nickName
 		from 
 			admin 
 		where
 			userName = #{userName}
 	</select>
 
+	<!-- uid ！= 1 过滤系统管理员 -->
+	<select id="loadAllAdmin" resultType="AdminModel" parameterType="int">
+		select
+			id,userName,password,createTime,nickName
+		from 
+			admin 
+		where uid != 1
+	</select>
 
 	<select id="getAdminById" resultType="AdminModel" parameterType="int">
 		select
-			id,userName,password,createTime
+			id,userName,password,createTime,nickName
 		from 
 			admin 
 		where
@@ -26,9 +34,9 @@
 	<insert id="insertAdmin" parameterType="AdminModel">
 		insert into 
 			admin
-			(userName,password,createTime)
+			(userName,password,createTime,nickName)
 		values
-			(#{userName},#{password},#{createTime})
+			(#{userName},#{password},#{createTime},#{nickName})
 	</insert>
 
 	<update id="updateAdmin" parameterType="AdminModel">
@@ -41,6 +49,9 @@
 			</if>
 			<if test="password != null and password != ''">
 				password = #{password},
+			</if>
+			<if test="nickName != null and nickName != ''">
+				nickName = #{nickName},
 			</if>
 		</set>
 		where id = #{id}
