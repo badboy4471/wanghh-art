@@ -19,7 +19,7 @@
 			id,userName,password,createTime,nickName
 		from 
 			admin 
-		where uid != 1
+		where id != 1
 	</select>
 
 	<select id="getAdminById" resultType="AdminModel" parameterType="int">
