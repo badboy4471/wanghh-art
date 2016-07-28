@@ -39,7 +39,7 @@ public class CheckController extends BaseController {
 
 	@RequestMapping(value = "admin/receipt/add", method = { RequestMethod.GET })
 	public String viewReceiptAdd() {
-		return "check/receipt_add";
+		return "dialog/receipt_add";
 	}
 	
 	@RequestMapping(value = "admin/receipt/list/view", method = { RequestMethod.GET })
