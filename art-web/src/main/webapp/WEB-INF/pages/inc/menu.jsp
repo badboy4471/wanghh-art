@@ -5,7 +5,6 @@
 				class="icon-chevron-right"></i> 首页</a></li>
 		<li <c:if test="${local == 'art.list' }">class="active"</c:if>><a href="${ctx }/admin/art/list.form"><i class="icon-chevron-right"></i>
 				作品列表</a></li>
-				
 		
 		<li <c:if test="${local == 'receipt.list.to' }">class="active"</c:if>><a href="${ctx }/admin/receipt/list/view.form"><i class="icon-chevron-right"></i>
 				我审核的审核单</a></li>

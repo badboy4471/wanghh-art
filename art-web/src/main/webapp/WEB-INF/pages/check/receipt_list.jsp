@@ -233,8 +233,7 @@
 			$("#addReceipt").click(function(){
 				var d = dialog({
 					title:'添加审核单',
-					width:550,
-					height:260
+					width:550
 				});
 				$.ajax({
 					url: "${ctx}/admin/receipt/add.form",
