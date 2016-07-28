@@ -80,6 +80,7 @@ public class CheckServiceImpl implements ICheckService {
 			checkMapper.insertCheckDetail(model);
 			return model;
 		}catch(Exception e){
+			e.printStackTrace();
 			return null;
 		}
 		

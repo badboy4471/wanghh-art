@@ -123,7 +123,7 @@ public class CheckController extends BaseController {
 			return result;
 		}else{
 			try{
-				checkService.insertCheckDetail(checkDetail);
+				CheckDetailModel model = checkService.insertCheckDetail(checkDetail);
 			}catch(Exception e){
 				result.setCode(ArtErrorCode.SYSTEM_ERROR.getCode());
 				result.setMessage(ArtErrorCode.SYSTEM_ERROR.getMessage());
