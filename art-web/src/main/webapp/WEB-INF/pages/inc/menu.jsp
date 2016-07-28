@@ -5,8 +5,7 @@
 				class="icon-chevron-right"></i> 首页</a></li>
 		<li <c:if test="${local == 'art.list' }">class="active"</c:if>><a href="${ctx }/admin/art/list.form"><i class="icon-chevron-right"></i>
 				作品列表</a></li>
-		<li <c:if test="${local == 'art.add' }">class="active"</c:if>><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
-				添加作品</a></li>
+				
 		
 		<li <c:if test="${local == 'receipt.add' }">class="active"</c:if>><a href="${ctx }/admin/receipt/add.form"><i class="icon-chevron-right"></i>
 				创建审核单</a></li>
@@ -19,6 +18,9 @@
 				
 		<li <c:if test="${local == 'weixin.menu' }">class="active"</c:if>><a href="${ctx }/admin/weixin/menu/view.form"><i class="icon-chevron-right"></i>
 				自定义菜单</a></li>
+				
+		<li <c:if test="${local == 'art.add' }">class="active"</c:if>><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
+				添加作品</a></li>
 		<!-- 
 		<li><a href="tables.html"><i class="icon-chevron-right"></i>
 				Tables</a></li>

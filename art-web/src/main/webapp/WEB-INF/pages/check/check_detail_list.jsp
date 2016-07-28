@@ -41,19 +41,21 @@
                                  
                                    <div class="table-toolbar">
                                       <div class="btn-group">
-                                         <a href="${ctx }/admin/art/add.form"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
+                                         <a href="${ctx }/admin/art/add.form?receiptId=${receiptId}"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
                                       </div>
                                       <div class="btn-group pull-right">
 										<p>
+										 <input  id="receiptId" type="hidden" value="${receiptId }" >
 										<!-- 
 										<select style="width: 150px;margin-bottom:0px;margin-right: 5px;" id="museumId" name="museumId">
                                               <option value="0">请选择艺术馆</option>
                                         </select>
-                                         -->
-                                         <input  id="receiptId" type="hidden" value="${receiptId }" >
+                                         
+                                        
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="编号" id="artNumber" type="text" >
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="内部编号" id="artInnerNumber" type="text" >
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="名称" id="artName" type="text" > <button class="btn" id="searchBtn"><i class="icon-search"></i>搜索</button>
+										-->
 										</p>
                                       </div>
                                    </div>

@@ -41,7 +41,7 @@
                                  
                                    <div class="table-toolbar">
                                       <div class="btn-group">
-                                         <a href="${ctx }/admin/art/add.form"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
+                                         <a href="${ctx }/admin/receipt/add.form"><button id="addReceipt" class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
                                       </div>
                                       <div class="btn-group pull-right">
 										<p>
@@ -56,13 +56,6 @@
 										</p>
                                       </div>
                                    </div>
-                                   <!-- private int id;
-	private String memo;
-	private Date createTime;
-	private int createUid;
-	private int status;
-	private int type;
-	private Date lastUpdateTime; -->
                                     <table cellspacing="0" class="table table-striped table-bordered" id="artList">
                                         <thead>
                                             <tr>
@@ -227,69 +220,31 @@
 			}
 		};
 		
-		initSelect = function(){
-			var optionSize = $("#museumId option").size();
-			if (optionSize == 1){
-				$.ajax({
-					url:"${ctx}/admin/museum/all.form",
-					dataType:"json",
-					method:"POST",
-					success:function(data){
-						$.each(data.data, function(i, item) {
-				            $("#museumId").append(
-				                    "<option value="+item.id+">" + item.name + "</option>");
-				                   
-				        });
-					}
-				})
-			}
-		}
 		
 		$(document).ready(function(){
+			$("#addReceipt").click(function(){
+				var d = dialog({
+					title:'添加审核单',
+						width:550,
+						height:260
+					});
+				$.ajax({
+					url: "${ctx}/admin/receipt/add.form",
+					success: function (data) {
+						d.content(data);
+					},
+					cache: false
+				});
+		        d.show();
+		      });		
+			
+			
 			search();
 			
 			$("body").on("click", '#searchBtn', function(){
 				search();
 			});
 			
-			$("body").on("click",'.archive',function(){
-				var artId = $(this).attr("data");
-				var d = dialog({
-				    title:"归档",
-					width:500,
-					height:240
-				});
-				$.ajax({
-					url: "${ctx}/admin/museum/list.form?artId="+artId,
-					success: function (data) {
-						d.content(data);
-					},
-					cache: false
-				});
-				d.show();
-			});
-			
-			$("body").on("click",'.goout',function(){
-				var artId = $(this).attr("data");
-				var d = dialog({
-				    title:"归档",
-					width:500,
-					height:500
-				});
-				$.ajax({
-					url: "${ctx}/admin/art/out.form?artId="+artId,
-					success: function (data) {
-						d.content(data);
-					},
-					cache: false
-				});
-				d.show();
-			});
-			
-			initSelect();
-			$("body").on("click","#museumId",function(){
-				initSelect();
-			})
 		}) 
 		</script>
     </body>
