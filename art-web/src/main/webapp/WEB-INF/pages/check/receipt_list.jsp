@@ -220,14 +220,22 @@
 			}
 		};
 		
+		search();
+			
+		$("body").on("click", '#searchBtn', function(){
+			search();
+		});
 		
+			
+		</script>
+		<script>
 		$(document).ready(function(){
 			$("#addReceipt").click(function(){
 				var d = dialog({
 					title:'添加审核单',
-						width:550,
-						height:260
-					});
+					width:550,
+					height:260
+				});
 				$.ajax({
 					url: "${ctx}/admin/receipt/add.form",
 					success: function (data) {
@@ -236,16 +244,8 @@
 					cache: false
 				});
 		        d.show();
-		      });	
+			});
 		});
-			
-			
-		search();
-			
-		$("body").on("click", '#searchBtn', function(){
-			search();
-		});
-			
 		</script>
     </body>
 </html>
