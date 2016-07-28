@@ -91,6 +91,16 @@ public class CheckServiceImpl implements ICheckService {
 		return checkMapper.getCheckDetail(artNumber);
 	}
 
+	@Override
+	public List<CheckDetailModel> searchCheckdetail(SearchModel search) {
+		return checkMapper.searchCheckDetail(search);
+	}
+
+	@Override
+	public int countCheckDetail(SearchModel search) {
+		return checkMapper.countCheckDetail(search);
+	}
+
 	
 
 }

@@ -38,4 +38,8 @@ public interface ICheckService {
 	CheckDetailModel insertCheckDetail(CheckDetailModel model);
 	
 	CheckDetailModel getCheckDetail(String artNumber);
+	
+	List<CheckDetailModel> searchCheckdetail(SearchModel search);
+	
+	int countCheckDetail(SearchModel search);
 }

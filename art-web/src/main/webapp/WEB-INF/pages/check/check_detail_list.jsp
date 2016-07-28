@@ -4,7 +4,7 @@
 <html>
     
     <head>
-        <title>审核单列表</title>
+        <title>审核单明细列表</title>
         <!-- Bootstrap -->
         <link href="${ctx }/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="${ctx }/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -33,7 +33,7 @@
                          <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">审核单列表</div>
+                                <div class="muted pull-left">审核单明细列表</div>
                             </div>
                             
                             <div class="block-content collapse in">
@@ -50,27 +50,20 @@
                                               <option value="0">请选择艺术馆</option>
                                         </select>
                                          -->
+                                         <input  id="receiptId" type="hidden" value="${receiptId }" >
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="编号" id="artNumber" type="text" >
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="内部编号" id="artInnerNumber" type="text" >
 										<input style="width: 150px;margin-bottom:0px;margin-right: 5px;" placeholder="名称" id="artName" type="text" > <button class="btn" id="searchBtn"><i class="icon-search"></i>搜索</button>
 										</p>
                                       </div>
                                    </div>
-                                   <!-- private int id;
-	private String memo;
-	private Date createTime;
-	private int createUid;
-	private int status;
-	private int type;
-	private Date lastUpdateTime; -->
                                     <table cellspacing="0" class="table table-striped table-bordered" id="artList">
                                         <thead>
                                             <tr>
+                                                <th>缩略图</th>
                                                 <th>编号</th>
+                                                <th>名字</th>
                                                 <th>描述</th>
-                                                <th>提交时间</th>
-                                                <th>类型</th>
-                                                <th>状态</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
@@ -104,10 +97,9 @@
 		<script>
 		var oTable = null; 
 		function retrieveData( sSource, aoData, fnCallback ) {  
-		    //将客户名称加入参数数组  
-		    var name = $("#key").val();
+		    var receiptId = $("#receiptId").val();
 			var status = $("#status").val();
-			aoData.push({ "name": "name", "value": name});
+			aoData.push({ "name": "receiptId", "value": receiptId});
 			aoData.push({ "name": "status", "value": status});
 		    $.ajax( {  
 		        "type": "POST",   
@@ -125,48 +117,34 @@
 				oTable = $("#artList").dataTable({
 					"sDom": "<'row'l f<'search'> r>t<'row'<'span6'i><'span6'p>>",
 					"bProcessing": true,
-				    "sAjaxSource":"${ctx}/admin/receipt/search.form",
+				    "sAjaxSource":"${ctx}/admin/check/detail/search.form",
 				    "bServerSide":true,
 				    "aoColumns": [
-						{ "mData": 'id'},
-						{ "mData": 'memo'},
-						{ "mData": 'createTime',
+						{ "mData": 'artImage',
+						  //"sWidth" : "14%",
 						  "mRender" : function(data,type,row){
-							  var date = new Date(data);
-							  Y = date.getFullYear() + '-';
-							  M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-							  D = date.getDate() + ' ';
-							  h = date.getHours() + ':';
-							  m = date.getMinutes() + ':';
-							  s = date.getSeconds(); 
-							  return Y+M+D+h+m+s;
+							  return "<img src=\"<%=AliyunUpload.IMAGE_DOMAIN%>/"+data+"\" style=\"width: 80px\"/>";
 						  }
 						},
-						{ "mData": 'type',
-						  "mRender" : function(data,type,row){
-								return data == 1?'出库':'入库';
-						   }	
-						},
-						{ "mData": 'status',
-						  "mRender":function(data,type,row){
-							  	if (data == 0)
-							  		return "待提交审核";
-								if (data == 1)
-									return "审核中";
-								if (data == 2)
-									return "审核通过";
-								if (data == 3)
-									return "审核不通过";
-								
-								return "未知状态";
+						{ "mData": 'artNumber' ,
+							//"sWidth" : "15%",
+						  "mRender": function ( data, type, row ) {
+							  var number = "编号："+row.artNumber;
+							  var innerNumber = "内部编号："+row.artInnerNumber;
+							  return number + "<br/><br/>"+innerNumber;
 							}
 						},
+						{ "mData": 'artName'},
+						{ "mData": 'artDesc' ,"sWidth" : "350px"},
 						{ "mData": 'id',
-						  "mRender" : function(data,type,row){
-							  var add = "<a href=\"${ctx}/admin/art/add.form?receiptId="+data+"\">添加</a>";
-							  var detail = "<a href=\"${ctx}/admin/check/detail/list/view.form?receiptId="+data+"\">明细</a>";
-							  return add + " " + detail;
-						  }
+						  "mRender": function ( data, type, row ) {
+							  var detail = "<a onClick=\"detail('"+row.artName+"',"+data+")\" href=\"###\" data=\""+data+"\" class=\"detail\">详细</a>";
+							  var del = "<a onClick=\"del("+data+")\" href=\"###\" data=\""+data+"\" class=\"delete\">删除</a>";
+							  var archive = "<a href='###' data=\""+data+"\" class='archive'>归档</a>";
+							  var goout = "<a class=\"goout\" href='${ctx}/admin/art/out.form?artId="+data+"' data='"+data+"'>出库</a>";
+							  var edit = "<a href=\"${ctx}/admin/art/edit.form?id="+data+"\">编辑</a>";
+							  return edit + " " + detail + "<br/>" + del + " " + goout;
+							}
 						}
 					],
 					"fnServerData": retrieveData,           //获取数据的处理函数  

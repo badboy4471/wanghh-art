@@ -115,4 +115,71 @@
 		where
 			artNumber = #{artNumber}
 	</select>
+	
+	<select id="searchCheckDetail" parameterType="SearchModel" resultType="ArtModel">
+		select
+			a.id,a.artName,a.artNumber,a.artInnerNumber,a.artImage,a.artAudio,a.artYear,a.artAuthor,a.artSize,a.artMaterial,a.artCert,a.artDesc
+		from 
+			check_detail a 
+		<where>
+			<if test="batchId > 0">
+				a.receiptId = #{batchId}
+			</if>
+			<if test="name != null and name != ''">
+				and a.artName like CONCAT('%', #{name}, '%') 
+			</if>
+			<if test="number != null and number != ''">
+				and a.artNumber like CONCAT(#{number}, '%') 
+			</if>
+			<if test="innerNumber != null and innerNumber != ''">
+				and a.artInnerNumber like CONCAT(#{innerNumber}, '%') 
+			</if>
+			<if test="id > 0">
+				and a.id = #{id}
+			</if>
+			<if test="status != null">
+				and a.status = #{status}
+			</if>
+			<if test="beginDate != null">
+				and a.createTime > #{beginDate}
+			</if>
+			<if test="endDate != null">
+				and #{endDate} > a.createTime
+			</if>
+		</where>
+			limit #{start}, #{limit}
+	</select>
+	
+	<select id="countCheckDetail" parameterType="SearchModel" resultType="int">
+		select
+			count(a.id)
+		from 
+			check_detail a 
+		<where>
+			<if test="batchId > 0">
+				a.receiptId = #{batchId}
+			</if>
+			<if test="name != null and name != ''">
+				and a.artName like CONCAT('%', #{name}, '%') 
+			</if>
+			<if test="number != null and number != ''">
+				and a.artNumber like CONCAT(#{number}, '%') 
+			</if>
+			<if test="innerNumber != null and innerNumber != ''">
+				and a.artInnerNumber like CONCAT(#{innerNumber}, '%') 
+			</if>
+			<if test="id > 0">
+				and a.id = #{id}
+			</if>
+			<if test="status != null">
+				and a.status = #{status}
+			</if>
+			<if test="beginDate != null">
+				and a.createTime > #{beginDate}
+			</if>
+			<if test="endDate != null">
+				and #{endDate} > a.createTime
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.whh.art.dao.mapper.CheckMapper;
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.ArtOutModel;

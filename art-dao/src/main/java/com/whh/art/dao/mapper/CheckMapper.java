@@ -75,4 +75,8 @@ public interface CheckMapper {
 	
 	CheckDetailModel getCheckDetail(String artNumber);
 	
+	List<CheckDetailModel> searchCheckDetail(SearchModel search);
+	
+	int countCheckDetail(SearchModel search);
+	
 }

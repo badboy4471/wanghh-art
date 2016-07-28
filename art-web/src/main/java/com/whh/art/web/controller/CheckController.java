@@ -10,10 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.AdminModel;
@@ -45,11 +47,73 @@ public class CheckController extends BaseController {
 		return "check/receipt_list";
 	}
 	
+	@RequestMapping(value = "admin/check/detail/list/view", method = { RequestMethod.GET })
+	public String viewCheckDetailList(@RequestParam("receiptId") int receiptId,
+			ModelMap model) {
+		model.put("receiptId",receiptId);
+		return "check/check_detail_list";
+	}
+	
+	
+	@RequestMapping(value = "admin/check/detail/search", method = { RequestMethod.POST,
+			RequestMethod.GET }, produces = "application/json")
+	public @ResponseBody
+	Result loadCheckDetails(@RequestBody JSONParam[] params, HttpSession session) {
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
+		Map paramMap = new HashMap();
+		super.convert2Map(paramMap, params);
+		Result result = new Result(null);
+		SearchModel search = new SearchModel();
+		
+		String statusStr = (String)paramMap.get("status");
+		int status = 0;
+		if (StringUtils.isNotBlank(statusStr)){
+			try{
+				status = Integer.parseInt(statusStr);
+			}catch(Exception e){
+				
+			}
+		}
+		
+		search.setStatus(status);
+		String receiptStr = (String) paramMap.get("receiptId");
+		int receiptId = 0;
+		if (StringUtils.isNotBlank(receiptStr)){
+			try{
+				receiptId = Integer.parseInt(receiptStr);
+			}catch(Exception e){
+				
+			}
+		}
+		
+		search.setBatchId(receiptId);
+		int start = 0;
+		try {
+			start = Integer.parseInt((String) paramMap.get("iDisplayStart"));
+		} catch (Exception e) {
+
+		}
+		int limit = 10;
+		try {
+			limit = Integer.parseInt((String) paramMap.get("iDisplayLength"));
+		} catch (Exception e) {
+
+		}
+		search.setStart(start);
+		search.setLimit(0);//全部取出
+		List<CheckDetailModel> checkDetails = this.checkService.searchCheckdetail(search);
+		int count = checkService.countCheckDetail(search);
+		result.setAaData(checkDetails);
+		result.setsEcho((String) paramMap.get("sEcho"));
+		result.setiTotalRecords(count);
+		result.setiTotalDisplayRecords(count);
+		return result;
+	}
 	
 	@RequestMapping(value = "admin/receipt/search", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = "application/json")
 	public @ResponseBody
-	Result loadArts(@RequestBody JSONParam[] params, HttpSession session) {
+	Result loadReceipts(@RequestBody JSONParam[] params, HttpSession session) {
 		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
 		Map paramMap = new HashMap();
 		super.convert2Map(paramMap, params);
