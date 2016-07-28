@@ -132,7 +132,14 @@
 						{ "mData": 'memo'},
 						{ "mData": 'createTime',
 						  "mRender" : function(data,type,row){
-							  return Date(parseInt(data)).toLocaleString().replace(/:\d{1,2}$/,' ');
+							  var date = new Date(data);
+							  Y = date.getFullYear() + '-';
+							  M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+							  D = date.getDate() + ' ';
+							  h = date.getHours() + ':';
+							  m = date.getMinutes() + ':';
+							  s = date.getSeconds(); 
+							  return Y+M+D+h+m+s;
 						  }
 						},
 						{ "mData": 'type',
