@@ -4,7 +4,7 @@
 <html>
     
     <head>
-        <title>艺术品添加</title>
+        <title>审核单列表</title>
         <!-- Bootstrap -->
         <link href="${ctx }/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="${ctx }/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
