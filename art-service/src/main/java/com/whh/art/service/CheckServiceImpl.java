@@ -3,6 +3,7 @@ package com.whh.art.service;
 import java.util.List;
 
 import com.whh.art.dao.mapper.CheckMapper;
+import com.whh.art.dao.model.CheckDetailModel;
 import com.whh.art.dao.model.CheckNodeModel;
 import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.SearchModel;
@@ -71,6 +72,17 @@ public class CheckServiceImpl implements ICheckService {
 
 	public void setCheckMapper(CheckMapper checkMapper) {
 		this.checkMapper = checkMapper;
+	}
+
+	@Override
+	public CheckDetailModel insertCheckDetail(CheckDetailModel model) {
+		try{
+			checkMapper.insertCheckDetail(model);
+			return model;
+		}catch(Exception e){
+			return null;
+		}
+		
 	}
 
 	

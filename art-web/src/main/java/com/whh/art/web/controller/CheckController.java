@@ -117,15 +117,13 @@ public class CheckController extends BaseController {
 	public @ResponseBody
 	Result saveArt(@ModelAttribute ArtSubmit artSubmit, HttpSession session) {
 		Result result = new Result(null);
-		ArtModel model = new ArtModel();
-		BeanUtils.copyProperties(artSubmit, model);
-		System.out.println(artSubmit);
+		CheckDetailModel checkDetail = new CheckDetailModel();
+		BeanUtils.copyProperties(artSubmit, checkDetail);
 		if (artSubmit.getId() > 0){ //编辑
-			
 			return result;
 		}else{
 			try{
-				
+				checkService.insertCheckDetail(checkDetail);
 			}catch(Exception e){
 				result.setCode(ArtErrorCode.SYSTEM_ERROR.getCode());
 				result.setMessage(ArtErrorCode.SYSTEM_ERROR.getMessage());

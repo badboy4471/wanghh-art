@@ -96,4 +96,14 @@
 			status = #{search.status}
 	</select>
 	
+	<insert id="insertCheckDetail" parameterType="CheckDetailModel" useGeneratedKeys="true" keyProperty="id">
+		insert into 
+			check_detail
+			(artName,artNumber,artInnerNumber,artYear,artAuthor,artMaterial,artSize,artCert,artDesc,createTime,artImage,artAudio,
+			type,come,createUid,receiptId)
+		values
+			(#{artName},#{artNumber},#{artInnerNumber},#{artYear},#{artAuthor},#{artMaterial},#{artSize},#{artCert},#{artDesc},now(),#{artImage},#{artAudio},
+			#{type},#{come},#{createUid},#{receiptId})
+	</insert>
+	
 </mapper>

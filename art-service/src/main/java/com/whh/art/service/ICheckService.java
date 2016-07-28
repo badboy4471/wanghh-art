@@ -2,6 +2,7 @@ package com.whh.art.service;
 
 import java.util.List;
 
+import com.whh.art.dao.model.CheckDetailModel;
 import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.SearchModel;
 
@@ -33,4 +34,6 @@ public interface ICheckService {
 	 * @return
 	 */
 	List loadMyReceipt(int uid,SearchModel search);
+	
+	CheckDetailModel insertCheckDetail(CheckDetailModel model);
 }

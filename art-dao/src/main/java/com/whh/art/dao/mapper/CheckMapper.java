@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.whh.art.dao.model.CheckDetailModel;
 import com.whh.art.dao.model.CheckNodeModel;
 import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.SearchModel;
@@ -69,5 +70,7 @@ public interface CheckMapper {
 	 * @return
 	 */
 	int countReceipts(@Param("uid")int uid,@Param("search") SearchModel search);
+	
+	int insertCheckDetail(CheckDetailModel detail);
 	
 }
