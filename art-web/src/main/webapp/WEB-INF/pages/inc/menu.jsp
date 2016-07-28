@@ -7,11 +7,11 @@
 				作品列表</a></li>
 				
 		
-		<li <c:if test="${local == 'receipt.add' }">class="active"</c:if>><a href="${ctx }/admin/receipt/add.form"><i class="icon-chevron-right"></i>
-				创建审核单</a></li>
+		<li <c:if test="${local == 'receipt.list.to' }">class="active"</c:if>><a href="${ctx }/admin/receipt/list/view.form"><i class="icon-chevron-right"></i>
+				我审核的审核单</a></li>
 				
-		<li <c:if test="${local == 'receipt.list' }">class="active"</c:if>><a href="${ctx }/admin/receipt/list/view.form"><i class="icon-chevron-right"></i>
-				审核单列表</a></li>
+		<li <c:if test="${local == 'receipt.list.from' }">class="active"</c:if>><a href="${ctx }/admin/receipt/list/view.form"><i class="icon-chevron-right"></i>
+				我发起的审核单</a></li>
 		
 		<li <c:if test="${local == 'user.list' }">class="active"</c:if>><a href="${ctx }/admin/wx/user/list.form"><i class="icon-chevron-right"></i>
 				用户列表</a></li>
@@ -22,6 +22,8 @@
 		<li <c:if test="${local == 'art.add' }">class="active"</c:if>><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
 				添加作品</a></li>
 		<!-- 
+		<li <c:if test="${local == 'receipt.add' }">class="active"</c:if>><a href="${ctx }/admin/receipt/add.form"><i class="icon-chevron-right"></i>
+				创建审核单</a></li>
 		<li><a href="tables.html"><i class="icon-chevron-right"></i>
 				Tables</a></li>
 		<li><a href="buttons.html"><i class="icon-chevron-right"></i>
