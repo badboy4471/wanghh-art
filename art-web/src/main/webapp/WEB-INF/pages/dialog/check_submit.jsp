@@ -4,8 +4,9 @@
 	<div class="block" style="border-top-style:solid; border-top-color: rgb(204,204,204);border-top-width: 1px">
 		<div class="block-content collapse in">
 			<div class="span12">
-				<form action="" id="form_sample_1" class="form-horizontal"
+				<form action="" id="check_submit_form" class="form-horizontal"
 					method="post">
+					<input type="hidden" name="receiptId" value="${receiptId }">
 					<fieldset>
 						<div class="control-group">
 							<label class="control-label">已经选中的审核人员<span class="required">*</span></label>
@@ -24,7 +25,7 @@
 							</div>
 						</div>
 						<div class="form-actions" style="margin-bottom:0px;">
-							<button type="button" id="saveMuseum" class="btn btn-primary">提交</button>
+							<button type="button" id="submitCheck" class="btn btn-primary">提交</button>
 							<button type="button" class="btn">重置</button>
 						</div>
 					</fieldset>
@@ -51,23 +52,14 @@
 			}
 		});
 		
-		$("#saveMuseum").click(function() {
-			var name = $("#name").val();
-			var location = $("#location").val();
+		$("#submitCheck").click(function() {
 			$.ajax({
 				method : "POST",
-				url : "${ctx }/admin/museum/save.form",
-				dataType : "json",
-				data : {
-					name : name,
-					location : location
-				},
-				success : function(data) {
-					alert(data.message);
-					if (data.code == 200){
-						dialog.getCurrent().close().remove();
-					}
-				}
+				url : "${ctx }/admin/check/submit.form",
+				data : $('#check_submit_form').serialize(),
+                success: function(data){
+                	alert("["+data.code+"]:"+data.message);
+                }
 			});
 		});
 	});

@@ -191,7 +191,7 @@ public class CheckController extends BaseController {
 	
 	@RequestMapping(value = "admin/check/detail/save", method = { RequestMethod.POST })
 	public @ResponseBody
-	Result saveArt(@ModelAttribute ArtSubmit artSubmit, HttpSession session) {
+	Result saveCheckDetail(@ModelAttribute ArtSubmit artSubmit, HttpSession session) {
 		Result result = new Result(null);
 		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
 		CheckDetailModel checkDetail = new CheckDetailModel();
@@ -208,5 +208,22 @@ public class CheckController extends BaseController {
 			}
 			return result;
 		}
+	}
+	
+	@RequestMapping(value = "admin/check/submit", method = { RequestMethod.POST })
+	public @ResponseBody
+	Result submitCheck(@RequestParam("checkUser") int[] checkUid,
+			@RequestParam("receiptId") int receiptId,HttpSession session) {
+		Result result = new Result(null);
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
+		try{
+			checkService.submitCheck(receiptId, checkUid);
+			result.setCode(200);
+			result.setMessage("提交成功！");
+		}catch(Exception e){
+			result.setCode(500);
+			result.setMessage("提交失败！");
+		}
+		return result;
 	}
 }
