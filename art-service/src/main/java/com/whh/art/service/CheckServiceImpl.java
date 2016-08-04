@@ -101,6 +101,16 @@ public class CheckServiceImpl implements ICheckService {
 		return checkMapper.countCheckDetail(search);
 	}
 
+	@Override
+	public void upadteReceipt(ReceiptModel receipt) {
+		checkMapper.upadteReceipt(receipt);
+	}
+
+	@Override
+	public ReceiptModel getReceipt(int id) {
+		return checkMapper.getReceipt(id);
+	}
+
 	
 
 }

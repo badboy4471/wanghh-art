@@ -42,4 +42,8 @@ public interface ICheckService {
 	List<CheckDetailModel> searchCheckdetail(SearchModel search);
 	
 	int countCheckDetail(SearchModel search);
+	
+	void upadteReceipt(ReceiptModel receipt);
+	
+	ReceiptModel getReceipt(int id);
 }

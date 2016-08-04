@@ -217,7 +217,22 @@ public class CheckController extends BaseController {
 		Result result = new Result(null);
 		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
 		try{
+			
+			ReceiptModel receipt = checkService.getReceipt(receiptId);
+			if (receipt == null || receipt.getCreateUid() != uid){
+				result.setCode(404);
+				result.setMessage("操作的审核单不存在！");
+				return result;
+			}
+			if (receipt.getStatus() != ReceiptStatus.WAIT.getCode()){
+				result.setCode(500);
+				result.setMessage("状态不对！");
+			}
+			
 			checkService.submitCheck(receiptId, checkUid);
+			//更新状态
+			receipt.setStatus(ReceiptStatus.CHECKING.getCode());//等待审核
+			checkService.upadteReceipt(receipt);
 			result.setCode(200);
 			result.setMessage("提交成功！");
 		}catch(Exception e){
