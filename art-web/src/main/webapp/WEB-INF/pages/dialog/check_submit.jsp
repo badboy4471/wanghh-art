@@ -38,9 +38,10 @@
 		
 		$(".allUser").click(function(){
 			var value = $(this).val();
-			var text = $(this).text();
+			var text = $(this).siblings().text();
 			alert(value + text);
 			var isSelected = $(this).attr("checked");
+			alert(isSelected);
 			if (isSelected){
 				$("#selected").append("<input class='selectedUser' name='checkUser' id='"+value+"' type='checkbox' value='"+value+"'>"+text);
 			}else{
