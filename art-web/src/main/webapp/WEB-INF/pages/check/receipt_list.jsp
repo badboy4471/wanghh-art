@@ -208,8 +208,7 @@
 		check_submit=function(id){
 			var d = dialog({
 			    title:"提交审核",
-			    width:500,
-			    height:500
+			    width:500
 			});
 			$.ajax({
 			    url: "${ctx}/admin/check/submit/view.form?receiptId="+id,

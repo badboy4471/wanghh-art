@@ -18,7 +18,6 @@
 						<div class="control-group">
 							<label class="control-label">所有员工<span class="required">*</span></label>
 							<div class="controls">
-								<input class="allUser" type="checkbox" data="test" value="test" />test <br/>
 								<c:forEach items="${admins }" var="admin">
 									<button type="button" data="${admin.id }" class="btn-allUser btn btn-default btn-lg">${admin.nickName }</button>
 								</c:forEach>
@@ -40,16 +39,15 @@
 		$(".btn-allUser").click(function(){
 			var text = $(this).html();
 			var id = $(this).attr("data");
-			
 			var classes = $(this).attr("class");
 			if (classes.indexOf("primary")>=0){
 				$(this).removeClass("btn-primary");
 				$(this).addClass("btn-default");
-				$("#selected").append("<span class='glyphicon glyphicon-minus' id='"+id+"'><input class='selectedUser' name='checkUser' type='hidden' value='"+id+"'>"+text+"</span>");
+				$("#"+id).remove();
 			}else{
 				$(this).addClass("btn-primary");
 				$(this).removeClass("btn-default");
-				$("#"+id).remove();
+				$("#selected").append("<span id='"+id+"'><button type='button' class='btn btn-default btn-lg'>"+text+"</button><input class='selectedUser' name='checkUser' type='hidden' value='"+id+"'></span>");
 			}
 		});
 		
