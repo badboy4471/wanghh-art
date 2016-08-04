@@ -227,6 +227,7 @@ public class CheckController extends BaseController {
 			if (receipt.getStatus() != ReceiptStatus.WAIT.getCode()){
 				result.setCode(500);
 				result.setMessage("状态不对！");
+				return result;
 			}
 			
 			checkService.submitCheck(receiptId, checkUid);
