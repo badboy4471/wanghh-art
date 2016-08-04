@@ -40,12 +40,9 @@
 		$(".allUser").click(function(){
 			var value = $(this).val();
 			var text = $(this).attr("data");
-			alert(value + text);
-			alert($(this).prop("checked"));
 			var isSelected = $(this).prop("checked");
-			alert(isSelected);
 			if (isSelected){
-				$("#selected").append("<input class='selectedUser' name='checkUser' id='"+value+"' type='checkbox' value='"+value+"'>"+text);
+				$("#selected").append("<span id='"+value+"'><input class='selectedUser' name='checkUser' type='hidden' value='"+value+"'>"+text+"</span>");
 			}else{
 				$("#"+value).remove();
 			}
