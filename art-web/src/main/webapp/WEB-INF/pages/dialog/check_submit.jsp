@@ -20,6 +20,7 @@
 							<div class="controls">
 								<input class="allUser" type="checkbox" data="test" value="test" />test <br/>
 								<c:forEach items="${admins }" var="admin">
+									<button type="button" data="${admin.id }" class="btn-allUser btn btn-default btn-lg">${admin.nickName }</button>
 									<input class="allUser" type="checkbox" data="${admin.nickName }" value="${admin.id }" />${admin.nickName }
 								</c:forEach>
 							</div>
@@ -37,12 +38,29 @@
 <script>
 	$(document).ready(function() {
 		
+		$(".btn-allUser").click(function(){
+			var text = $(this).html();
+			var id = $(this).attr("data");
+			alert(text + " " + id);
+			
+			var classes = $(this).attr("class");
+			if (classes.indexOf("primary")>=0){
+				$(this).removeClass("btn-primary");
+				$(this).addClass("btn-default");
+				$("#selected").append("<span class='glyphicon glyphicon-minus' id='"+value+"'><input class='selectedUser' name='checkUser' type='hidden' value='"+value+"'>"+text+"</span>");
+			}else{
+				$(this).addClass("btn-primary");
+				$(this).removeClass("btn-default");
+				$("#"+value).remove();
+			}
+		});
+		
 		$(".allUser").click(function(){
 			var value = $(this).val();
 			var text = $(this).attr("data");
 			var isSelected = $(this).prop("checked");
 			if (isSelected){
-				$("#selected").append("<span id='"+value+"'><input class='selectedUser' name='checkUser' type='hidden' value='"+value+"'>"+text+"</span>");
+				$("#selected").append("<span class='glyphicon glyphicon-minus' id='"+value+"'><input class='selectedUser' name='checkUser' type='hidden' value='"+value+"'>"+text+"</span>");
 			}else{
 				$("#"+value).remove();
 			}
