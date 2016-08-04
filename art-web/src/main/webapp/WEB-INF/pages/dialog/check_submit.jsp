@@ -41,8 +41,8 @@
 			var value = $(this).val();
 			var text = $(this).attr("data");
 			alert(value + text);
-			alert($(this).attr("checked"));
-			var isSelected = $(this).attr("checked");
+			alert($(this).prop("checked"));
+			var isSelected = $(this).prop("checked");
 			alert(isSelected);
 			if (isSelected){
 				$("#selected").append("<input class='selectedUser' name='checkUser' id='"+value+"' type='checkbox' value='"+value+"'>"+text);
