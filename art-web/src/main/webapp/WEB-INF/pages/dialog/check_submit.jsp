@@ -40,6 +40,7 @@
 			var value = $(this).val();
 			var text = $(this).attr("data");
 			alert(value + text);
+			alert($(this).attr("checked"));
 			var isSelected = $(this).attr("checked");
 			alert(isSelected);
 			if (isSelected){
