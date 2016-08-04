@@ -18,8 +18,9 @@
 						<div class="control-group">
 							<label class="control-label">所有员工<span class="required">*</span></label>
 							<div class="controls">
+								<input class="allUser" type="checkbox" data="test" value="test" />test <br/>
 								<c:forEach items="${admins }" var="admin">
-									<input class="allUser" type="checkbox" data="${admin.nickName }" value="${admin.id }">${admin.nickName }
+									<input class="allUser" type="checkbox" data="${admin.nickName }" value="${admin.id }" />${admin.nickName }
 								</c:forEach>
 							</div>
 						</div>
