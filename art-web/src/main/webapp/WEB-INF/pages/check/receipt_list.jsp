@@ -156,9 +156,13 @@
 						},
 						{ "mData": 'id',
 						  "mRender" : function(data,type,row){
-							  var add = "<a href=\"${ctx}/admin/art/add.form?receiptId="+data+"\">添加</a>";
+							  var add = "";
 							  var detail = "<a href=\"${ctx}/admin/check/detail/list/view.form?receiptId="+data+"\">明细</a>";
-							  var submit = "<a href=\"###\"onClick=\"check_submit('"+data+"')\" >提交审核</a>";
+							  var submit = "";
+							  if (row.status == 0){
+								  submit = "<a href=\"###\"onClick=\"check_submit('"+data+"')\" >提交审核</a>";
+								  add = "<a href=\"${ctx}/admin/art/add.form?receiptId="+data+"\">添加</a>";
+							  }
 							  return add + " " + detail + "<br/>"+ submit;
 						  }
 						}
