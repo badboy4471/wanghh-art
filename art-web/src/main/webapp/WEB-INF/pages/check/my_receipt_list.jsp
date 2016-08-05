@@ -157,14 +157,13 @@
 						},
 						{ "mData": 'id',
 						  "mRender" : function(data,type,row){
-							  var add = "";
+							  var check = "";
 							  var detail = "<a href=\"${ctx}/admin/check/detail/list/view.form?receiptId="+data+"\">明细</a>";
-							  var submit = "";
+							  var deny = "";
 							  if (row.status == 0){
-								  submit = "<a href=\"###\"onClick=\"check_submit('"+data+"')\" >提交审核</a>";
-								  add = "<a href=\"${ctx}/admin/art/add.form?receiptId="+data+"\">添加</a>";
+								  check = "<a href=\"###\"onClick=\"check('"+data+"',1)\" >审核</a>";
 							  }
-							  return add + " " + detail + "<br/>"+ submit;
+							  return detail + "<br/>"+ check;
 						  }
 						}
 					],
@@ -193,30 +192,13 @@
 			}
 		}
 		
-		
-		detail=function(title,id){
+		check = function(id){
 			var d = dialog({
-			    title:title,
-			    width:500,
-			    height:500
-			});
-			$.ajax({
-			    url: "${ctx}/admin/art/detail.form?id="+id,
-			    success: function (data) {
-			        d.content(data);
-			    },
-			    cache: false
-			});
-			d.show();
-		}
-		
-		check_submit=function(id){
-			var d = dialog({
-			    title:"提交审核",
+			    title:"审核",
 			    width:500
 			});
 			$.ajax({
-			    url: "${ctx}/admin/check/submit/view.form?receiptId="+id,
+			    url: "${ctx}/admin/check/view.form?receiptId="+id,
 			    success: function (data) {
 			        d.content(data);
 			    },
@@ -224,46 +206,10 @@
 			});
 			d.show();
 		}
-		
 	    
-		del=function(id){
-			if(confirm("删除艺术品？")){
-				$.ajax({
-				    url: "${ctx}/admin/art/del.form?id="+id,
-				    success: function (data) {
-				        if (data.code == 200){
-				        	alert(data.message);
-				        }
-				    },
-				    cache: false
-				});
-			}
-		};
-		
 		search();
-			
 		$("body").on("click", '#searchBtn', function(){
 			search();
-		});
-		
-			
-		</script>
-		<script>
-		$(document).ready(function(){
-			$("#addReceipt").click(function(){
-				var d = dialog({
-					title:'添加审核单',
-					width:550
-				});
-				$.ajax({
-					url: "${ctx}/admin/receipt/add.form",
-					success: function (data) {
-						d.content(data);
-					},
-					cache: false
-				});
-		        d.show();
-			});
 		});
 		</script>
     </body>
