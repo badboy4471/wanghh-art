@@ -17,7 +17,7 @@
         <![endif]-->
         <script src="${ctx }/vendors/jquery-1.9.1.js"></script>
         <script src="${ctx }/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <c:set var="local" value="receipt.list.from"></c:set>
+        <c:set var="local" value="receipt.list.to"></c:set>
     </head>
     
     <body>
