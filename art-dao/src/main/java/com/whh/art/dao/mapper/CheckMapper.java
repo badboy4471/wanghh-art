@@ -64,6 +64,14 @@ public interface CheckMapper {
 	List<ReceiptModel> loadReceipts(@Param("uid")int uid,@Param("search") SearchModel search);
 	
 	/**
+	 * 获取需要我审核的审核单
+	 * @param uid
+	 * @param search
+	 * @return
+	 */
+	List<ReceiptModel> loadMyCheckReceipts(@Param("uid") int uid,@Param("search") SearchModel search);
+	
+	/**
 	 * 
 	 * @param uid
 	 * @param search
@@ -78,5 +86,7 @@ public interface CheckMapper {
 	List<CheckDetailModel> searchCheckDetail(SearchModel search);
 	
 	int countCheckDetail(SearchModel search);
+	
+	
 	
 }

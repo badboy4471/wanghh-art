@@ -50,6 +50,11 @@ public class CheckController extends BaseController {
 		return "check/receipt_list";
 	}
 	
+	@RequestMapping(value = "admin/my/receipt/list/view", method = { RequestMethod.GET })
+	public String viewMyCheckReceiptList() {
+		return "check/my_receipt_list";
+	}
+	
 	@RequestMapping(value = "admin/check/detail/list/view", method = { RequestMethod.GET })
 	public String viewCheckDetailList(@RequestParam("receiptId") int receiptId,
 			ModelMap model) {
@@ -122,6 +127,44 @@ public class CheckController extends BaseController {
 		result.setiTotalDisplayRecords(count);
 		return result;
 	}
+	
+	/**
+	 * 需要我审核的审核单
+	 * @param params
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "admin/my/receipt/search", method = { RequestMethod.POST,
+			RequestMethod.GET }, produces = "application/json")
+	public @ResponseBody
+	Result loadMyCheckReceipts(@RequestBody JSONParam[] params, HttpSession session) {
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
+		Map paramMap = new HashMap();
+		super.convert2Map(paramMap, params);
+		Result result = new Result(null);
+		SearchModel search = new SearchModel();
+		search.setName((String) paramMap.get("name"));
+		String statusStr = (String)paramMap.get("status");
+		int status = 0;
+		if (StringUtils.isNotBlank(statusStr)){
+			try{
+				status = Integer.parseInt(statusStr);
+			}catch(Exception e){
+				
+			}
+		}
+		search.setStatus(status);
+		search.setStart(0);
+		search.setLimit(0);//全部取出
+		List<ReceiptModel> receipts = this.checkService.loadMyCheckReceipts(uid, search);
+		int count = receipts == null ?0:receipts.size();
+		result.setAaData(receipts);
+		result.setsEcho((String) paramMap.get("sEcho"));
+		result.setiTotalRecords(count);
+		result.setiTotalDisplayRecords(count);
+		return result;
+	}
+	
 	
 	@RequestMapping(value = "admin/receipt/search", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = "application/json")

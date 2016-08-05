@@ -33,7 +33,15 @@ public interface ICheckService {
 	 * @param status
 	 * @return
 	 */
-	List loadMyReceipt(int uid,SearchModel search);
+	List<ReceiptModel> loadMyReceipt(int uid,SearchModel search);
+	
+	/**
+	 * 获取需要我审核的审核单
+	 * @param uid
+	 * @param search
+	 * @return
+	 */
+	List<ReceiptModel> loadMyCheckReceipts(int uid,SearchModel search);
 	
 	CheckDetailModel insertCheckDetail(CheckDetailModel model);
 	

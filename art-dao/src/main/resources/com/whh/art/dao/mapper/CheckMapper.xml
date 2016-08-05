@@ -85,6 +85,35 @@
 		</if>
 	</select>
 	
+	<select id="loadMyCheckReceipts" parameterType="map" resultType="ReceiptModel">
+		(select 
+			r.id,r.memo,r.createTime,r.createUid,r.status,r.checkMemo,r.type,r.lastUpdateTime
+		from 
+			receipt r,check_process p
+		where 
+			r.id = p.receiptId
+		and 
+			p.checkUid = #{uid}
+		and 
+			p.status = #{search.status}
+		and 
+			p.parentId = 0 )
+		UNION ALL 
+		(select 
+			r.id,r.memo,r.createTime,r.createUid,r.status,r.checkMemo,r.type,r.lastUpdateTime
+		from 
+			receipt r,check_process p,check_process p1
+		where 
+			r.id = p.receiptId
+		and 
+			p.checkUid = #{uid}
+		and 
+			p.status = #{search.status}
+		and 
+			p.parentId = p1.id and p1.status = 1)
+		order by id asc
+	</select>
+	
 	<select id="countReceipts" parameterType="map" resultType="int">
 		select 
 			count(*)

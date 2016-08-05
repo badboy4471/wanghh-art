@@ -111,6 +111,11 @@ public class CheckServiceImpl implements ICheckService {
 		return checkMapper.getReceipt(id);
 	}
 
+	@Override
+	public List<ReceiptModel> loadMyCheckReceipts(int uid, SearchModel search) {
+		return checkMapper.loadMyCheckReceipts(uid, search);
+	}
+
 	
 
 }
