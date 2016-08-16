@@ -61,12 +61,12 @@
 	</select>
 	
 	
-	<select id="getCheckProcess" parameterType="int" resultType="CheckNodeModel">
+	<select id="loadCheckProcesses" parameterType="int" resultType="CheckNodeModel">
 		select 
 			id,receiptId,checkUid,checkTime,status,checkMemo,parentId
 		from
 			check_process
-		where receiptId = #{receiptId}
+		where receiptId = #{receiptId} order by id desc;
 	</select>
 	
 	<select id="getCheckNodeByUidAndReceiptId" parameterType="map" resultType="CheckNodeModel">

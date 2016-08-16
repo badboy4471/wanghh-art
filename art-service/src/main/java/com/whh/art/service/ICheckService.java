@@ -68,4 +68,6 @@ public interface ICheckService {
 	void updateCheckProcess(CheckNodeModel node);
 	
 	CheckNodeModel getCheckNodeByUidAndReceiptId(int receiptId,int uid);
+	
+	List<CheckNodeModel> loadCheckProcesses(int receiptId);
 }

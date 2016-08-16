@@ -103,7 +103,6 @@ public class CheckController extends BaseController {
 			}else{
 				node.setStatus(2);
 			}
-			node.setCheckUid(uid);
 			node.setCheckMemo(memo);
 			node.setCheckTime(new Date());
 			//更新当前审核状态
@@ -120,11 +119,23 @@ public class CheckController extends BaseController {
 				}
 			}else{
 				//更新其他节点为无需审核，终止审核；
+				List<CheckNodeModel> nodes = checkService.loadCheckProcesses(receiptId);
+				for (CheckNodeModel anode : nodes){
+					if (anode.getStatus() == 0){
+						anode.setStatus(-1);
+						anode.setCheckMemo(uid+"审核不通过");
+						anode.setCheckTime(new Date());
+						checkService.updateCheckProcess(anode);
+					}
+				}
+				//更新整个审核单的状态；
 				ReceiptModel receipt = checkService.getReceipt(receiptId);
 				receipt.setLastUpdateTime(new Date());
 				receipt.setStatus(ReceiptStatus.REJECT.getCode());
 				checkService.upadteReceipt(receipt);
 			}
+			result.setCode(200);
+			result.setMessage("审核成功！");
 		}else{
 			result.setCode(1404);
 			result.setMessage("没有审核权限");

@@ -61,7 +61,7 @@ public interface CheckMapper {
 	 * @param receiptId
 	 * @return
 	 */
-	List<CheckNodeModel> getCheckProcess(int receiptId);
+	List<CheckNodeModel> loadCheckProcesses(int receiptId);
 	
 	/**
 	 * 获取我发起的审核单
