@@ -54,7 +54,7 @@ public interface CheckMapper {
 	 * @param id
 	 * @return
 	 */
-	CheckNodeModel getCheckNodeByUidAndReceiptId(int uid,int receiptId);
+	CheckNodeModel getCheckNodeByUidAndReceiptId(@Param("uid")int uid,@Param("receiptId")int receiptId);
 	
 	/**
 	 * 获取审核单的流程
