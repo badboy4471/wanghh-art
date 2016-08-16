@@ -15,8 +15,8 @@
 							</div>
 						</div>
 						<div class="form-actions" style="margin-bottom:0px;">
-							<button type="button" value="pass" class="btn btn-primary">通过</button>
-							<button type="button" value="nopass" class="btn">不通过</button>
+							<button type="button" name="btn" value="pass" class="btn btn-primary">通过</button>
+							<button type="button" name="btn" value="nopass" class="btn">不通过</button>
 						</div>
 					</fieldset>
 				</form>
