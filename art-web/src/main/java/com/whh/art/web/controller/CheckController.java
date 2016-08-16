@@ -72,6 +72,19 @@ public class CheckController extends BaseController {
 		return "dialog/check_submit";
 	}
 	
+	/**
+	 * 进入审核页面
+	 * @param receiptId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "admin/check/view", method = { RequestMethod.GET })
+	public String viewCheck(@RequestParam("receiptId") int receiptId,
+			ModelMap model) {
+		model.put("receiptId", receiptId);
+		return "dialog/check";
+	}
+	
 	
 	@RequestMapping(value = "admin/check/detail/search", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = "application/json")
