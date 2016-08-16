@@ -4,7 +4,7 @@
 	<div class="block" style="border-top-style:solid; border-top-color: rgb(204,204,204);border-top-width: 1px">
 		<div class="block-content collapse in">
 			<div class="span12">
-				<form action="" id="check_submit_form" class="form-horizontal"
+				<form action="" id="do_check_form" class="form-horizontal"
 					method="post">
 					<input type="hidden" name="receiptId" value="${receiptId }">
 					<fieldset>
@@ -15,8 +15,8 @@
 							</div>
 						</div>
 						<div class="form-actions" style="margin-bottom:0px;">
-							<button type="button" class="btn btn-primary">提交</button>
-							<button type="button" class="btn">重置</button>
+							<button type="button" value="pass" class="btn btn-primary">通过</button>
+							<button type="button" value="nopass" class="btn">不通过</button>
 						</div>
 					</fieldset>
 				</form>
@@ -30,8 +30,8 @@
 		$(".btn").click(function() {
 			$.ajax({
 				method : "POST",
-				url : "${ctx }/admin/check/submit.form",
-				data : $('#check_submit_form').serialize(),
+				url : "${ctx }/admin/check/do.form",
+				data : $('#do_check_form').serialize(),
                 success: function(data){
                 	alert("["+data.code+"]:"+data.message);
                 }

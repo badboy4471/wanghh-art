@@ -7,7 +7,7 @@ public class CheckNodeModel {
 	private int id;
 	private int receiptId;
 	private int checkUid;
-	private Date checkTime;
+	private Date checkTime = new Date();
 	private int status;
 	private String checkMemo;
 	private int parentId;//父审核节点id

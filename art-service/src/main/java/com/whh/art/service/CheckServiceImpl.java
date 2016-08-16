@@ -116,6 +116,34 @@ public class CheckServiceImpl implements ICheckService {
 		return checkMapper.loadMyCheckReceipts(uid, search);
 	}
 
-	
+	@Override
+	public boolean canCheck(int receiptId, int uid) {
+		CheckNodeModel node = checkMapper.getCheckNodeByUidAndReceiptId(uid, receiptId);
+		if (node == null){
+			return false;
+		}else{
+			if (node.getStatus() != 0){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
 
+	@Override
+	public boolean isFinishCheckProcess(int receiptId) {
+		int count = checkMapper.countNoCheckProcess(receiptId);
+		return count == 0;
+	}
+
+	@Override
+	public void updateCheckProcess(CheckNodeModel node) {
+		checkMapper.updateCheckProcess(node);
+		
+	}
+
+	@Override
+	public CheckNodeModel getCheckNodeByUidAndReceiptId(int receiptId, int uid) {
+		return checkMapper.getCheckNodeByUidAndReceiptId(uid, receiptId);
+	}
 }

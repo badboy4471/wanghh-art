@@ -50,6 +50,13 @@ public interface CheckMapper {
 	CheckNodeModel getCheckNode(int id);
 	
 	/**
+	 * 通过用户ID和审核单Id获取审核节点
+	 * @param id
+	 * @return
+	 */
+	CheckNodeModel getCheckNodeByUidAndReceiptId(int uid,int receiptId);
+	
+	/**
 	 * 获取审核单的流程
 	 * @param receiptId
 	 * @return
@@ -86,6 +93,13 @@ public interface CheckMapper {
 	List<CheckDetailModel> searchCheckDetail(SearchModel search);
 	
 	int countCheckDetail(SearchModel search);
+	
+	/**
+	 * 计算
+	 * @param receiptId
+	 * @return
+	 */
+	int countNoCheckProcess(int receiptId);
 	
 	
 	

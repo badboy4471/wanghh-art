@@ -1,5 +1,6 @@
 package com.whh.art.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.CheckDetailModel;
+import com.whh.art.dao.model.CheckNodeModel;
 import com.whh.art.dao.model.ReceiptModel;
 import com.whh.art.dao.model.ReceiptModel.ReceiptStatus;
 import com.whh.art.dao.model.ReceiptModel.ReceiptType;
@@ -85,6 +87,55 @@ public class CheckController extends BaseController {
 		return "dialog/check";
 	}
 	
+	
+	@RequestMapping(value = "admin/check/do", method = { RequestMethod.POST })
+	public @ResponseBody
+	Result doCheck(@RequestParam("receiptId")int receiptId,
+			@RequestParam("memo")String memo,
+			@RequestParam("btn")String btn,
+			HttpSession session) {
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
+		Result result = new Result(null);
+		if(checkService.canCheck(receiptId, uid)){
+			CheckNodeModel node = checkService.getCheckNodeByUidAndReceiptId(receiptId, uid);
+			if(hasPass(btn)){
+				node.setStatus(1);
+			}else{
+				node.setStatus(2);
+			}
+			node.setCheckUid(uid);
+			node.setCheckMemo(memo);
+			node.setCheckTime(new Date());
+			//更新当前审核状态
+			checkService.updateCheckProcess(node);
+			if(hasPass(btn)){
+				//判断是否是最后一个人审核通过；
+				if(checkService.isFinishCheckProcess(receiptId)){
+					//更新整个审核单状态；
+					ReceiptModel receipt = checkService.getReceipt(receiptId);
+					receipt.setLastUpdateTime(new Date());
+					receipt.setStatus(ReceiptModel.ReceiptStatus.PASS.getCode());
+					checkService.upadteReceipt(receipt);
+					//TODO 入库or出库
+				}
+			}else{
+				//更新其他节点为无需审核，终止审核；
+				ReceiptModel receipt = checkService.getReceipt(receiptId);
+				receipt.setLastUpdateTime(new Date());
+				receipt.setStatus(ReceiptStatus.REJECT.getCode());
+				checkService.upadteReceipt(receipt);
+			}
+		}else{
+			result.setCode(1404);
+			result.setMessage("没有审核权限");
+		}
+		return result;
+	}
+	
+	
+	private boolean hasPass(String btn){
+		return btn.equals("pass");
+	}
 	
 	@RequestMapping(value = "admin/check/detail/search", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = "application/json")
