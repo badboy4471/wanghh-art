@@ -6,7 +6,7 @@
 			<div class="span12">
 				<form action="" id="do_check_form" class="form-horizontal"
 					method="post">
-					<input type="hidden" name="receiptId" value="${receiptId }">
+					<input id="receiptId" type="hidden" name="receiptId" value="${receiptId }">
 					<fieldset>
 						<div class="control-group">
 							<label class="control-label">审核理由<span class="required">*</span></label>
@@ -28,10 +28,17 @@
 	$(document).ready(function() {
 		
 		$(".btn").click(function() {
+			var btn = $(this).attr("value");
+			
 			$.ajax({
 				method : "POST",
 				url : "${ctx }/admin/check/do.form",
-				data : $('#do_check_form').serialize(),
+				dataType : "json",
+				data : {
+					receiptId :$("#receiptId").val(),
+					memo:$("#memo").val(),
+					btn:btn
+				},
                 success: function(data){
                 	alert("["+data.code+"]:"+data.message);
                 }
