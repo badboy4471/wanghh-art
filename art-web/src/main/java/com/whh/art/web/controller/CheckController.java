@@ -114,7 +114,7 @@ public class CheckController extends BaseController {
 					ReceiptModel receipt = checkService.getReceipt(receiptId);
 					receipt.setLastUpdateTime(new Date());
 					receipt.setStatus(ReceiptModel.ReceiptStatus.PASS.getCode());
-					checkService.upadteReceipt(receipt);
+					checkService.updateReceipt(receipt);
 					//TODO 入库or出库
 				}
 			}else{
@@ -132,7 +132,7 @@ public class CheckController extends BaseController {
 				ReceiptModel receipt = checkService.getReceipt(receiptId);
 				receipt.setLastUpdateTime(new Date());
 				receipt.setStatus(ReceiptStatus.REJECT.getCode());
-				checkService.upadteReceipt(receipt);
+				checkService.updateReceipt(receipt);
 			}
 			result.setCode(200);
 			result.setMessage("审核成功！");
@@ -351,7 +351,8 @@ public class CheckController extends BaseController {
 			checkService.submitCheck(receiptId, checkUid);
 			//更新状态
 			receipt.setStatus(ReceiptStatus.CHECKING.getCode());//等待审核
-			checkService.upadteReceipt(receipt);
+			receipt.setLastUpdateTime(new Date());
+			checkService.updateReceipt(receipt);
 			result.setCode(200);
 			result.setMessage("提交成功！");
 		}catch(Exception e){

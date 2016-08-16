@@ -27,7 +27,7 @@ public interface CheckMapper {
 	 * 更新审核单
 	 * @param receipt
 	 */
-	void upadteReceipt(ReceiptModel receipt);
+	void updateReceipt(ReceiptModel receipt);
 	
 	/**
 	 * 更新审核单

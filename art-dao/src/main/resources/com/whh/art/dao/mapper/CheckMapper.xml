@@ -20,13 +20,12 @@
 			(#{receiptId},#{checkUid},#{parentId})
 	</insert>
 	
-	<update id="upadteReceipt" parameterType="ReceiptModel">
+	<update id="updateReceipt" parameterType="ReceiptModel">
 		update 
 			receipt
 		<set>
 			lastUpdateTime = #{lastUpdateTime},
 			status = #{status},
-			checkMemo = #{checkMemo}
 		</set>
 		where id = #{id}
 	</update>

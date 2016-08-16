@@ -52,7 +52,7 @@ public interface ICheckService {
 	
 	int countCheckDetail(SearchModel search);
 	
-	void upadteReceipt(ReceiptModel receipt);
+	void updateReceipt(ReceiptModel receipt);
 	
 	ReceiptModel getReceipt(int id);
 	

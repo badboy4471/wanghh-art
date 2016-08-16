@@ -102,8 +102,8 @@ public class CheckServiceImpl implements ICheckService {
 	}
 
 	@Override
-	public void upadteReceipt(ReceiptModel receipt) {
-		checkMapper.upadteReceipt(receipt);
+	public void updateReceipt(ReceiptModel receipt) {
+		checkMapper.updateReceipt(receipt);
 	}
 
 	@Override
