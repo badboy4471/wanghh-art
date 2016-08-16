@@ -53,6 +53,7 @@ public class CheckServiceImpl implements ICheckService {
 				checkNode.setCheckUid(uids[i]);
 				checkNode.setParentId(parentId);
 				checkNode.setReceiptId(receiptId);
+				checkNode.setStatus(0);//待审核
 				checkMapper.addCheckNode(checkNode);
 				if (checkNode.getId() > 0) {
 					parentId = checkNode.getId();
