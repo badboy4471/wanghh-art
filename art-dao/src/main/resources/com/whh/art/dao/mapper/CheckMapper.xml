@@ -45,7 +45,7 @@
 	
 	<select id="getReceipt" parameterType="int" resultType="ReceiptModel">
 		select 
-			id,memo,createTime,createUid,status,checkMemo,type,lastUpdateTime
+			id,memo,createTime,createUid,status,type,lastUpdateTime
 		from 
 			receipt
 		where id = #{id}
@@ -79,7 +79,7 @@
 	
 	<select id="loadReceipts" parameterType="map" resultType="ReceiptModel">
 		select 
-			id,memo,createTime,createUid,status,checkMemo,type,lastUpdateTime
+			id,memo,createTime,createUid,status,type,lastUpdateTime
 		from 
 			receipt
 		where 
@@ -95,7 +95,7 @@
 	
 	<select id="loadMyCheckReceipts" parameterType="map" resultType="ReceiptModel">
 		(select 
-			r.id,r.memo,r.createTime,r.createUid,r.status,r.checkMemo,r.type,r.lastUpdateTime
+			r.id,r.memo,r.createTime,r.createUid,r.status,r.type,r.lastUpdateTime
 		from 
 			receipt r,check_process p
 		where 
@@ -108,7 +108,7 @@
 			p.parentId = 0 )
 		UNION ALL 
 		(select 
-			r.id,r.memo,r.createTime,r.createUid,r.status,r.checkMemo,r.type,r.lastUpdateTime
+			r.id,r.memo,r.createTime,r.createUid,r.status,r.type,r.lastUpdateTime
 		from 
 			receipt r,check_process p,check_process p1
 		where 
