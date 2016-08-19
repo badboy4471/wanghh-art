@@ -55,14 +55,12 @@
                         <!-- /block -->
                     </div>
                     <div class="row-fluid">
-                    	<c:forEach var="museum" items="${museums }" varStatus="midx">
-                    	<c:if test="${ not empty museum.museum }">
-                        <div class="span6">
-                            <!-- block -->
+                    	<div class="span6">
+                            <!-- block 我发起的审核单-->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left"><a href="###" class="museumRemove" data="${museum.museum.id }"><i class="icon-remove"></i></a> ${museum.museum.name }</div>
-                                    <div class="pull-right"><span class="badge badge-info">${museum.artCount }</span>
+                                    <div class="muted pull-left"><a href="${ctx }/admin/receipt/list/view.form">我发起的审核单</a></div>
+                                    <div class="pull-right"><span class="badge badge-info">0</span>
 
                                     </div>
                                 </div>
@@ -70,19 +68,19 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>编号</th>
-                                                <th>名称</th>
-                                                <th>作者</th>
+                                                <th>描述</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach items="${museum.arts }" var="art" varStatus="idx">
+                                        	<c:forEach items="${receipts }" var="receipt">
                                             <tr>
-                                                <td>${idx.count }</td>
-                                                <td>${art.artNumber }</td>
-                                                <td>${art.artName }</td>
-                                                <td>@${art.artAuthor }</td>
+                                                <td>${receipt.id }</td>
+                                                <td>${receipt.memo }</td>
+                                                <td>${receipt.status }</td>
+                                                <td><a href="###" onClick="show_check(${receipt.id })">查看详情</a></td>
                                             </tr>
                                             </c:forEach>
                                         </tbody>
@@ -91,44 +89,42 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        </c:if>
-                        <c:if test="${empty museum.museum}">
-                        	<div class="span6">
-                            <!-- block -->
+                        
+                        <div class="span6">
+                            <!-- block 我审核的审核单-->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">添加</div>
+                                    <div class="muted pull-left"><a href="${ctx }/admin/receipt/list/view.form">我审核的审核单</a></div>
+                                    <div class="pull-right"><span class="badge badge-info">0</span>
+
+                                    </div>
                                 </div>
                                 <div class="block-content collapse in">
-                                    <table class="table">
-                                    	<thead>
+                                    <table class="table table-striped">
+                                        <thead>
                                             <tr>
-                                                <th></th>
+                                                <th>编号</th>
+                                                <th>描述</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        	<c:forEach items="${myReceipts }" var="receipt">
                                             <tr>
-                                                <td style="border-top: none;text-align: center;">
-                                                	<a href="###" id="addMuseum"><img alt="add" src="${ctx }/images/big-add.png"></a>
-                                                </td>
+                                                <td>${receipt.id }</td>
+                                                <td>${receipt.memo }</td>
+                                                <td>${receipt.status }</td>
+                                                <td><a href="###" onClick="check(${receipt.id })">审核</a></td>
                                             </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <!-- /block -->
                         </div>
-                        </c:if>
-                        <c:if test="${midx.count%2 == 0 }">
-                        	</div>
-                        	<div class="row-fluid">
-                        </c:if>
-                        
-                        
-                        </c:forEach>
                     </div>
-                    
-                    
                 </div>
             </div>
             <hr>
@@ -145,6 +141,36 @@
             // Easy pie charts
             $('.chart').easyPieChart({animate: 1000});
         });
+        
+        show_check = function(id){
+			var d = dialog({
+			    title:"审核情况",
+			    width:650
+			});
+			$.ajax({
+			    url: "${ctx}/admin/check/process/view.form?receiptId="+id,
+			    success: function (data) {
+			        d.content(data);
+			    },
+			    cache: false
+			});
+			d.show();
+		}
+        
+        check = function(id){
+			var d = dialog({
+			    title:"审核",
+			    width:500
+			});
+			$.ajax({
+			    url: "${ctx}/admin/check/view.form?receiptId="+id,
+			    success: function (data) {
+			        d.content(data);
+			    },
+			    cache: false
+			});
+			d.show();
+		}
         
         $(document).ready(function(){
         	$("#addMuseum").click(function(){

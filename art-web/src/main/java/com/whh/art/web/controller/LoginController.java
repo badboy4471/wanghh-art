@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.whh.art.dao.model.AdminModel;
 import com.whh.art.dao.model.ArtModel;
 import com.whh.art.dao.model.MuseumModel;
+import com.whh.art.dao.model.ReceiptModel;
+import com.whh.art.dao.model.SearchModel;
 import com.whh.art.dao.model.SystemActionModel;
 import com.whh.art.service.IAdminService;
 import com.whh.art.service.IArtService;
+import com.whh.art.service.ICheckService;
 import com.whh.art.web.form.MuseumForm;
 import com.whh.art.web.form.Result;
 
@@ -36,6 +40,8 @@ public class LoginController {
 	IAdminService adminService;
 	@Resource
 	IArtService artService;
+	@Resource 
+	ICheckService checkService;
 
 	@RequestMapping(value = "login", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = "application/json")
@@ -61,8 +67,25 @@ public class LoginController {
 
 	@RequestMapping(value = "admin/index", method = { RequestMethod.GET })
 	public String index(HttpSession session,ModelMap model) {
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
 		
-		List<MuseumForm> museumList = new ArrayList<MuseumForm>();
+		//我发起的审核单
+		SearchModel search = new SearchModel();
+		search.setLimit(3);
+		search.setStatus(null);
+		List<ReceiptModel> receipts = checkService.loadMyReceipt(uid, search);
+		
+		model.put("receipts", receipts);
+		
+		//需要我审核的审核单
+		search.setStatus(0);
+		search.setStart(0);
+		search.setLimit(3);//全部取出
+		List<ReceiptModel> myReceipts = this.checkService.loadMyCheckReceipts(uid, search);
+		model.put("myReceipts", myReceipts);
+		
+		
+		/*List<MuseumForm> museumList = new ArrayList<MuseumForm>();
 		List<MuseumModel> museums = artService.loadAllMuseum();
 		
 		for (MuseumModel museum : museums){
@@ -78,7 +101,7 @@ public class LoginController {
 		MuseumForm form = new MuseumForm();
 		museumList.add(form);
 		
-		model.addAttribute("museums", museumList);
+		model.addAttribute("museums", museumList);*/
 		
 		
 		return "home";
