@@ -108,4 +108,10 @@ public interface CheckMapper {
 	 */
 	List<CheckNodeModel> showCheckProcess(int receiptid);
 	
+	/**
+	 * 审核通过插入仓库
+	 * @param receiptId
+	 */
+	void insertArt(int receiptId);
+	
 }

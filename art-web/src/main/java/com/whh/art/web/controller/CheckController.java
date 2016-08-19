@@ -132,7 +132,12 @@ public class CheckController extends BaseController {
 					receipt.setLastUpdateTime(new Date());
 					receipt.setStatus(ReceiptModel.ReceiptStatus.PASS.getCode());
 					checkService.updateReceipt(receipt);
-					//TODO 入库or出库
+					//入库or出库
+					
+					if(receipt.getType() == ReceiptModel.ReceiptType.IN.getCode()){//入库
+						checkService.insertArt(receiptId);
+					}
+					
 				}
 			}else{
 				//更新其他节点为无需审核，终止审核；

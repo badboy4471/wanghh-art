@@ -238,4 +238,15 @@
 	<select id="countNoCheckProcess" parameterType="int" resultType="int">
 		select count(*) from check_process where receiptId = #{receiptId} and status = 0;
 	</select>
+	
+	<insert id="insertArt" parameterType="int">
+		insert into 
+            art
+            (artName,artNumber,artInnerNumber,artYear,artAuthor,
+            artMaterial,artSize,artCert,artDesc,createTime,artImage,artAudio,status)
+        select 
+            artName,artNumber,artInnerNumber,artYear,artAuthor,artMaterial,
+            artSize,artCert,artDesc,createTime,artImage,artAudio,status from check_detail 
+        where receiptId = #{receiptId}
+	</insert>
 </mapper>

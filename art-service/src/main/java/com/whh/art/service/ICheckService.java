@@ -72,4 +72,6 @@ public interface ICheckService {
 	List<CheckNodeModel> loadCheckProcesses(int receiptId);
 	
 	List<CheckNodeModel> showCheckProcess(int receiptId);
+	
+	void insertArt(int receiptId);
 }
