@@ -70,8 +70,8 @@ public class CheckController extends BaseController {
 			ModelMap model,HttpSession session) {
 		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
 		model.put("receiptId",receiptId);
-		CheckNodeModel node = checkService.getCheckNodeByUidAndReceiptId(receiptId, uid);
-		if (node != null){
+		ReceiptModel receipt = checkService.getReceipt(receiptId);
+		if (receipt != null && receipt.getCreateUid() == uid){
 			List<CheckNodeModel> process = checkService.showCheckProcess(receiptId);
 			model.put("process", process);
 		}else{
