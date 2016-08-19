@@ -17,7 +17,20 @@
 						                  <td>${node.id }</td>
 						                  <td>${node.nickName }</td>
 						                  <td>${node.checkTime }</td>
-						                  <td>${node.status }</td>
+						                  <td>
+						                  <c:if test="${node.status == -1}">
+						                  	前面审核不通过
+						                  </c:if>
+						                  <c:if test="${node.status == 0}">
+						                  	待审核
+						                  </c:if>
+						                  <c:if test="${node.status == 1}">
+						                  	通过
+						                  </c:if>
+						                  <c:if test="${node.status == 2}">
+						                  	不通过
+						                  </c:if>
+						                  </td>
 						                  <td>${node.checkMemo }</td>
 						                </tr>
 						              </c:forEach>

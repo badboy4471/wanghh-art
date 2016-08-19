@@ -232,7 +232,7 @@
 		show_check = function(id){
 			var d = dialog({
 			    title:"审核情况",
-			    width:500
+			    width:650
 			});
 			$.ajax({
 			    url: "${ctx}/admin/check/process/view.form?receiptId="+id,
