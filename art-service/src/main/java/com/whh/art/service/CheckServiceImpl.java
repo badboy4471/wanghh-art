@@ -152,4 +152,9 @@ public class CheckServiceImpl implements ICheckService {
 	public List<CheckNodeModel> loadCheckProcesses(int receiptId) {
 		return checkMapper.loadCheckProcesses(receiptId);
 	}
+
+	@Override
+	public List<CheckNodeModel> showCheckProcess(int receiptId) {
+		return checkMapper.showCheckProcess(receiptId);
+	}
 }

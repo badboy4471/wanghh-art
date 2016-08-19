@@ -20,6 +20,18 @@
 			(#{receiptId},#{checkUid},#{parentId})
 	</insert>
 	
+	<select id="showCheckProcess" parameterType="int" resultType="CheckNodeModel">
+		select 
+			c.id,c.receiptId,a.id,a.nickName,c.checkTime,c.status,c.checkMemo
+		from 
+			check_process as c, admin  as a  
+		where 
+			a.id = c.checkUid 
+		and  
+			c.receiptId = #{receiptId}
+		order by c.id ASC 
+	</select>
+	
 	<update id="updateReceipt" parameterType="ReceiptModel">
 		update 
 			receipt
@@ -84,8 +96,11 @@
 			receipt
 		where 
 			createUid = #{uid}
+		<if test="search.status != null">
 		and 
 			status = #{search.status}
+		</if>
+		
 		order by
 			id desc
 		<if test="search.limit > 0">

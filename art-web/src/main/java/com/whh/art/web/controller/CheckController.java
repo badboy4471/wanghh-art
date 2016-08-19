@@ -64,6 +64,23 @@ public class CheckController extends BaseController {
 		return "check/check_detail_list";
 	}
 	
+	
+	@RequestMapping(value = "admin/check/process/view", method = { RequestMethod.GET })
+	public String viewCheckProcess(@RequestParam("receiptId") int receiptId,
+			ModelMap model,HttpSession session) {
+		int uid = ((AdminModel) session.getAttribute(LoginController.SESSION_KEY)).getId();
+		model.put("receiptId",receiptId);
+		CheckNodeModel node = checkService.getCheckNodeByUidAndReceiptId(receiptId, uid);
+		if (node != null){
+			List<CheckNodeModel> process = checkService.showCheckProcess(receiptId);
+			model.put("process", process);
+		}else{
+			model.put("msg","你没有权限查看该审核单！");
+		}
+		return "dialog/check_process";
+	}
+	
+	
 	@RequestMapping(value = "admin/check/submit/view", method = { RequestMethod.GET })
 	public String viewCheckSubmit(@RequestParam("receiptId") int receiptId,
 			ModelMap model) {
@@ -255,15 +272,14 @@ public class CheckController extends BaseController {
 		int status = 0;
 		if (StringUtils.isNotBlank(statusStr)){
 			try{
-				
 				status = Integer.parseInt(statusStr);
 			}catch(Exception e){
 				
 			}
+			search.setStatus(status);
+		}else{
+			search.setStatus(null);
 		}
-		
-		search.setStatus(status);
-		
 		int start = 0;
 		try {
 			start = Integer.parseInt((String) paramMap.get("iDisplayStart"));

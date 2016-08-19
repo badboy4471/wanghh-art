@@ -101,6 +101,11 @@ public interface CheckMapper {
 	 */
 	int countNoCheckProcess(int receiptId);
 	
-	
+	/**
+	 * 查看审核流程
+	 * @param receiptid
+	 * @return
+	 */
+	List<CheckNodeModel> showCheckProcess(int receiptid);
 	
 }

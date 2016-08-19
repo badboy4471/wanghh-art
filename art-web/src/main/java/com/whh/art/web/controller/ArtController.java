@@ -56,7 +56,7 @@ public class ArtController extends BaseController {
 		search.setLimit(0);
 		search.setStatus(0);//等待提交审核
 		List<ReceiptModel> receipts = checkService.loadMyReceipt(user.getId(), search);
-		
+		//添加一个商品必须通过审核单进入
 		if (receipts == null || receipts.size() == 0){
 			return "404";
 		}

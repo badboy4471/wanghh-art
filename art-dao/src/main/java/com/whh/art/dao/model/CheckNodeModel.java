@@ -7,6 +7,7 @@ public class CheckNodeModel {
 	private int id;
 	private int receiptId;
 	private int checkUid;
+	private String nickName;
 	private Date checkTime = new Date();
 	private int status;
 	private String checkMemo;
@@ -54,6 +55,10 @@ public class CheckNodeModel {
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
-	
-
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 }
