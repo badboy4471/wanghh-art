@@ -79,7 +79,20 @@
                                             <tr>
                                                 <td>${receipt.id }</td>
                                                 <td>${receipt.memo }</td>
-                                                <td>${receipt.status }</td>
+                                                <td>
+                                                <c:if test="${ receipt.status == 0}">
+                                                	待提交审核
+                                                </c:if>
+                                                <c:if test="${ receipt.status == 1}">
+                                                	审核中
+                                                </c:if>
+                                                <c:if test="${ receipt.status == 2}">
+                                                	审核通过
+                                                </c:if>
+                                                <c:if test="${ receipt.status == 3}">
+                                                	审核不通过
+                                                </c:if>
+                                                </td>
                                                 <td><a href="###" onClick="show_check(${receipt.id })">查看详情</a></td>
                                             </tr>
                                             </c:forEach>
@@ -94,7 +107,7 @@
                             <!-- block 我审核的审核单-->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left"><a href="${ctx }/admin/receipt/list/view.form">我审核的审核单</a></div>
+                                    <div class="muted pull-left"><a href="${ctx }/admin/my/receipt/list/view.form">我审核的审核单</a></div>
                                     <div class="pull-right"><span class="badge badge-info">0</span>
 
                                     </div>
@@ -114,7 +127,20 @@
                                             <tr>
                                                 <td>${receipt.id }</td>
                                                 <td>${receipt.memo }</td>
-                                                <td>${receipt.status }</td>
+                                                <td>
+                                                <c:if test="${ receipt.status == 0}">
+                                                	待提交审核
+                                                </c:if>
+                                                <c:if test="${ receipt.status == 1}">
+                                                	审核中
+                                                </c:if>
+                                                <c:if test="${ receipt.status == 2}">
+                                                	审核通过
+                                                </c:if>
+                                                <c:if test="${ receipt.status == 3}">
+                                                	审核不通过
+                                                </c:if>
+                                                </td>
                                                 <td><a href="###" onClick="check(${receipt.id })">审核</a></td>
                                             </tr>
                                             </c:forEach>
