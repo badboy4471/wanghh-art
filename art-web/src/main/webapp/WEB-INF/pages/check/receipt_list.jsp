@@ -168,7 +168,7 @@
 							  if (row.status > 0){
 								  view = "<a href=\"###\"onClick=\"show_check('"+data+"')\" >查看审核情况</a>";
 							  }
-							  return add + " " + detail + "<br/>"+ submit;
+							  return add + " " + detail + "<br/>"+ submit + " " +view;
 						  }
 						}
 					],
