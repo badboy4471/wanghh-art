@@ -10,7 +10,7 @@
 				<ul class="nav pull-right">
 					<li class="dropdown"><a href="#" role="button"
 						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-user"></i>${__session_user__.userName } <i
+							class="icon-user"></i>${__session_user__.nickName } <i
 							class="caret"></i>
 
 					</a>
