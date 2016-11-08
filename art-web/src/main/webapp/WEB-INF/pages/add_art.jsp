@@ -210,6 +210,7 @@
 				});
 			   
 			   $('#artAudio').uploadify({
+				    'successTimeout':300,
 				   	'buttonText':'选择文件',
 				   	'fileObjName':'file',
 				   	'fileTypeExts' : '*.mp3; *.wav',
