@@ -201,7 +201,7 @@ public class WxReceiver {
 		item.setDescription("与大家对话-黑泽明电影分镜头绘画展");
 		item.setPicUrl("http://art-images.oss-cn-hangzhou.aliyuncs.com/system/huodong-hzm.jpg");
 		item.setTitle("欢迎关注791艺术街区");
-		item.setUrl("http://gl.791whys.com/avtivehzm.html");
+		item.setUrl("http://gl.791whys.com/activehzm.html");
 
 		WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS().addArticle(item)
 				.fromUser(inMessage.getToUserName())
