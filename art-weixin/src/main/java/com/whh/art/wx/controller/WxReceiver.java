@@ -164,7 +164,7 @@ public class WxReceiver {
 					.fromUser(inMessage.getToUserName())
 					.toUser(inMessage.getFromUserName()).build();*/
 			
-			WxCpXmlOutNewsMessage news = this.buildCompanyDesc(inMessage);
+			WxCpXmlOutNewsMessage news = this.buildActiveDesc(inMessage);
 			
 			
 			String rtnXML = XStreamTransformer.toXml(
@@ -189,6 +189,19 @@ public class WxReceiver {
 		item.setPicUrl("http://art-images.oss-cn-hangzhou.aliyuncs.com/system/791-big.jpg");
 		item.setTitle("791艺术街区介绍");
 		item.setUrl("http://gl.791whys.com/company.html");
+
+		WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS().addArticle(item)
+				.fromUser(inMessage.getToUserName())
+				.toUser(inMessage.getFromUserName()).build();
+		return news;
+	}
+	
+	private WxCpXmlOutNewsMessage buildActiveDesc(WxCpXmlMessage inMessage) {
+		Item item = new Item();
+		item.setDescription("与大家对话-黑泽明电影分镜头绘画展");
+		item.setPicUrl("http://art-images.oss-cn-hangzhou.aliyuncs.com/system/huodong-hzm.jpg");
+		item.setTitle("欢迎关注791艺术街区");
+		item.setUrl("http://gl.791whys.com/avtivehzm.html");
 
 		WxCpXmlOutNewsMessage news = WxCpXmlOutMessage.NEWS().addArticle(item)
 				.fromUser(inMessage.getToUserName())
