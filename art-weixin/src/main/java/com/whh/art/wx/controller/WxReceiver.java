@@ -1,10 +1,12 @@
 package com.whh.art.wx.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import me.chanjar.weixin.common.util.crypto.SHA1;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutImageMessage;
@@ -14,6 +16,7 @@ import me.chanjar.weixin.cp.bean.WxCpXmlOutNewsMessage.Item;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutTextMessage;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wanghh.art.service.wx.AccessTokenServiceImpl;
 import com.wanghh.art.service.wx.IAccessTokenService;
 import com.whh.art.dao.model.ArtModel;
+import com.whh.art.dao.model.SystemCmdModel;
 import com.whh.art.dao.model.SystemConfigModel;
 import com.whh.art.dao.model.WxUserModel;
 import com.whh.art.service.IAdminService;
@@ -61,7 +65,7 @@ public class WxReceiver {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		try {
-			String mySignature = SHA1.gen(AccessTokenServiceImpl.TOKEN, timestamp, nonce);
+			//String mySignature = SHA1.gen(AccessTokenServiceImpl.TOKEN, timestamp, nonce);
 
 			WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
 			config.setToken(AccessTokenServiceImpl.TOKEN);
@@ -74,15 +78,24 @@ public class WxReceiver {
 			
 			System.out.println("接收微信信息！"+inMessage);
 			String rtnXML = null;
-			if (inMessage.getMsgType().equals("text")){
-				rtnXML = this.handleNumber(inMessage);
-			}
 			
-			if (inMessage.getMsgType().equals("event")){
-				rtnXML = this.handleEvent(inMessage);
-			}
-			if (StringUtils.isNotBlank(rtnXML)){
-				response.getWriter().print(rtnXML);
+			//先处理系统指令
+			
+			List<String> outMsgs = this.handleSystemCmd(inMessage);
+			if (outMsgs.size()>0){
+				//取第一个
+				response.getWriter().print(outMsgs.get(0));
+			}else{
+				if (inMessage.getMsgType().equals("text")){
+					rtnXML = this.handleNumber(inMessage);
+				}
+				
+				if (inMessage.getMsgType().equals("event")){
+					rtnXML = this.handleEvent(inMessage);
+				}
+				if (StringUtils.isNotBlank(rtnXML)){
+					response.getWriter().print(rtnXML);
+				}
 			}
 
 		} catch (Exception e1) {
@@ -90,6 +103,62 @@ public class WxReceiver {
 		}
 
 		return echostr;
+	}
+	
+	/**
+	 * 处理系统指令
+	 * 
+	 * @param inMessages
+	 * @return
+	 */
+	private List<String> handleSystemCmd(WxCpXmlMessage inMessage) {
+		List<String> outMsgs = new ArrayList<String>();
+		String cmd = null;
+		if (inMessage.getMsgType().equals("text")) {
+			cmd = inMessage.getContent();
+		}
+
+		if (inMessage.getMsgType().equals("event")) {
+			cmd = inMessage.getEvent();
+		}
+		if (StringUtils.isNotBlank(cmd)) {
+			List<SystemCmdModel> cmds = systemConfigService.loadSystemCmds(
+					inMessage.getMsgType(), cmd);
+			for (SystemCmdModel systemCmd : cmds) {
+				if (systemCmd.getReplyType().equals("text")) {
+					WxCpXmlOutTextMessage text = WxCpXmlOutMessage.TEXT()
+							.fromUser(inMessage.getToUserName())
+							.toUser(inMessage.getFromUserName())
+							.content(systemCmd.getReplyText()).build();
+					if (text != null) {
+						String rtnXML = XStreamTransformer.toXml(
+								(Class) text.getClass(), text);
+						outMsgs.add(rtnXML);
+					}
+				}
+
+				if (systemCmd.getReplyType().equals("image")) {
+					WxCpXmlOutImageMessage image = WxCpXmlOutMessage.IMAGE()
+							.fromUser(inMessage.getToUserName())
+							.toUser(inMessage.getFromUserName())
+							.mediaId(systemCmd.getReplyText()).build();
+					if (image != null) {
+						String rtnXML = XStreamTransformer.toXml(
+								(Class) image.getClass(), image);
+						outMsgs.add(rtnXML);
+					}
+				}
+
+				if (systemCmd.getReplyType().equals("voice")) {
+
+				}
+
+				if (systemCmd.getReplyType().equals("video")) {
+
+				}
+			}
+		}
+		return outMsgs;
 	}
 	
 	@SuppressWarnings("all")
@@ -159,16 +228,16 @@ public class WxReceiver {
 			
 			SystemConfigModel config = systemConfigService.getSystemConfig();
 			
-			/*WxCpXmlOutTextMessage text = WxCpXmlOutTextMessage.TEXT()
+			WxCpXmlOutTextMessage text = WxCpXmlOutTextMessage.TEXT()
 					.content(config.getWelcomeMessage())
 					.fromUser(inMessage.getToUserName())
-					.toUser(inMessage.getFromUserName()).build();*/
+					.toUser(inMessage.getFromUserName()).build();
 			
-			WxCpXmlOutNewsMessage news = this.buildActiveDesc(inMessage);
+			//WxCpXmlOutNewsMessage news = this.buildActiveDesc(inMessage);
 			
 			
 			String rtnXML = XStreamTransformer.toXml(
-					(Class) news.getClass(), news);
+					(Class) text.getClass(), text);
 			return rtnXML;	
 		}
 		

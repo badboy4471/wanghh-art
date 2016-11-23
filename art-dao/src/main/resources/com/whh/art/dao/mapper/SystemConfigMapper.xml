@@ -17,5 +17,14 @@
 		
 		where id = #{id}
 	</update>
+	
+	<select id="loadSystemCmds" resultType="SystemCmdModel" parameterType="map">
+		select 
+			id,cmdType,cmd,replyType,replyText 
+		from
+			system_cmd
+		where 
+			cmdType = #{cmdType} and cmd = #{cmd}
+	</select>
 
 </mapper>
