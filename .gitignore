@@ -3,4 +3,6 @@
 */.settings/*
 */target/*
 log.txt
-
+.idea
+*.iml
+online-dataSource.properties
