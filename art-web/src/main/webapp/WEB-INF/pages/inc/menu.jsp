@@ -11,13 +11,13 @@
 				
 		<li <c:if test="${local == 'receipt.list.from' }">class="active"</c:if>><a href="${ctx }/admin/receipt/list/view.form"><i class="icon-chevron-right"></i>
 				我发起的审核单</a></li>
-		
+		<!--
 		<li <c:if test="${local == 'user.list' }">class="active"</c:if>><a href="${ctx }/admin/wx/user/list.form"><i class="icon-chevron-right"></i>
 				用户列表</a></li>
 				
 		<li <c:if test="${local == 'weixin.menu' }">class="active"</c:if>><a href="${ctx }/admin/weixin/menu/view.form"><i class="icon-chevron-right"></i>
 				自定义菜单</a></li>
-			<!-- 	
+
 		<li <c:if test="${local == 'art.add' }">class="active"</c:if>><a href="${ctx }/admin/art/add.form"><i class="icon-chevron-right"></i>
 				添加作品</a></li>
 		
